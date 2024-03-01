@@ -32,6 +32,16 @@ DEPENDPATH += C:/tools/opencv/build/include
 
 
 DISTFILES += \
+    Gallery/baby with a ball.jpg \
+    Gallery/bird.jpg \
+    Gallery/cat.jpg \
+    Gallery/cutie.jpg \
+    Gallery/forest and mountain.jpg \
+    Gallery/happy dog.jpg \
+    Gallery/hiker 2.jpg \
+    Gallery/palestine.jpg \
+    Gallery/pyramids and a photographer.jpg \
+    Gallery/whale.jpg \
     gitignore.txt \
     Icons/DropDownIcon.png \
     Icons/FilterIcon.png \
