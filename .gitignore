@@ -32,6 +32,9 @@
 *.app
 
 
+build-Task1-Desktop_Qt_6_6_2_GCC_64bit-Debug/
+
+build-Task1-Desktop_Qt_6_6_2_GCC_64bit-Debug
 
 build-Task1-Desktop_Qt_6_4_1_MinGW_64_bit-Debug/
 build-Task1-Desktop_Qt_6_4_1_MinGW_64_bit-Debug
