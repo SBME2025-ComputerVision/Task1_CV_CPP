@@ -11,14 +11,19 @@ CONFIG += c++17
 
 
 SOURCES += \
+    Filters/filter.cpp \
+    UI/filterswidget.cpp \
     main.cpp \
-    mainwindow.cpp
+    UI/mainwindow.cpp
 
 HEADERS += \
-    mainwindow.h
+    Filters/filter.h \
+    UI/filterswidget.h \
+    UI/mainwindow.h
 
 FORMS += \
-    mainwindow.ui
+    UI/filterswidget.ui \
+    UI/mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
