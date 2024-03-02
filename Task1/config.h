@@ -3,8 +3,10 @@
 #define CONFIG_H
 
 #include <bits/stdc++.h>
-using namespace std;
+#include<opencv2/opencv.hpp>
 
+using namespace std;
+using namespace cv;
 // externs
 
 extern string birdPth;

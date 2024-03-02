@@ -1,6 +1,5 @@
 #include "config.h"
-#include <bits/stdc++.h>
-#include<opencv2/opencv.hpp>
+
 
 // Global strings
 // Paths to Gallary Images
