@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "UI/mainwindow.h"
 #include<opencv2/opencv.hpp>
 
 #include <QApplication>
