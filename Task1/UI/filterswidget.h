@@ -13,6 +13,8 @@ class FiltersWidget : public QWidget
 
 private:
     ImageController *imageController = new ImageController();
+    QPixmap originalImg;
+    QPixmap processedImg;
 
 public:
     explicit FiltersWidget(QWidget *parent = nullptr);

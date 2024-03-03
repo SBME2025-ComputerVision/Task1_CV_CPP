@@ -19,6 +19,7 @@ void Image::loadImage(string pth){
         qDebug()<< "error";
     }
     this->isEmpty = this->originalImg.empty();
+    convertToGreyScale();
 }
 
 

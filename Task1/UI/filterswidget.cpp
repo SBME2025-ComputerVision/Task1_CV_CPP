@@ -60,7 +60,14 @@ void FiltersWidget::on_resetFilterBtn_clicked()
 
 void FiltersWidget::on_uploadImgBtn_clicked()
 {
-    QPixmap img = imageController->uploadImg();
+    originalImg = imageController->uploadImg();
+    processedImg = imageController->greyScaledImg();
+
+    originalImg = originalImg.scaled(ui->imageOriginal->size(),Qt::IgnoreAspectRatio);
+    //processedImg = processedImg.scaled(ui->imageFiltered->size(),Qt::IgnoreAspectRatio);
+    ui->imageOriginal->setPixmap(originalImg);
+    ui->imageFiltered->setPixmap(processedImg);
+
 }
 
 
