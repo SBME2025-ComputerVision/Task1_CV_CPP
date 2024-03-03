@@ -3,7 +3,6 @@
 
 #include <bits/stdc++.h>
 #include<opencv2/opencv.hpp>
-#include<QString>
 using namespace std;
 using namespace cv;
 
@@ -13,9 +12,9 @@ private:
     Mat originalImg;
     Mat processedImg;
     Mat greyScaledImg;
-    bool isEmpty = true;
+    bool isEmpty;
     bool isProcessed;
-    QString path;
+    string path;
 
 public:
 
@@ -32,17 +31,17 @@ public:
 
     Mat getGreyScaledImg();
 
-    void setProcessedImg();
+    void setProcessedImg(Mat img);
 
     // Returns empty property
-    bool isEmpty();
+    bool Empty();
 
-    bool isProcessed();
+    bool Processed();
 
     //
-    QString getImgPath();
+    string getImgPath();
 
-    void setImgPath();
+    void setImgPath(string pth);
 
     // Load/Update a new image
     void loadImage(string pth);

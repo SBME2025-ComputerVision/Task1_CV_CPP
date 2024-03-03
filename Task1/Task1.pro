@@ -4,6 +4,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
 
+CONFIG += link_pkgconfig
+PKGCONFIG += opencv4
+
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -11,15 +14,27 @@ CONFIG += c++17
 
 
 SOURCES += \
-    Filters/filter.cpp \
+    Controllers/filtercontroller.cpp \
+    Controllers/imagecontroller.cpp \
+    Controllers/noisecontroller.cpp \
+    Models/filter.cpp \
+    Models/noise.cpp \
+    Models/image.cpp \
     UI/filterswidget.cpp \
-    main.cpp \
-    UI/mainwindow.cpp
+    UI/mainwindow.cpp \
+    config.cpp \
+    main.cpp
 
 HEADERS += \
-    Filters/filter.h \
+    Controllers/filtercontroller.h \
+    Controllers/imagecontroller.h \
+    Controllers/noisecontroller.h \
+    Models/filter.h \
+    Models/image.h \
+    Models/noise.h \
     UI/filterswidget.h \
-    UI/mainwindow.h
+    UI/mainwindow.h \
+    config.h
 
 FORMS += \
     UI/filterswidget.ui \
@@ -32,8 +47,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 win32:CONFIG(release, debug|release): LIBS += -LC:/tools/opencv/build/x64/vc14/lib/ -lopencv_world451
 else:win32:CONFIG(debug, debug|release): LIBS += -LC:/tools/opencv/build/x64/vc14/lib/ -lopencv_world451d
-INCLUDEPATH += C:/tools/opencv/build/include
-DEPENDPATH += C:/tools/opencv/build/include
 
 
 DISTFILES += \
