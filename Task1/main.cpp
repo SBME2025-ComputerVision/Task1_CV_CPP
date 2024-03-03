@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
     // w.show();
     // return a.exec();
     Image *mama = new Image("Gallery/cat.jpg");
+      imwrite("output2.jpg", mama->getOriginalImg());
     mama->convertToGreyScale();
     imwrite("output.jpg", mama->getGreyScaledImg());
 

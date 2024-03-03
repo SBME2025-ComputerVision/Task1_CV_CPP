@@ -16,9 +16,8 @@ void Image::loadImage(string pth){
     setImgPath(pth);
     this->originalImg = imread(pth,IMREAD_COLOR);
     if(this->originalImg.empty()){
-        qDebug()<< "a7a";
+        qDebug()<< "error";
     }
-    cvtColor(this->originalImg,this->originalImg,COLOR_BGR2RGB);
     this->isEmpty = this->originalImg.empty();
 }
 
