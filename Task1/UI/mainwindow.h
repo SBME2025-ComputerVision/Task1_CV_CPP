@@ -30,6 +30,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     int index;
-    void setFrameIndex();
+    void setFrameIndex(int index);
 };
 #endif // MAINWINDOW_H

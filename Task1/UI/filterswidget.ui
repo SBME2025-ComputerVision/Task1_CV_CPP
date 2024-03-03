@@ -71,7 +71,7 @@
     </property>
    </widget>
   </widget>
-  <widget class="QPushButton" name="uploadFilterBtn">
+  <widget class="QPushButton" name="uploadImgBtn">
    <property name="geometry">
     <rect>
      <x>70</x>

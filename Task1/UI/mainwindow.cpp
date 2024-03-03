@@ -10,14 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    index = 0;
-    struct Pages{
-        int FilterPage =0;
-        int EdgeDetectionPage=1;
-        int HistogramPage=2;
-        int ThresholdingPage =3;
-        int HybridPage=4;
-    };
+    index = FilterPage;
+
     FiltersWidget *filterWidget = new FiltersWidget();
 
 
@@ -34,39 +28,39 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_filteringBtn_clicked()
 {
-    index = Pages.FilterPage;
+    index = FilterPage;
     MainWindow::setFrameIndex(index);
 }
 
 
 void MainWindow::on_edgeDetectionBtn_clicked()
 {
-    index = Pages.EdgeDetectionPage;
+    index = EdgeDetectionPage;
     MainWindow::setFrameIndex(index);
 }
 
 
 void MainWindow::on_histogramsBtn_clicked()
 {
-    index = Pages.HistogramPage;
+    index = HistogramPage;
     MainWindow::setFrameIndex(index);
 }
 
 
 void MainWindow::on_thresholdingBtn_clicked()
 {
-    index = Pages.ThresholdingPage;
+    index = ThresholdingPage;
     MainWindow::setFrameIndex(index);
 }
 
 
 void MainWindow::on_hybridBtn_clicked()
 {
-    index = Pages.HybridPage;
+    index = HybridPage;
     MainWindow::setFrameIndex(index);
 }
 
-void MainWindow::setFrameIndex(index){
+void MainWindow::setFrameIndex(int index){
 
     if(index <ui->stackedWidget->count()-1){
         ui->stackedWidget->setCurrentIndex(index);

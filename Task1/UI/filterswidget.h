@@ -2,6 +2,7 @@
 #define FILTERSWIDGET_H
 
 #include <QWidget>
+#include "Controllers/imagecontroller.h"
 namespace Ui {
 class FiltersWidget;
 }
@@ -9,6 +10,9 @@ class FiltersWidget;
 class FiltersWidget : public QWidget
 {
     Q_OBJECT
+
+private:
+    ImageController *imageController = new ImageController();
 
 public:
     explicit FiltersWidget(QWidget *parent = nullptr);
@@ -29,9 +33,9 @@ private slots:
 
     void on_apply_median_filter_clicked();
 
-    void on_uploadFilterBtn_clicked();
-
     void on_resetFilterBtn_clicked();
+
+    void on_uploadImgBtn_clicked();
 
 private:
     Ui::FiltersWidget *ui;

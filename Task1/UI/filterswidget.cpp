@@ -1,5 +1,6 @@
 #include "filterswidget.h"
 #include "ui_filterswidget.h"
+#include "config.h"
 
 FiltersWidget::FiltersWidget(QWidget *parent) :
     QWidget(parent),
@@ -50,14 +51,15 @@ void FiltersWidget::on_apply_median_filter_clicked()
 }
 
 
-void FiltersWidget::on_uploadFilterBtn_clicked()
+
+void FiltersWidget::on_resetFilterBtn_clicked()
 {
 
 }
 
 
-void FiltersWidget::on_resetFilterBtn_clicked()
+void FiltersWidget::on_uploadImgBtn_clicked()
 {
-
+    Mat img = imageController->uploadImg();
 }
 
