@@ -5,13 +5,6 @@ ImageController::ImageController() {
     this->img = new Image();
 }
 
-QPixmap ImageController::processAndReturnImage(Mat (Image::*processFunction)(), Image *img) {
-    if (!img->Empty()) {
-        return Helpers::convertMatToPixmap((img->*processFunction)());
-    }
-    return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
-}
-
 QPixmap ImageController::uploadImg() {
     QString appDirPath = QCoreApplication::applicationDirPath();
     QString path = QFileDialog::getOpenFileName(nullptr, "Choose an Image", appDirPath);
@@ -26,10 +19,27 @@ QPixmap ImageController::uploadImg() {
 }
 
 QPixmap ImageController::greyScaledImg() {
-    Mat x = img->getGreyScaledImg();
-    QPixmap m = processAndReturnImage(&Image::getGreyScaledImg, this->img);
-    return m;
+    if(!img->Empty()){
+        QPixmap m = Helpers::convertMatToPixmap(this->img->getGreyScaledImg());
+        return m;
+    }
+    return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
 }
+
+QPixmap ImageController::orignImg() {
+    if(!img->Empty()){
+        return Helpers::convertMatToPixmap(this->img->getOriginalImg());
+    }
+    return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
+}
+
+QPixmap ImageController::processedImg() {
+    if(!img->Empty()&&img->Processed()){
+        return Helpers::convertMatToPixmap(this->img->getProcessedImg());
+    }
+    return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
+}
+
 
 
 

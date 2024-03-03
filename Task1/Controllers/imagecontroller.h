@@ -9,7 +9,6 @@ class ImageController
 {
 private:
     Image *img;
-    QPixmap processAndReturnImage(Mat (Image::*processFunction)(), Image *img);
 public:
     ImageController();
     QPixmap uploadImg();
