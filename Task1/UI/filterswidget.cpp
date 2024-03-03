@@ -60,6 +60,8 @@ void FiltersWidget::on_resetFilterBtn_clicked()
 
 void FiltersWidget::on_uploadImgBtn_clicked()
 {
-    Mat img = imageController->uploadImg();
+    QPixmap img = imageController->uploadImg();
 }
+
+
 

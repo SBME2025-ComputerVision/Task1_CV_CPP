@@ -17,6 +17,7 @@ SOURCES += \
     Controllers/filtercontroller.cpp \
     Controllers/imagecontroller.cpp \
     Controllers/noisecontroller.cpp \
+    Helpers/helpers.cpp \
     Models/filter.cpp \
     Models/noise.cpp \
     Models/image.cpp \
@@ -29,12 +30,13 @@ HEADERS += \
     Controllers/filtercontroller.h \
     Controllers/imagecontroller.h \
     Controllers/noisecontroller.h \
+    Helpers/helpers.h \
     Models/filter.h \
     Models/image.h \
     Models/noise.h \
     UI/filterswidget.h \
     UI/mainwindow.h \
-    config.h
+    config.h \
 
 FORMS += \
     UI/filterswidget.ui \

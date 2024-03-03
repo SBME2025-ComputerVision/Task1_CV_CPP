@@ -3,7 +3,7 @@
 
 #include "Models/image.h"
 #include <opencv2/opencv.hpp>
-
+#include "Helpers/helpers.h"
 
 class ImageController
 {
@@ -11,7 +11,7 @@ private:
     Image *img;
 public:
     ImageController();
-    Mat uploadImg();
+    QPixmap uploadImg();
 };
 
 #endif // IMAGECONTROLLER_H
