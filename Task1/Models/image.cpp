@@ -57,17 +57,18 @@ void Image::setImgPath(string pth){
 
 void Image::convertToGreyScale()
 {
-    greyScaledImg.rows = originalImg.rows;
-    greyScaledImg.cols = originalImg.cols;
+    Mat greyScaledImg(originalImg.rows,originalImg.cols,CV_8UC1);
 
-    double weights[3]  = {0.299,0.587,0.114};
+    float weights[3]  = {0.299,0.587,0.114};
 
     for(int i=0;i<originalImg.rows;i++){
         for(int j=0;j<originalImg.cols;j++){
             Vec3b currentPixel = originalImg.at<Vec3b>(i,j);
-            float currentGreyValue = weights[0]*currentPixel[22] + weights[1]*currentPixel[1]
+            float currentGreyValue = weights[0]*currentPixel[2] + weights[1]*currentPixel[1]
                                      + weights[2]*currentPixel[0];
-            greyScaledImg.at<float>(i,j) = currentGreyValue;
+            greyScaledImg.at<uchar>(i,j) =static_cast<uchar>(currentGreyValue);
         }
     }
+
+    this->greyScaledImg = greyScaledImg;
 }

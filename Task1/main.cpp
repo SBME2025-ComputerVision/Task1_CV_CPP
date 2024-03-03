@@ -9,8 +9,8 @@ int main(int argc, char *argv[])
     // MainWindow w;
     // w.show();
     // return a.exec();
-    Image *mama = new Image("cat.jpg");
-    qDebug() << mama->Empty();
-    cv::imshow("anateez",mama->getOriginalImg());
+    Image *mama = new Image("Gallery/cat.jpg");
+    mama->convertToGreyScale();
+    imwrite("output.jpg", mama->getGreyScaledImg());
 
 }
