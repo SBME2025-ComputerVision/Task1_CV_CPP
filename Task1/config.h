@@ -15,5 +15,4 @@ extern string cutiePth;
 extern string palestinePth;
 extern string whalePth;
 
-
 #endif // CONFIG_H

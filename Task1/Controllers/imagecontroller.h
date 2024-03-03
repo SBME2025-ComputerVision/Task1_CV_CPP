@@ -1,5 +1,6 @@
 #ifndef IMAGECONTROLLER_H
 #define IMAGECONTROLLER_H
+#include<Models/image.h>
 
 class ImageController
 {

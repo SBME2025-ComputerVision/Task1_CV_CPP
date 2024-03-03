@@ -16,7 +16,20 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_filteringBtn_clicked();
+
+    void on_edgeDetectionBtn_clicked();
+
+    void on_histogramsBtn_clicked();
+
+    void on_thresholdingBtn_clicked();
+
+    void on_hybridBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
+    int index;
+    void setFrameIndex();
 };
 #endif // MAINWINDOW_H
