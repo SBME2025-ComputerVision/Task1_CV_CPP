@@ -4,19 +4,25 @@
 
 #include <bits/stdc++.h>
 #include<opencv2/opencv.hpp>
-#include"image.h"
+using namespace cv;
+
 
 
 class Filter
 {
+private:
+    static Mat gaussianKernel(int kernelSize, float sigma);
 public:
 
     // Initiallize Filter object
     Filter();
-    void gaussionFilter(Image* img);
-    void medianFilter(Image* img);
-    void avgFilter(Image* img);
+    static Mat gaussionFilter(Mat img,int kernelSize);
+    static Mat medianFilter(Mat img,int kernelSize);
+    static Mat avgFilter(Mat img,int kernelSize);
 
+    static Mat opencvGaussianFilter(Mat img, int kernelSize);
+    static Mat opencvMedianFilter(Mat img, int kernelSize);
+    static Mat opencvAvgFilter(Mat img, int kernelSize);
 };
 
 #endif // FILTER_H
