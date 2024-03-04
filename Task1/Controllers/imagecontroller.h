@@ -15,6 +15,8 @@ public:
     QPixmap greyScaledImg();
     QPixmap orignImg();
     QPixmap processedImg();
+
+
 };
 
 #endif // IMAGECONTROLLER_H&

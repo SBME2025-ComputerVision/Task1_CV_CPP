@@ -11,7 +11,9 @@ class Helpers
 public:
     Helpers();
     ~Helpers();
+    static Mat readImageMat();
     static QPixmap convertMatToPixmap(Mat img);
+    static void displayImg(Mat newImg,  QLabel *label);
 };
 
 #endif // HELPERS_H

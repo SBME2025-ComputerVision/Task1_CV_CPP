@@ -14,7 +14,7 @@ Image::Image(string pth){
 
 void Image::loadImage(string pth){
     setImgPath(pth);
-    this->originalImg = imread(pth);
+    this->originalImg = imread(pth,IMREAD_COLOR);
     if(this->originalImg.empty()){
         qDebug()<< "error";
     }
