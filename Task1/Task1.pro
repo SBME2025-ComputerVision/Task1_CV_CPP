@@ -14,9 +14,7 @@ PKGCONFIG += opencv4
 
 
 SOURCES += \
-    Controllers/filtercontroller.cpp \
     Controllers/imagecontroller.cpp \
-    Controllers/noisecontroller.cpp \
     Helpers/helpers.cpp \
     Models/filter.cpp \
     Models/noise.cpp \
@@ -27,9 +25,7 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
-    Controllers/filtercontroller.h \
     Controllers/imagecontroller.h \
-    Controllers/noisecontroller.h \
     Helpers/helpers.h \
     Models/filter.h \
     Models/image.h \

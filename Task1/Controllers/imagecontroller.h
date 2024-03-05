@@ -12,15 +12,10 @@ private:
 public:
     ImageController();
     QPixmap uploadImg();
-    QPixmap greyScaledImg();
-    QPixmap orignImg();
-    QPixmap processedImg();
-    QPixmap applyGaussianNoise();
-    QPixmap applyUniformNoise();
-    QPixmap applySaltPepperNoise();
-    QPixmap applyAvgFilter();
-    QPixmap applyGaussianFilter();
-    QPixmap applyMedianFilter();
+    QPixmap getGreyScaledImg();
+    QPixmap getProcessedImg();
+    QPixmap FilterImg(Mat (*filter)(Mat img, int kernelSize), int kernelSize);
+    QPixmap addNoise(int noiseType, int r, float mean, float sigma);
     
 };
 

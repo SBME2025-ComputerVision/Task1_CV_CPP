@@ -9,12 +9,16 @@ using namespace cv;
 class Image
 {
 private:
+    // Image properties
+    // to store the original image
     Mat originalImg;
+    // to store the processed image (gray scale, noised, filtered, etc.)
     Mat processedImg;
-    Mat noisedImg;
-    Mat greyScaledImg;
+    // to know if the image is empty
     bool isEmpty;
+    // to know if any processing has been done on the image
     bool isProcessed;
+    // to store the noised image
     string path;
 
 public:
@@ -26,33 +30,28 @@ public:
     Image(string pth);
 
     // Returns img property
+    // to get the original image
     Mat getOriginalImg();
-
+    // to get the processed image
     Mat getProcessedImg();
 
-    Mat getGreyScaledImg();
-
-    Mat getNoisedImg();
-
-
-    void setProcessedImg(Mat img);
-
-    void setNoisedImg(Mat img);
+    // set the processed image
+    void setProcessedImg(Mat& img);
 
     // Returns empty property
     bool Empty();
 
+    // Returns processed property
     bool Processed();
 
-    //
+    // Returns noised property
     string getImgPath();
 
+    // Set the path to the image file
     void setImgPath(string pth);
 
     // Load/Update a new image
     void loadImage(string pth);
-
-    void convertToGreyScale();
 
 
     ~Image();

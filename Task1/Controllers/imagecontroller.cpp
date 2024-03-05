@@ -18,75 +18,56 @@ QPixmap ImageController::uploadImg() {
     return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
 }
 
-QPixmap ImageController::greyScaledImg() {
+
+QPixmap ImageController::getGreyScaledImg() {
     if(!img->Empty()){
-        QPixmap m = Helpers::convertMatToPixmap(this->img->getGreyScaledImg());
-        return m;
+        Mat greyScaledImg = Filter::convertToGrayScale(img->getOriginalImg());
+        img->setProcessedImg(greyScaledImg);
+        return Helpers::convertMatToPixmap(img->getProcessedImg());
     }
     return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
 }
 
-QPixmap ImageController::orignImg() {
-    if(!img->Empty()){
-        return Helpers::convertMatToPixmap(this->img->getOriginalImg());
-    }
-    return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
-}
 
-QPixmap ImageController::processedImg() {
+QPixmap ImageController::getProcessedImg() {
     if(!img->Empty()&&img->Processed()){
         return Helpers::convertMatToPixmap(this->img->getProcessedImg());
     }
     return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
 }
 
-QPixmap ImageController::applyGaussianNoise() {
-    if(!img->Empty()){
-        img->setNoisedImg(Noise::gasussianNoise(img->getOriginalImg(),0,10));
-        return Helpers::convertMatToPixmap(img->getNoisedImg());
+QPixmap ImageController::FilterImg(Mat(*filter)(Mat img,int kernelSize),int kernelSize) {
+    if(!img->Empty() && img->Processed()){
+        Mat res = filter(img->getProcessedImg(),kernelSize);
+        return Helpers::convertMatToPixmap(res);
     }
     return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
 }
 
-QPixmap ImageController::applyUniformNoise() {
+QPixmap ImageController::addNoise(int noiseType, int r, float mean, float sigma) {
     if(!img->Empty()){
-        img->setNoisedImg(Noise::uniformNoise(img->getOriginalImg()));
-        return Helpers::convertMatToPixmap(img->getNoisedImg());
+        Mat res;
+        switch (noiseType) {
+            case 1:
+                res = Noise::uniformNoise(img->getOriginalImg());
+                break;
+            case 2:
+                res = Noise::saltAndPepperNoise(img->getOriginalImg(),r);
+                break;
+            case 3:
+                res = Noise::gasussianNoise(img->getOriginalImg(),mean,sigma);
+                break;
+            default:
+                res = img->getOriginalImg();
+                break;
+        }
+        img->setProcessedImg(res);
+        return Helpers::convertMatToPixmap(res);
     }
     return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
 }
 
-QPixmap ImageController::applySaltPepperNoise() {
-    if(!img->Empty()){
-        img->setNoisedImg(Noise::saltAndPepperNoise(img->getOriginalImg(),0.5,0.7));
-        return Helpers::convertMatToPixmap(img->getNoisedImg());
-    }
-    return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
-}
 
-QPixmap ImageController::applyAvgFilter() {
-    if(!img->Empty()){
-        img->setProcessedImg(Filter::avgFilter(img->getOriginalImg(),5));
-        return Helpers::convertMatToPixmap(img->getProcessedImg());
-    }
-    return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
-}
-
-QPixmap ImageController::applyGaussianFilter() {
-    if(!img->Empty()){
-        img->setProcessedImg(Filter::gaussionFilter(img->getOriginalImg(),5));
-        return Helpers::convertMatToPixmap(img->getProcessedImg());
-    }
-    return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
-}
-
-QPixmap ImageController::applyMedianFilter() {
-    if(!img->Empty()){
-        img->setProcessedImg(Filter::medianFilter(img->getOriginalImg(),5));
-        return Helpers::convertMatToPixmap(img->getProcessedImg());
-    }
-    return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
-}
 
 
 

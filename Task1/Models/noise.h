@@ -19,7 +19,7 @@ public:
     static Mat gasussianNoise(Mat img, float mean, float sigma);
 
     // Add salt and pepper noise Noise to an Image object
-    static Mat saltAndPepperNoise(Mat img, float salt, float pepper);
+    static Mat saltAndPepperNoise(Mat img, int r);
 
 };
 

@@ -12,7 +12,7 @@ class FiltersWidget : public QWidget
     Q_OBJECT
 
 private:
-    ImageController *imageController = new ImageController();
+    ImageController *imageController;
     QPixmap originalImg;
     QPixmap processedImg;
 

@@ -43,6 +43,7 @@ Mat Filter::gaussionFilter(Mat img, int kernelSize) {
     return result;
 }
 
+// TODO: Implement median filter
 Mat Filter::medianFilter(Mat img, int kernelSize) {
     Mat result = img.clone();
     int center = kernelSize / 2;
@@ -68,6 +69,8 @@ Mat Filter::medianFilter(Mat img, int kernelSize) {
     return result;
 }
 
+
+
 Mat Filter::opencvGaussianFilter(Mat img, int kernelSize) {
     Mat result = img.clone();
     GaussianBlur(img, result, Size(kernelSize, kernelSize), 0, 0, BORDER_DEFAULT);
@@ -85,3 +88,74 @@ Mat Filter::opencvAvgFilter(Mat img, int kernelSize) {
     blur(img, result, Size(kernelSize, kernelSize), Point(-1, -1), BORDER_DEFAULT);
     return result;
 }
+
+Mat Filter::detectEdgeSobel(Mat img){
+
+    Mat sobelX = detectEdgeSobelX(img);
+    Mat sobelY = detectEdgeSobelY(img);
+    Mat magnitude = edgeMagnitude(sobelX,sobelY);
+    return magnitude;
+
+}
+Mat Filter::detectEdgeSobelX(Mat img){
+    // Mat xFilter= (Mat_<float>(3,3)<<-1, 0, 1,
+    //                                -2, 0, 2,
+    //                                -1, 0, 1);
+    Mat xFilter= (Mat_<float>(3,3)<<-1, 0, 1,
+                                   -2, 0, 2,
+                                   -1, 0, 1);
+
+    Mat result;
+    filter2D(img, result,CV_32F,xFilter,Point(-1,-1),0,BORDER_DEFAULT);
+    return result;
+
+}
+
+Mat Filter::detectEdgeSobelY(Mat img){
+    // Mat yFilter= (Mat_<float>(3,3)<<   1,2,1,
+    //                                    0,0,0,
+    //                                   -1,-2,-1);
+    Mat yFilter= (Mat_<float>(3,3)<<   -1,-2,-1,
+                                           0,0,0,
+                                           1,2,1);
+    Mat result;
+    filter2D(img, result,CV_32F,yFilter,Point(-1,-1),0,BORDER_DEFAULT);
+
+    return result;
+}
+
+Mat Filter::edgeMagnitude(Mat edgeX, Mat edgeY){
+
+
+    Mat magnitude_Gradient = Mat::zeros(edgeX.rows,edgeX.cols,edgeX.type());
+    // for (int i = 0; i < edgeX.rows; i++)
+    // {
+    //     for (int j = 0; j < edgeX.cols; j++)
+    //     {
+    //         Magnitude_Gradient.at<float>(i, j) = sqrt(pow(edgeX.at<float>(i, j), 2) + pow(edgeY.at<float>(i, j), 2));
+    //     }
+    // }
+    // Magnitude_Gradient = edgeX + edgeY;
+
+
+    magnitude(edgeX,edgeY,magnitude_Gradient);
+    // cout <<Magnitude_Gradient.size();
+    return magnitude_Gradient;
+
+}
+
+Mat Filter::convertToGrayScale(Mat img)
+{
+    Mat greyScaledImg(img.rows, img.cols, CV_8UC1);
+    float weights[3]  = {0.299, 0.587, 0.114};
+    for(int i = 0; i < img.rows; i++){
+        for(int j = 0; j < img.cols; j++){
+            Vec3b currentPixel = img.at<Vec3b>(i, j); // Access pixel from input image
+            float currentGreyValue = weights[0] * currentPixel[2] + weights[1] * currentPixel[1]
+                                     + weights[2] * currentPixel[0];
+            greyScaledImg.at<uchar>(i, j) = static_cast<uchar>(currentGreyValue);
+        }
+    }
+    return greyScaledImg;
+}
+

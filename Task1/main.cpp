@@ -12,8 +12,8 @@ int main(int argc, char *argv[])
     w.show();
     return a.exec();
 
-    // Image *mama = new Image("Gallery/cat.jpg");
-    // imwrite("original.jpg", mama->getOriginalImg());
+    Image *mama = new Image("Gallery/cat.jpg");
+    imwrite("original.jpg", mama->getOriginalImg());
     // Mat avgFilter = Filter::avgFilter(mama->getOriginalImg(),5);
     // mama->setProcessedImg(avgFilter);
     // imwrite("myAvg.jpg",avgFilter);
@@ -38,17 +38,20 @@ int main(int argc, char *argv[])
     // mama->setProcessedImg(opencvGaussianFilter);
     // imwrite("opencvGaussian.jpg",opencvGaussianFilter);
 
-    // Mat uniformNoise = Noise::uniformNoise(mama->getOriginalImg());
-    // mama->setProcessedImg(uniformNoise);
-    // imwrite("uniformNoise.jpg",uniformNoise);
+    // Mat saltAndPepperNoise = Noise::saltAndPepperNoise(mama->getOriginalImg(),0.5,0.7);
+    // mama->setNoisedImg(saltAndPepperNoise);
+    // imwrite("saltAndPepperNoise1.jpg",mama->getNoisedImg());
 
     // Mat gaussianNoise = Noise::gasussianNoise(mama->getOriginalImg(),0,10);
-    // mama->setProcessedImg(gaussianNoise);
-    // imwrite("gaussianNoise.jpg",gaussianNoise);
+    // mama->setNoisedImg(gaussianNoise);
+    // imwrite("gaussianNoise1.jpg",mama->getNoisedImg());
 
-    // Mat saltAndPepperNoise = Noise::saltAndPepperNoise(mama->getOriginalImg(),0.5,0.7);
-    // mama->setProcessedImg(saltAndPepperNoise);
-    // imwrite("saltAndPepperNoise.jpg",saltAndPepperNoise);
+    // Mat uniformNoise = Noise::uniformNoise(mama->getOriginalImg());
+    // mama->setNoisedImg(uniformNoise);
+    // imwrite("uniformNoise1.jpg",mama->getNoisedImg());
+
+
+
 
 
 
