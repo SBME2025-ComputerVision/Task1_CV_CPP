@@ -4,10 +4,12 @@ Noise::Noise() {}
 
 Mat Noise::uniformNoise(Mat img)
 {
-    Mat noise = img.clone();
+    Mat result = img.clone();
+
+    Mat noise = Mat(img.size(), img.type());
     randu(noise, 0, 255);
-    img +=noise;
-    return img;
+    result +=noise;
+    return result;
 }
 
 // Mat Noise::saltAndPepperNoise(Mat img, float saltRatio, float pepperRatio) {
