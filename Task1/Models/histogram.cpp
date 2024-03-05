@@ -1,7 +1,7 @@
 #include"histogram.h"
 
 
-void Histogram:: calculate_histogram(Mat &img_grayscale,map<int,int>&histogram ,vector<float>&accumelated_histogram){
+void Histogram:: calculate_histogram(Mat img_grayscale,map<int,int>&histogram ,vector<float>&accumelated_histogram){
     for(int row=0;row<img_grayscale.rows;row++){
         for(int col=0;col<img_grayscale.cols;col++){
             int pixel=img_grayscale.at<uchar>(row,col);
@@ -28,7 +28,7 @@ void Histogram:: calculate_histogram(Mat &img_grayscale,map<int,int>&histogram ,
 
 }
 
-void Histogram:: normalize_img(Mat&img){
+Mat Histogram:: normalize_img(Mat img){
     float img_min=img.at<uchar>(0,0), img_max=0;
     for(int row=0;row<img.rows;row++){
         for(int col=0;col<img.cols;col++){
@@ -47,10 +47,10 @@ void Histogram:: normalize_img(Mat&img){
 
         }
     }
-
+    return img;
 }
 
-Mat Histogram:: Equalize_img(Mat &img){
+Mat Histogram:: Equalize_img(Mat img){
     map<int,int> histogram;
     map<int,int>intensity_value;
     vector<float>cumulative_histogram;

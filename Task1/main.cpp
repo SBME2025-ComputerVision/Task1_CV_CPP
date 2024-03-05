@@ -5,15 +5,16 @@
 #include<Models/noise.h>
 #include"config.h"
 #include <QApplication>
+
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    return a.exec();
+    // QApplication a(argc, argv);
+    // MainWindow w;
+    // w.show();
+    // return a.exec();
 
-    // Image *mama = new Image("Gallery/cat.jpg");
-    // imwrite("original.jpg", mama->getOriginalImg());
+    Image *mama = new Image("Gallery/bird.jpg");
+    imwrite("original.jpg", mama->getOriginalImg());
     // Mat avgFilter = Filter::avgFilter(mama->getOriginalImg(),5);
     // mama->setProcessedImg(avgFilter);
     // imwrite("myAvg.jpg",avgFilter);
@@ -50,8 +51,12 @@ int main(int argc, char *argv[])
     // mama->setProcessedImg(saltAndPepperNoise);
     // imwrite("saltAndPepperNoise.jpg",saltAndPepperNoise);
 
-
-
+    // Mat cur =mama->getOriginalImg();
+    // Histogram::normalize_img(cur);
+    Mat cur = Histogram::Equalize_img(mama->getOriginalImg());
+   // Mat cur = Histogram::normalize_img(mama->getOriginalImg());
+    mama->setProcessedImg(cur);
+    imwrite("saltAndPepperNoise.jpg",cur);
     return 0;
 
 

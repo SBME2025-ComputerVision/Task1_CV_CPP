@@ -7,6 +7,7 @@
 #include"Models/noise.h"
 #include"Models/filter.h"
 #include "Models/image.h"
+#include "Models/histogram.h"
 #include <QString>
 #include <QFileDialog>
 #include <QCoreApplication>

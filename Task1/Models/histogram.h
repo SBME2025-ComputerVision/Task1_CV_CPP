@@ -13,11 +13,11 @@ class Histogram{
 private:
 
 public:
-    void calculate_histogram(Mat &img_grayscale,map<int,int>&histogram, vector<float>&accumelated_histogram);
+    static void calculate_histogram(Mat img_grayscale,map<int,int>&histogram, vector<float>&accumelated_histogram);
 
-    void normalize_img(Mat&img);
+    static Mat normalize_img(Mat img);
 
-    Mat Equalize_img(Mat &img);
+    static Mat Equalize_img(Mat img);
 
 
 
