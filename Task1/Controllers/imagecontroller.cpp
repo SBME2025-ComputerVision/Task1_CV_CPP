@@ -52,7 +52,7 @@ QPixmap ImageController::addNoise(int noiseType, int r, float mean, float sigma)
                 res = Noise::uniformNoise(img->getOriginalImg());
                 break;
             case 2:
-                res = Noise::saltAndPepperNoise(img->getOriginalImg(),r);
+                res = Noise::saltAndPepperNoise(img->getProcessedImg(),r);
                 break;
             case 3:
                 res = Noise::gasussianNoise(img->getOriginalImg(),mean,sigma);
@@ -62,6 +62,8 @@ QPixmap ImageController::addNoise(int noiseType, int r, float mean, float sigma)
                 break;
         }
         img->setProcessedImg(res);
+
+        qDebug()<<"Ahmed";
         return Helpers::convertMatToPixmap(res);
     }
     return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));

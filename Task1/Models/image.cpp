@@ -18,6 +18,9 @@ void Image::loadImage(string pth){
         qDebug()<< "error";
     }
     setImgPath(pth);
+    Size s = Size(512,512);
+    resize(originalImg,originalImg,s);
+    // resize(processedImg,processedImg,s);
     this->isProcessed = false;
     this->isEmpty = this->originalImg.empty();
 }
@@ -32,7 +35,8 @@ Mat Image::getProcessedImg(){
 }
 
 void Image::setProcessedImg(Mat& img){
-    this->processedImg = Mat::zeros(img.size(),img.type());
+    // this->processedImg = NULL;
+    this->processedImg = img;
     this->isProcessed = true;
 }
 
