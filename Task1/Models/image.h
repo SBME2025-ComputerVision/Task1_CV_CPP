@@ -11,6 +11,7 @@ class Image
 private:
     Mat originalImg;
     Mat processedImg;
+    Mat noisedImg;
     Mat greyScaledImg;
     bool isEmpty;
     bool isProcessed;
@@ -31,7 +32,12 @@ public:
 
     Mat getGreyScaledImg();
 
+    Mat getNoisedImg();
+
+
     void setProcessedImg(Mat img);
+
+    void setNoisedImg(Mat img);
 
     // Returns empty property
     bool Empty();

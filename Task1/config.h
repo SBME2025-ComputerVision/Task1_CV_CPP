@@ -4,6 +4,8 @@
 
 #include <bits/stdc++.h>
 #include<opencv2/opencv.hpp>
+#include"Models/noise.h"
+#include"Models/filter.h"
 #include "Models/image.h"
 #include <QString>
 #include <QFileDialog>

@@ -7,12 +7,12 @@
 #include <QApplication>
 int main(int argc, char *argv[])
 {
-    // QApplication a(argc, argv);
-    // MainWindow w;
-    // w.show();
-    // return a.exec();
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+    return a.exec();
 
-    Image *mama = new Image("Gallery/cat.jpg");
+    // Image *mama = new Image("Gallery/cat.jpg");
     // imwrite("original.jpg", mama->getOriginalImg());
     // Mat avgFilter = Filter::avgFilter(mama->getOriginalImg(),5);
     // mama->setProcessedImg(avgFilter);
@@ -46,9 +46,9 @@ int main(int argc, char *argv[])
     // mama->setProcessedImg(gaussianNoise);
     // imwrite("gaussianNoise.jpg",gaussianNoise);
 
-    Mat saltAndPepperNoise = Noise::saltAndPepperNoise(mama->getOriginalImg(),0.5,0.7);
-    mama->setProcessedImg(saltAndPepperNoise);
-    imwrite("saltAndPepperNoise.jpg",saltAndPepperNoise);
+    // Mat saltAndPepperNoise = Noise::saltAndPepperNoise(mama->getOriginalImg(),0.5,0.7);
+    // mama->setProcessedImg(saltAndPepperNoise);
+    // imwrite("saltAndPepperNoise.jpg",saltAndPepperNoise);
 
 
 

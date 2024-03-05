@@ -35,10 +35,19 @@ Mat Image::getGreyScaledImg(){
     return this->greyScaledImg;
 }
 
+Mat Image::getNoisedImg(){
+    return this->noisedImg;
+}
+
 void Image::setProcessedImg(Mat img){
     this->processedImg = img;
     if(!this->processedImg.empty()) this->isProcessed = true;
 }
+
+void Image::setNoisedImg(Mat img){
+    this->noisedImg = img;
+}
+
 bool Image::Empty(){
     return this->isEmpty;
 }

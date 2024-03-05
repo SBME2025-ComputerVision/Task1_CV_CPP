@@ -15,8 +15,13 @@ public:
     QPixmap greyScaledImg();
     QPixmap orignImg();
     QPixmap processedImg();
-
-
+    QPixmap applyGaussianNoise();
+    QPixmap applyUniformNoise();
+    QPixmap applySaltPepperNoise();
+    QPixmap applyAvgFilter();
+    QPixmap applyGaussianFilter();
+    QPixmap applyMedianFilter();
+    
 };
 
 #endif // IMAGECONTROLLER_H&

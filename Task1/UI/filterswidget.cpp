@@ -17,19 +17,26 @@ FiltersWidget::~FiltersWidget()
 
 void FiltersWidget::on_apply_gaussian_noise_clicked()
 {
+    originalImg = imageController->applyGaussianNoise();
+    originalImg = originalImg.scaled(ui->imageOriginal->size(),Qt::IgnoreAspectRatio);
+    ui->imageOriginal->setPixmap(originalImg);
 
 }
 
 
 void FiltersWidget::on_apply_uniform_noise_clicked()
 {
-
+    originalImg = imageController->applyUniformNoise();
+    originalImg = originalImg.scaled(ui->imageOriginal->size(),Qt::IgnoreAspectRatio);
+    ui->imageOriginal->setPixmap(originalImg);
 }
 
 
 void FiltersWidget::on_apply_saltpeper_noise_clicked()
 {
-
+    originalImg = imageController->applySaltPepperNoise();
+    originalImg = originalImg.scaled(ui->imageOriginal->size(),Qt::IgnoreAspectRatio);
+    ui->imageOriginal->setPixmap(originalImg);
 }
 
 
@@ -67,7 +74,6 @@ void FiltersWidget::on_uploadImgBtn_clicked()
     processedImg = processedImg.scaled(ui->imageFiltered->size(),Qt::IgnoreAspectRatio);
     ui->imageOriginal->setPixmap(originalImg);
     ui->imageFiltered->setPixmap(processedImg);
-
 }
 
 

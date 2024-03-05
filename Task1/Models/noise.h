@@ -3,9 +3,10 @@
 
 #include <bits/stdc++.h>
 #include<opencv2/opencv.hpp>
-#include "config.h"
+
 
 using namespace std;
+using namespace cv;
 
 class Noise
 {
