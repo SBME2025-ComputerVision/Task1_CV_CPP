@@ -19,6 +19,7 @@ SOURCES += \
     Controllers/noisecontroller.cpp \
     Helpers/helpers.cpp \
     Models/filter.cpp \
+    Models/histogram.cpp \
     Models/noise.cpp \
     Models/image.cpp \
     UI/filterswidget.cpp \
@@ -32,6 +33,7 @@ HEADERS += \
     Controllers/noisecontroller.h \
     Helpers/helpers.h \
     Models/filter.h \
+    Models/histogram.h \
     Models/image.h \
     Models/noise.h \
     UI/filterswidget.h \

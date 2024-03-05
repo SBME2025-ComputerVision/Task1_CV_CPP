@@ -5,7 +5,6 @@ Noise::Noise() {}
 Mat Noise::uniformNoise(Mat img)
 {
     Mat result = img.clone();
-
     Mat noise = Mat(img.size(), img.type());
     randu(noise, 0, 255);
     result +=noise;
