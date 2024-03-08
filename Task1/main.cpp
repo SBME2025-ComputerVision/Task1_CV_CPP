@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     // w.show();
     // return a.exec();
 
-    Image *mama = new Image("Gallery/bird.jpg");
+    Image *mama = new Image("Gallery/output.jpg");
     imwrite("original.jpg", mama->getOriginalImg());
     // Mat avgFilter = Filter::avgFilter(mama->getOriginalImg(),5);
     // mama->setProcessedImg(avgFilter);
@@ -53,10 +53,14 @@ int main(int argc, char *argv[])
 
     // Mat cur =mama->getOriginalImg();
     // Histogram::normalize_img(cur);
-    Mat cur = Histogram::Equalize_img(mama->getOriginalImg());
+    Mat original=mama->getOriginalImg();
+    // Mat norm=Histogram::normalize_img(original);
+    Mat cur= Histogram::calculate_histogram(original);
+    Mat distCurve=Histogram::distributionCurve(cur);
+    Mat plot=Histogram::plot_histogram(cur,100,147,111);
    // Mat cur = Histogram::normalize_img(mama->getOriginalImg());
-    mama->setProcessedImg(cur);
-    imwrite("saltAndPepperNoise.jpg",cur);
+    mama->setProcessedImg(distCurve);
+    imwrite("saltAndPepperNoise.jpg",distCurve);
     return 0;
 
 
