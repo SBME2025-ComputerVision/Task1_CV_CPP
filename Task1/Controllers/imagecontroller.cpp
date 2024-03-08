@@ -47,7 +47,7 @@ QPixmap ImageController::FilterImg(int filterType,int kernelSize) {
                 res = Filter::opencvAvgFilter(processedImg,kernelSize);
                 break;
             case MedianFilter:
-                res = Filter::opencvMedianFilter(processedImg,kernelSize);
+                res = Filter::medianFilter(processedImg,kernelSize);
                 break;
             case GaussianFilter:
                 res = Filter::opencvGaussianFilter(processedImg,kernelSize);

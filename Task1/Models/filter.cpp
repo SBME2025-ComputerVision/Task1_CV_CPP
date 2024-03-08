@@ -43,29 +43,47 @@ Mat Filter::gaussionFilter(Mat img, int kernelSize) {
     return result;
 }
 
-// TODO: Implement median filter
+// TODO: Implement median filter optimization , ET:10sec
+// Mat Filter::medianFilter(Mat img, int kernelSize) {
+//     Mat result = img.clone();
+//     int center = kernelSize / 2;
+//         for(int x = center; x < result.rows - center; x++){
+//             for(int y = center; y < result.cols - center; y++){
+//                 vector<int> values;
+//                 for(int i = -center; i <= center; i++){
+//                     for(int j = -center; j <= center; j++){
+//                         values.push_back(result.at<uchar>(x + i, y + j));
+//                     }
+//                 }
+//                 sort(values.begin(), values.end());
+//                 result.at<uchar>(x, y) = values[values.size() / 2];
+//             }
+//         }
+
+
+//     return result;
+// }
+
 Mat Filter::medianFilter(Mat img, int kernelSize) {
     Mat result = img.clone();
     int center = kernelSize / 2;
-    vector<Mat> channels;
-    split(img, channels);
-    for(int i = 0; i < 3; i++){
-        Mat channel = channels[i];
-        for(int x = center; x < channel.rows - center; x++){
-            for(int y = center; y < channel.cols - center; y++){
-                vector<int> values;
-                for(int i = -center; i <= center; i++){
-                    for(int j = -center; j <= center; j++){
-                        values.push_back(channel.at<uchar>(x + i, y + j));
-                    }
-                }
-                sort(values.begin(), values.end());
-                channel.at<uchar>(x, y) = values[values.size() / 2];
-            }
+
+    for (int x = center; x < result.rows - center; x++) {
+        for (int y = center; y < result.cols - center; y++) {
+            // Extract the kernel region
+            Mat kernel = result(Rect(y - center, x - center, kernelSize, kernelSize)).clone();
+
+            // Reshape the kernel to a column vector
+            Mat kernelVec = kernel.reshape(1, kernelSize * kernelSize);
+
+            // Sort the values along the column vector
+            std::nth_element(kernelVec.data, kernelVec.data + kernelVec.rows * kernelVec.cols / 2, kernelVec.data + kernelVec.rows * kernelVec.cols);
+
+            // Get the median value
+            result.at<uchar>(x, y) = kernelVec.at<uchar>(kernelVec.rows * kernelVec.cols / 2);
         }
-        channels[i] = channel;
     }
-    merge(channels, result);
+
     return result;
 }
 
