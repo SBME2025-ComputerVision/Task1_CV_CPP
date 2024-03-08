@@ -10,10 +10,30 @@ string cutiePth = "/Gallery/cutie.jpg";
 string palestinePth = "/Gallery/palestine.jpg";
 string whalePth = "/Gallery/whale.jpg";
 
-const int FilterPage =0;
-const int EdgeDetectionPage=1;
-const int HistogramPage=2;
-const int ThresholdingPage =3;
-const int HybridPage=4;
+
+
+// Enums
+
+// enum Pages{
+//     FilterPage = 0,
+//     EdgeDetectionPage = 1,
+//     HistogramPage = 2,
+//     ThresholdingPage = 3,
+//     HybridPage = 4
+// };
+
+
+// enum FilterType{
+//     MeanFilter = 1,
+//     MedianFilter = 2,
+//     GaussianFilter = 3
+// };
+
+
+// enum NoiseType{
+//     UniformNoise = 1,
+//     SaltAndPepperNoise = 2,
+//     GaussianNoise = 3
+// };
 
 

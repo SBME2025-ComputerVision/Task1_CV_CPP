@@ -1,62 +1,28 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-#include <bits/stdc++.h>
 #include<opencv2/opencv.hpp>
-using namespace std;
+#include<QDebug>
 using namespace cv;
+using namespace std;
 
 class Image
 {
 private:
-    // Image properties
-    // to store the original image
     Mat originalImg;
-    // to store the processed image (gray scale, noised, filtered, etc.)
-    Mat processedImg;
-    // to know if the image is empty
-    bool isEmpty;
-    // to know if any processing has been done on the image
-    bool isProcessed;
-    // to store the noised image
-    string path;
+    string imgPth;
+    bool empty;
+    bool processed;
 
 public:
-
-    // Initiallize an empty Image object
     Image();
-
-    // Initiallize an Image object with the path to the image file
     Image(string pth);
-
-    // Returns img property
-    // to get the original image
+    Image(Mat img,string pth);
     Mat getOriginalImg();
-    // to get the processed image
-    Mat getProcessedImg();
-
-    // set the processed image
-    void setProcessedImg(Mat& img);
-
-    // Returns empty property
-    bool Empty();
-
-    // Returns processed property
-    bool Processed();
-
-    // Returns noised property
-    string getImgPath();
-
-    // Set the path to the image file
-    void setImgPath(string pth);
-
-    // Load/Update a new image
-    void loadImage(string pth);
-
-
-    ~Image();
-
-
+    void setOriginalImg(Mat img ,string pth);
+    void setIsProcessed(bool processed);
+    bool isEmpty();
+    bool isProcessed();
 };
 
 #endif // IMAGE_H

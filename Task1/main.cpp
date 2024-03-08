@@ -12,47 +12,15 @@ int main(int argc, char *argv[])
     w.show();
     return a.exec();
 
-    Image *mama = new Image("Gallery/cat.jpg");
-    imwrite("original.jpg", mama->getOriginalImg());
-    // Mat avgFilter = Filter::avgFilter(mama->getOriginalImg(),5);
-    // mama->setProcessedImg(avgFilter);
-    // imwrite("myAvg.jpg",avgFilter);
+    // Image *mama = new Image("Gallery/whale.jpg");
+    // Noise *noise = new Noise();
+    // imwrite("original.jpg", mama->getOriginalImg());
 
-    // Mat medianFilter = Filter::medianFilter(mama->getOriginalImg(),5);
-    // mama->setProcessedImg(medianFilter);
-    // imwrite("myMedian.jpg",medianFilter);
+    // Mat grey = Filter::convertToGrayScale(mama->getOriginalImg());
 
-    // Mat gaussianFilter = Filter::gaussionFilter(mama->getOriginalImg(),5);
-    // mama->setProcessedImg(gaussianFilter);
-    // imwrite("myGaussian.jpg",gaussianFilter);
+    // Mat res = noise->saltAndPepperNoise(grey,15);
 
-    // Mat opencvAvgFilter = Filter::opencvAvgFilter(mama->getOriginalImg(),5);
-    // mama->setProcessedImg(opencvAvgFilter);
-    // imwrite("opencvAvg.jpg",opencvAvgFilter);
-
-    // Mat opencvMedianFilter = Filter::opencvMedianFilter(mama->getOriginalImg(),5);
-    // mama->setProcessedImg(opencvMedianFilter);
-    // imwrite("opencvMedian.jpg",opencvMedianFilter);
-
-    // Mat opencvGaussianFilter = Filter::opencvGaussianFilter(mama->getOriginalImg(),5);
-    // mama->setProcessedImg(opencvGaussianFilter);
-    // imwrite("opencvGaussian.jpg",opencvGaussianFilter);
-
-    // Mat saltAndPepperNoise = Noise::saltAndPepperNoise(mama->getOriginalImg(),0.5,0.7);
-    // mama->setNoisedImg(saltAndPepperNoise);
-    // imwrite("saltAndPepperNoise1.jpg",mama->getNoisedImg());
-
-    // Mat gaussianNoise = Noise::gasussianNoise(mama->getOriginalImg(),0,10);
-    // mama->setNoisedImg(gaussianNoise);
-    // imwrite("gaussianNoise1.jpg",mama->getNoisedImg());
-
-    // Mat uniformNoise = Noise::uniformNoise(mama->getOriginalImg());
-    // mama->setNoisedImg(uniformNoise);
-    // imwrite("uniformNoise1.jpg",mama->getNoisedImg());
-
-
-
-
+    // imwrite("res.jpg",res);
 
 
     return 0;

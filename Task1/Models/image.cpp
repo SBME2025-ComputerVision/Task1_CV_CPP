@@ -1,60 +1,44 @@
 #include "image.h"
-#include "config.h"
-#include<QDebug>
+
 Image::Image() {
-    this->isEmpty = true;
-    this->isProcessed = false;
-    setImgPath("");
+    empty = true;
+    processed = false;
 }
-
 Image::Image(string pth){
-    this->loadImage(pth);
-}
-
-
-void Image::loadImage(string pth){
-    this->originalImg = imread(pth,IMREAD_COLOR);
-    if(this->originalImg.empty()){
-        qDebug()<< "error";
+    Mat opImg = imread(pth,IMREAD_COLOR);
+    if(!opImg.empty()){
+        setOriginalImg(opImg,pth);
+    }else{
+        qDebug()<<"Bad img path";
     }
-    setImgPath(pth);
-    Size s = Size(512,512);
-    resize(originalImg,originalImg,s);
-    // resize(processedImg,processedImg,s);
-    this->isProcessed = false;
-    this->isEmpty = this->originalImg.empty();
+    processed = false;
 }
-
-
+Image::Image(Mat img,string pth){
+    setOriginalImg(img,pth);
+    processed = false;
+}
 Mat Image::getOriginalImg(){
-    return this->originalImg;
+    return originalImg;
 }
 
-Mat Image::getProcessedImg(){
-    return this->processedImg;
+void Image::setOriginalImg(Mat img,string pth){
+    if(!img.empty() && !pth.empty()){
+        originalImg = img.clone();
+        empty = false;
+        imgPth = pth;
+        qDebug()<<"Set Original image successfully";
+    }else{
+        qDebug()<<"Set Original image Error";
+    }
 }
 
-void Image::setProcessedImg(Mat& img){
-    // this->processedImg = NULL;
-    this->processedImg = img;
-    this->isProcessed = true;
+void Image::setIsProcessed(bool processed){
+    this->processed = processed;
 }
 
-
-bool Image::Empty(){
-    return this->isEmpty;
+bool Image::isEmpty(){
+    return empty;
 }
-
-bool Image::Processed(){
-    return this->isProcessed;
+bool Image::isProcessed(){
+    return processed;
 }
-
-string Image::getImgPath(){
-    return this->path;
-}
-
-void Image::setImgPath(string pth){
-    this->path =  pth;;
-}
-
-

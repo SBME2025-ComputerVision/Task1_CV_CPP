@@ -5,13 +5,16 @@ ImageController::ImageController() {
     this->img = new Image();
 }
 
+
+
 QPixmap ImageController::uploadImg() {
     QString appDirPath = QCoreApplication::applicationDirPath();
     QString path = QFileDialog::getOpenFileName(nullptr, "Choose an Image", appDirPath);
 
     if (!path.isEmpty()) {
-        this->img->loadImage(path.toStdString());
-        if (!this->img->Empty()) {
+        delete this->img;
+        this->img = new Image(path.toStdString());
+        if (!img->isEmpty()) {
             return Helpers::convertMatToPixmap(this->img->getOriginalImg());
         }
     }
@@ -20,51 +23,65 @@ QPixmap ImageController::uploadImg() {
 
 
 QPixmap ImageController::getGreyScaledImg() {
-    if(!img->Empty()){
-        Mat greyScaledImg = Filter::convertToGrayScale(img->getOriginalImg());
-        img->setProcessedImg(greyScaledImg);
-        return Helpers::convertMatToPixmap(img->getProcessedImg());
+    if(!img->isEmpty()){
+        processedImg = Filter::convertToGrayScale(img->getOriginalImg());
+        img->setIsProcessed(true);
+        return Helpers::convertMatToPixmap(processedImg);
     }
     return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
 }
 
 
 QPixmap ImageController::getProcessedImg() {
-    if(!img->Empty()&&img->Processed()){
-        return Helpers::convertMatToPixmap(this->img->getProcessedImg());
+    if(!processedImg.empty()&&img->isProcessed()){
+        return Helpers::convertMatToPixmap(processedImg);
     }
     return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
 }
 
-QPixmap ImageController::FilterImg(Mat(*filter)(Mat img,int kernelSize),int kernelSize) {
-    if(!img->Empty() && img->Processed()){
-        Mat res = filter(img->getProcessedImg(),kernelSize);
-        return Helpers::convertMatToPixmap(res);
-    }
-    return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
-}
-
-QPixmap ImageController::addNoise(int noiseType, int r, float mean, float sigma) {
-    if(!img->Empty()){
+QPixmap ImageController::FilterImg(int filterType,int kernelSize) {
+    if(!img->isEmpty()&&img->isProcessed()){
         Mat res;
-        switch (noiseType) {
-            case 1:
-                res = Noise::uniformNoise(img->getOriginalImg());
+        switch (filterType) {
+            case AvgFilter:
+                res = Filter::opencvAvgFilter(processedImg,kernelSize);
                 break;
-            case 2:
-                res = Noise::saltAndPepperNoise(img->getProcessedImg(),r);
+            case MedianFilter:
+                res = Filter::opencvMedianFilter(processedImg,kernelSize);
                 break;
-            case 3:
-                res = Noise::gasussianNoise(img->getOriginalImg(),mean,sigma);
+            case GaussianFilter:
+                res = Filter::opencvGaussianFilter(processedImg,kernelSize);
                 break;
             default:
                 res = img->getOriginalImg();
                 break;
         }
-        img->setProcessedImg(res);
+        processedImg = res;
+        return Helpers::convertMatToPixmap(processedImg);
+    }
+    return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
+    
+}
 
-        qDebug()<<"Ahmed";
-        return Helpers::convertMatToPixmap(res);
+QPixmap ImageController::addNoise(int noiseType, int r, float mean, float sigma) {
+    if(!img->isEmpty()&&img->isProcessed()){
+        Mat res;
+        switch (noiseType) {
+            case UniformNoise:
+            res = Noise::uniformNoise(processedImg);
+                break;
+            case SaltAndPepperNoise:
+                res = Noise::saltAndPepperNoise(processedImg,r);
+                break;
+            case GaussianNoise:
+                res = Noise::gasussianNoise(processedImg,mean,sigma);
+                break;
+            default:
+                res = img->getOriginalImg();
+                break;
+        }
+        processedImg = res;
+        return Helpers::convertMatToPixmap(processedImg);
     }
     return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
 }
