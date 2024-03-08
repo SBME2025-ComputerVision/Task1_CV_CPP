@@ -44,13 +44,13 @@ QPixmap ImageController::FilterImg(int filterType,int kernelSize) {
         Mat res;
         switch (filterType) {
             case AvgFilter:
-                res = Filter::opencvAvgFilter(processedImg,kernelSize);
+                res = Filter::avgFilter(processedImg,kernelSize);
                 break;
             case MedianFilter:
                 res = Filter::medianFilter(processedImg,kernelSize);
                 break;
             case GaussianFilter:
-                res = Filter::opencvGaussianFilter(processedImg,kernelSize);
+                res = Filter::gaussionFilter(processedImg,kernelSize);
                 break;
             default:
                 res = img->getOriginalImg();

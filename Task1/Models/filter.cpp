@@ -31,15 +31,9 @@ Mat Filter::avgFilter(Mat img, int kernelSize) {
 
 Mat Filter::gaussionFilter(Mat img, int kernelSize) {
     Mat result = img.clone();
-    vector<Mat> channels;
-    split(img, channels);
-    for(int i = 0; i < 3; i++){
-        Mat channel = channels[i];
         Mat kernel = gaussianKernel(kernelSize, 1.0);
-        filter2D(channel, channel, -1, kernel, Point(-1, -1), 0, BORDER_DEFAULT);
-        channels[i] = channel;
-    }
-    merge(channels, result);
+        filter2D(result, result, -1, kernel, Point(-1, -1), 0, BORDER_DEFAULT);
+
     return result;
 }
 
