@@ -3,7 +3,7 @@
 
 
 
-Mat Histogram:: calculate_histogram(Mat image) {
+Mat Histogram:: calculateHistogram(Mat image) {
     Mat hist;
     hist = Mat::zeros(256, 1, CV_32F);
     // convert each pixel to be stored in float
@@ -19,7 +19,7 @@ Mat Histogram:: calculate_histogram(Mat image) {
     }
     return hist;
 }
-Mat Histogram:: plot_histogram(Mat histogram ,int r,int g,int b) {
+Mat Histogram:: plotHistogram(Mat histogram ,int r,int g,int b) {
     Mat histogram_image(400, 512, CV_8UC3, Scalar(0, 0, 0));
     Mat normalized_histogram;
     normalize(histogram, normalized_histogram, 0, 255, NORM_MINMAX, -1, Mat());
@@ -35,7 +35,7 @@ Mat Histogram:: plot_histogram(Mat histogram ,int r,int g,int b) {
 };
 
 
-Mat Histogram:: normalize_img(Mat input_image){
+Mat Histogram:: normalizeImg(Mat input_image){
     Mat normalized_image;
     normalize(input_image,normalized_image,0,255,NORM_MINMAX,CV_8U);
     return normalized_image;
@@ -44,7 +44,7 @@ Mat Histogram:: normalize_img(Mat input_image){
 
 
 
-Mat Histogram:: Equalize_img(const Mat& input_image){
+Mat Histogram:: equalizeImg(const Mat& input_image){
     Mat equalized_image;
 
     Mat gray_image;

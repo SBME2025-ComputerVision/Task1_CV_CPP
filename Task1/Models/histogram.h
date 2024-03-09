@@ -14,13 +14,13 @@ private:
 
 public:
 
-    static Mat normalize_img(Mat input_image);
+    static Mat normalizeImg(Mat input_image);
 
-    static Mat Equalize_img(const Mat& input_image);
+    static Mat equalizeImg(const Mat& input_image);
 
-    static Mat plot_histogram(cv::Mat histogram,int r=0,int g=0,int b=0);
+    static Mat plotHistogram(Mat histogram,int r=0,int g=0,int b=0);
 
-    static Mat calculate_histogram(cv::Mat image);
+    static Mat calculateHistogram(Mat image);
 
     static Mat distributionCurve(Mat histogram);
 
