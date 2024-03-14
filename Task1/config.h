@@ -23,9 +23,23 @@ extern string cutiePth;
 extern string palestinePth;
 extern string whalePth;
 
-extern const int FilterPage;
-extern const int EdgeDetectionPage;
-extern const int HistogramPage;
-extern const int ThresholdingPage;
-extern const int HybridPage;
+ enum NoiseType{
+    UniformNoise = 1,
+    SaltAndPepperNoise = 2,
+    GaussianNoise = 3
+};
+
+ enum FilterType{
+    AvgFilter = 1,
+    MedianFilter = 2,
+    GaussianFilter = 3
+};
+
+ enum Pages{
+    FilterPage = 0,
+    EdgeDetectionPage = 1,
+    HistogramPage = 2,
+    ThresholdingPage = 3,
+    HybridPage = 4
+};
 #endif // CONFIG_H

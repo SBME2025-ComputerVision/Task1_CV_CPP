@@ -1,83 +1,44 @@
 #include "image.h"
-#include "config.h"
-#include<QDebug>
+
 Image::Image() {
-    this->isEmpty = true;
-    this->isProcessed = false;
-    setImgPath("");
+    empty = true;
+    processed = false;
 }
-
 Image::Image(string pth){
-    this->loadImage(pth);
-}
-
-
-void Image::loadImage(string pth){
-    setImgPath(pth);
-    this->originalImg = imread(pth,IMREAD_COLOR);
-    if(this->originalImg.empty()){
-        qDebug()<< "error";
+    Mat opImg = imread(pth,IMREAD_COLOR);
+    if(!opImg.empty()){
+        setOriginalImg(opImg,pth);
+    }else{
+        qDebug()<<"Bad img path";
     }
-    this->isEmpty = this->originalImg.empty();
-    convertToGreyScale();
+    processed = false;
 }
-
-
+Image::Image(Mat img,string pth){
+    setOriginalImg(img,pth);
+    processed = false;
+}
 Mat Image::getOriginalImg(){
-    return this->originalImg;
+    return originalImg;
 }
 
-Mat Image::getProcessedImg(){
-    return this->processedImg;
-}
-
-Mat Image::getGreyScaledImg(){
-    return this->greyScaledImg;
-}
-
-Mat Image::getNoisedImg(){
-    return this->noisedImg;
-}
-
-void Image::setProcessedImg(Mat img){
-    this->processedImg = img;
-    if(!this->processedImg.empty()) this->isProcessed = true;
-}
-
-void Image::setNoisedImg(Mat img){
-    this->noisedImg = img;
-}
-
-bool Image::Empty(){
-    return this->isEmpty;
-}
-
-bool Image::Processed(){
-    return this->isProcessed;
-}
-
-string Image::getImgPath(){
-    return this->path;
-}
-
-void Image::setImgPath(string pth){
-    this->path =  pth;;
-}
-
-void Image::convertToGreyScale()
-{
-    Mat greyScaledImg(originalImg.rows,originalImg.cols,CV_8UC1);
-
-    float weights[3]  = {0.299,0.587,0.114};
-
-    for(int i=0;i<originalImg.rows;i++){
-        for(int j=0;j<originalImg.cols;j++){
-            Vec3b currentPixel = originalImg.at<Vec3b>(i,j);
-            float currentGreyValue = weights[0]*currentPixel[2] + weights[1]*currentPixel[1]
-                                     + weights[2]*currentPixel[0];
-            greyScaledImg.at<uchar>(i,j) =static_cast<uchar>(currentGreyValue);
-        }
+void Image::setOriginalImg(Mat img,string pth){
+    if(!img.empty() && !pth.empty()){
+        originalImg = img.clone();
+        empty = false;
+        imgPth = pth;
+        qDebug()<<"Set Original image successfully";
+    }else{
+        qDebug()<<"Set Original image Error";
     }
+}
 
-    this->greyScaledImg = greyScaledImg;
+void Image::setIsProcessed(bool processed){
+    this->processed = processed;
+}
+
+bool Image::isEmpty(){
+    return empty;
+}
+bool Image::isProcessed(){
+    return processed;
 }
