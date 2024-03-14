@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     // w.show();
     // return a.exec();
 
-    Image* cat = new Image("./Gallery/cat.jpg");
+    Image* cat = new Image("./Gallery/whale.jpg");
 
     imwrite("orignal.jpg",cat->getOriginalImg());
     imwrite("grey.jpg",Filter::convertToGrayScale(cat->getOriginalImg()));
@@ -23,21 +23,24 @@ int main(int argc, char *argv[])
 
     Mat dftImg = Fourier::applyDFT(grey);
 
-    Mat planes[2];
+   dftImg = Fourier::applyShifting(dftImg);
 
+    Mat planes[2];
     split(dftImg,planes);
 
-    Mat real,imaginary,mag,phase;
+    Mat mag, phaz;
 
-    real = planes[0];
-    imaginary = planes[1];
-
-    magnitude(real,imaginary,mag);
-    cv::phase(real,imaginary,phase);
+    magnitude(planes[0],planes[1],mag);
+    phase(planes[0],planes[1],phaz,true);
 
 
-    imwrite("dftImg.jpg",phase);
 
+
+    Mat img = Fourier::applyIDFT(phaz);
+
+
+
+    imwrite("inversing.jpg",img);
     return 0;
 
 
