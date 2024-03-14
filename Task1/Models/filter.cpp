@@ -135,6 +135,66 @@ Mat Filter::detectEdgeSobelY(Mat img){
 
     return result;
 }
+Mat Filter::detectEdgeRobertX(Mat img){
+    Mat yFilter= (Mat_<float>(2,2)<< 1,0,0,-1);
+    Mat result;
+    filter2D(img, result,CV_32F,yFilter,Point(-1,-1),0,BORDER_DEFAULT);
+
+    return result;
+}
+
+Mat Filter::detectEdgeRobertY(Mat img){
+
+    Mat yFilter= (Mat_<float>(2,2)<< 0,1,-1,0);
+
+    Mat result;
+    filter2D(img, result,CV_32F,yFilter,Point(-1,-1),0,BORDER_DEFAULT);
+
+    return result;
+}
+
+Mat Filter::detectEdgeRobert(Mat img){
+
+    Mat robertX = detectEdgeRobertX(img);
+    Mat robertY = detectEdgeRobertY(img);
+    Mat magnitude = edgeMagnitude(robertX,robertY);
+    return magnitude;
+
+}
+
+
+Mat Filter::detectEdgePrewittX(Mat img){
+
+    Mat yFilter= (Mat_<float>(3,3)<< -1,0,1,-1,0,1,-1,0,1);
+
+    Mat result;
+    filter2D(img, result,CV_32F,yFilter,Point(-1,-1),0,BORDER_DEFAULT);
+
+    return result;
+}
+Mat Filter::detectEdgePrewittY(Mat img){
+    Mat yFilter= (Mat_<float>(3,3)<<-1,-1,-1,0,0,0,1,1,1 );
+    Mat result;
+    filter2D(img, result,CV_32F,yFilter,Point(-1,-1),0,BORDER_DEFAULT);
+
+    return result;
+}
+Mat Filter::detectEdgePrewitt(Mat img){
+
+    Mat PrewittX = detectEdgePrewittX(img);
+    Mat PrewittY = detectEdgePrewittY(img);
+    Mat magnitude = edgeMagnitude(PrewittX,PrewittY);
+    return magnitude;
+
+}
+Mat Filter::detectEdgeCanny(Mat img){
+    int t_low = 50;
+    int t_high= 250;
+    Mat edges;
+    cv::Canny(img,edges,t_low,t_high);
+    return edges;
+}
+
 
 Mat Filter::edgeMagnitude(Mat edgeX, Mat edgeY){
 
