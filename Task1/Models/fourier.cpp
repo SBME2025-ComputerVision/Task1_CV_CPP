@@ -6,8 +6,8 @@ Fourier::Fourier(){}
 
 Mat Fourier::applyDFT(Mat img){
     Mat dftOut;
-    dft(img,dftOut, DFT_COMPLEX_OUTPUT);
-    return dftOutl;
+    dft(img,dftOut,DFT_SCALE|DFT_COMPLEX_OUTPUT);
+    return dftOut;
 }
 
 Mat Fourier::applyIDFT(Mat img){
@@ -16,20 +16,20 @@ Mat Fourier::applyIDFT(Mat img){
     return inverseOut;
 }
 
-Mat Fourier::applyShifting(Mat mat){
+Mat Fourier::applyShifting(Mat img){
 
     Mat tmp, q0, q1, q2, q3; // quadrants that will be swapped
 
-    Mat outputShift = mat.clone();
+    Mat outputShift = img.clone();
 
-    int centerX = mat.cols /2;
-    int centerY = mat.rows /2;
+    int centerX = img.cols /2;
+    int centerY = img.rows /2;
 
 
-    q0 = outputShift(Rect(0, 0, cx, cy)); // upper left corner
-    q1 = outputShift(Rect(cx, 0, cx, cy)); // upper right corner
-    q2 = outputShift(Rect(0, cy, cx, cy)); // lower left corner
-    q3 = outputShift(Rect(cx, cy, cx, cy)); //lower right corner
+    q0 = outputShift(Rect(0, 0, centerX, centerY)); // upper left corner
+    q1 = outputShift(Rect(centerX, 0, centerX, centerY)); // upper right corner
+    q2 = outputShift(Rect(0, centerY, centerX, centerY)); // lower left corner
+    q3 = outputShift(Rect(centerX, centerY, centerX, centerY)); //lower right corner
 
 
     // switching q0 by q3 and q1 by q2

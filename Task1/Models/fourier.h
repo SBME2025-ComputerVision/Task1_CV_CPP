@@ -14,7 +14,7 @@ public:
 
     static Mat applyDFT(Mat img);
     static Mat applyIDFT(Mat img);
-    static Mat applyShifting(Mat mat);
+    static Mat applyShifting(Mat img);
 };
 
 #endif // FOURIER_H

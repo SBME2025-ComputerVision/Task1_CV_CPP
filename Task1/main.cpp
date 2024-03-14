@@ -4,31 +4,39 @@
 #include<Models/filter.h>
 #include<Models/noise.h>
 #include<Models/histogram.h>
+#include<Models/fourier.h>
 #include"config.h"
 #include <QApplication>
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    return a.exec();
+    // QApplication a(argc, argv);
+    // MainWindow w;
+    // w.show();
+    // return a.exec();
 
-//    Image *mama = new Image("Gallery/cat.jpg");
-//      imwrite("original.jpg", mama->getOriginalImg());
-//      // Mat avgFilter = Filter::avgFilter(mama->getOriginalImg(),5);
-//      // mama->setProcessedImg(avgFilter);
+    Image* cat = new Image("./Gallery/cat.jpg");
+
+    imwrite("orignal.jpg",cat->getOriginalImg());
+    imwrite("grey.jpg",Filter::convertToGrayScale(cat->getOriginalImg()));
+
+    Mat grey = Filter::convertToGrayScale(cat->getOriginalImg());
+
+    Mat dftImg = Fourier::applyDFT(grey);
+
+    Mat planes[2];
+
+    split(dftImg,planes);
+
+    Mat real,imaginary,mag,phase;
+
+    real = planes[0];
+    imaginary = planes[1];
+
+    magnitude(real,imaginary,mag);
+    cv::phase(real,imaginary,phase);
 
 
-//      // Mat cur =mama->getOriginalImg();
-//      // Histogram::normalize_img(cur);
-//      Mat original=mama->getOriginalImg();
-//      // Mat norm=Histogram::normalize_img(original);
-//      Mat cur= Histogram::calculateHistogram(original);
-//      Mat distCurve=Histogram::distributionCurve(cur);
-//      Mat plot=Histogram::plotHistogram(cur,100,147,111);
-//      Mat cur2 = Histogram::equalizeImg(mama->getOriginalImg());
-//      imwrite("saltAndPepperNoise.jpg",cur2);
-
+    imwrite("dftImg.jpg",phase);
 
     return 0;
 

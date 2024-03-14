@@ -218,14 +218,14 @@ Mat Filter::edgeMagnitude(Mat edgeX, Mat edgeY){
 
 Mat Filter::convertToGrayScale(Mat img)
 {
-    Mat greyScaledImg(img.rows, img.cols, CV_8UC1);
+    Mat greyScaledImg(img.rows, img.cols, CV_32F);
     float weights[3]  = {0.299, 0.587, 0.114};
     for(int i = 0; i < img.rows; i++){
         for(int j = 0; j < img.cols; j++){
             Vec3b currentPixel = img.at<Vec3b>(i, j); // Access pixel from input image
             float currentGreyValue = weights[0] * currentPixel[2] + weights[1] * currentPixel[1]
                                      + weights[2] * currentPixel[0];
-            greyScaledImg.at<uchar>(i, j) = static_cast<uchar>(currentGreyValue);
+            greyScaledImg.at<float>(i, j) = static_cast<float>(currentGreyValue);
         }
     }
     return greyScaledImg;
