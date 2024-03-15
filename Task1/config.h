@@ -7,6 +7,8 @@
 #include"Models/noise.h"
 #include"Models/filter.h"
 #include "Models/image.h"
+#include "Models/fourier.h"
+#include "Models/frequency.h"
 #include <QString>
 #include <QFileDialog>
 #include <QCoreApplication>
@@ -30,8 +32,10 @@ extern string whalePth;
 
  enum FilterType{
     AvgFilter = 1,
-    MedianFilter = 2,
-    GaussianFilter = 3
+    MedianFilter,
+    GaussianFilter,
+    HighPassFilter,
+    LowPassFilter
 };
 
  enum Pages{
@@ -39,6 +43,7 @@ extern string whalePth;
     EdgeDetectionPage = 1,
     HistogramPage = 2,
     ThresholdingPage = 3,
-    HybridPage = 4
+    HybridPage = 4,
+    FrequencyPage = 5
 };
 #endif // CONFIG_H

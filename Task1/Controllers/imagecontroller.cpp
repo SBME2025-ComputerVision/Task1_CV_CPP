@@ -15,6 +15,8 @@ QPixmap ImageController::uploadImg() {
         delete this->img;
         this->img = new Image(path.toStdString());
         if (!img->isEmpty()) {
+            Mat lol = this->img->getOriginalImg();
+            cout<<lol.type();
             return Helpers::convertMatToPixmap(this->img->getOriginalImg());
         }
     }
@@ -87,7 +89,17 @@ QPixmap ImageController::addNoise(int noiseType, int r, float mean, float sigma)
 }
 
 
-
+QPixmap ImageController::frequencyFilter(int radius, int Filter){
+    if(!img->isEmpty()&&img->isProcessed()){
+        Mat res;
+        res = img->getOriginalImg();
+        res= Filter::convertToGrayScale(res);
+        res = Filter::applyFrequencyFilter(res, radius, Filter);
+        res.convertTo(res,CV_8UC1);
+        processedImg = res;
+        return Helpers::convertMatToPixmap(processedImg);
+    }
+}
 
 
 

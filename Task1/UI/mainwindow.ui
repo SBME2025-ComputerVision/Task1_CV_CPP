@@ -107,6 +107,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="frequencyBtn">
+         <property name="text">
+          <string>Frequency filter</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
