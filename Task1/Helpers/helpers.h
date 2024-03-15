@@ -11,6 +11,8 @@ class Helpers
 public:
     Helpers();
     ~Helpers();
+    static QString getImgPath();
+    static Mat readImageMat();
     static QString openFile();
     static QPixmap convertMatToPixmap(Mat img);
     

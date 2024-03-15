@@ -8,9 +8,15 @@
 
 using namespace cv;
 
-
+struct HistogramData {
+    Mat plot_b_hist;
+    Mat plot_g_hist;
+    Mat plot_r_hist;
+    Mat hist_image;
+};
 class Histogram{
 private:
+
 
 public:
 
@@ -22,9 +28,9 @@ public:
 
     static Mat calculateHistogram(Mat image);
 
-    static Mat distributionCurve(Mat histogram);
+    static Mat distributionCurve(Mat histogram,int b,int g, int r);
 
-
+    static HistogramData rgbHistogram(Mat inputImage);
 
 };
 

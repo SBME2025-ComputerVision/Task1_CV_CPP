@@ -41,26 +41,46 @@ Mat Histogram:: normalizeImg(Mat input_image){
     return normalized_image;
 }
 
-
-
-
 Mat Histogram:: equalizeImg(const Mat& input_image){
     Mat equalized_image;
 
-    Mat gray_image;
-    if (input_image.channels() > 1) {
-        cvtColor(input_image, gray_image, COLOR_BGR2GRAY);
-    } else {
-        gray_image = input_image.clone();
-    }
+     Mat gray_image;
+     if (input_image.channels() > 1) {
+         cvtColor(input_image, gray_image, COLOR_BGR2GRAY);
+     } else {
+         gray_image = input_image.clone();
+     }
 
-    equalizeHist(gray_image, equalized_image);
+     // Compute histogram
+     int histSize = 256;
+     // const float* histRange = {range};
+     Mat histogram;
+     // calcHist(&gray_image, 1, nullptr, Mat(), histogram, 1, &histSize, &histRange, true, false);
+     histogram=calculateHistogram(gray_image);
 
-    return equalized_image;
+     // Calculate cumulative distribution function (CDF)
+     Mat cdf(histSize, 1, CV_32F);
+     cdf.at<float>(0) = histogram.at<float>(0) / (gray_image.rows * gray_image.cols);
+     for (int i = 1; i < histSize; ++i) {
+         cdf.at<float>(i) = cdf.at<float>(i - 1) + histogram.at<float>(i) / (gray_image.rows * gray_image.cols);
+     }
 
+     // Normalize the CDF
+     Mat normalized_cdf;
+     normalize(cdf, normalized_cdf, 0, 255, NORM_MINMAX, CV_8U);
+
+     // Apply histogram equalization
+     equalized_image = gray_image.clone();
+     for (int i = 0; i < gray_image.rows; ++i) {
+         for (int j = 0; j < gray_image.cols; ++j) {
+             equalized_image.at<uchar>(i, j) = saturate_cast<uchar>(normalized_cdf.at<uchar>(gray_image.at<uchar>(i, j)));
+         }
+     }
+
+     return equalized_image;
 }
 
-Mat Histogram:: distributionCurve(Mat histogram) {
+Mat Histogram:: distributionCurve(Mat histogram,int b,int g ,int r) {
 
     int num_bins = histogram.rows;
     // This is used to create the image where the curve is drawn
@@ -81,8 +101,57 @@ Mat Histogram:: distributionCurve(Mat histogram) {
     int npts = Mat(curve_points).rows;
 
     // polylines is used to draw the curve on the points
-    polylines(curve_image, &pts, &npts, 1, false, Scalar(255, 255, 0), 2);
+    polylines(curve_image, &pts, &npts, 1, false, Scalar(b, g, r), 2);
 
     return curve_image;
 
 };
+
+
+
+
+HistogramData Histogram::rgbHistogram(Mat inputImage){
+    HistogramData histogramdata;
+
+       // Separate color channels
+       vector<Mat> bgr_planes;
+       split(inputImage, bgr_planes);
+
+       // Calculate histograms
+       int histSize = 256;
+       Mat b_hist, g_hist, r_hist;
+
+       Mat plot_r_hist,plot_g_hist,plot_b_hist;
+       b_hist=calculateHistogram(bgr_planes[0]);
+       g_hist=calculateHistogram(bgr_planes[1]);
+       r_hist=calculateHistogram(bgr_planes[2]);
+       histogramdata.plot_r_hist=plotHistogram(r_hist,0,0,255);
+       histogramdata.plot_g_hist=plotHistogram(g_hist,0,255,0);
+       histogramdata.plot_b_hist=plotHistogram(b_hist,255,0,0);
+
+       // Normalize histograms
+       int hist_height = 400;
+       int hist_width = 512;
+       int bin_width = cvRound((double)hist_width / histSize);
+       Mat hist_image(hist_height, hist_width, CV_8UC3, Scalar(0, 0, 0));
+       normalize(b_hist, b_hist, 0, hist_image.rows, NORM_MINMAX, -1, Mat());
+       normalize(g_hist, g_hist, 0, hist_image.rows, NORM_MINMAX, -1, Mat());
+       normalize(r_hist, r_hist, 0, hist_image.rows, NORM_MINMAX, -1, Mat());
+
+       // Plot histograms
+       for (int i = 1; i < histSize; i++) {
+           line(hist_image, Point(bin_width * (i - 1), hist_height - cvRound(b_hist.at<float>(i - 1))),
+               Point(bin_width * (i), hist_height - cvRound(b_hist.at<float>(i))),
+               Scalar(255, 0, 0), 2, LINE_AA);
+           line(hist_image, Point(bin_width * (i - 1), hist_height - cvRound(g_hist.at<float>(i - 1))),
+               Point(bin_width * (i), hist_height - cvRound(g_hist.at<float>(i))),
+               Scalar(0, 255, 0), 2, LINE_AA);
+           line(hist_image, Point(bin_width * (i - 1), hist_height - cvRound(r_hist.at<float>(i - 1))),
+               Point(bin_width * (i), hist_height - cvRound(r_hist.at<float>(i))),
+               Scalar(0, 0, 255), 2, LINE_AA);
+       }
+       histogramdata.hist_image=hist_image;
+       return histogramdata;
+
+
+}

@@ -1,12 +1,14 @@
 #include "mainwindow.h"
+#include "UI/plotswidget.h"
 #include "ui_mainwindow.h"
 #include <opencv2/opencv.hpp>
 
 #include "config.h"
 
 #include "UI/filterswidget.h"
-#include "UI/edgedetectionwidget.h"
 
+#include "UI/histogramwidget.h"
+#include "UI/edgedetectionwidget.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -16,14 +18,19 @@ MainWindow::MainWindow(QWidget *parent)
     index = FilterPage;
 
 
+
     // FiltersWidget *filterWidget = new FiltersWidget();
     // FrequencyWidget *frequencyWidget = new FrequencyWidget();
-
+    HistogramWidget *histogramWidget=new HistogramWidget();
+    PlotsWidget *plotWidget =new PlotsWidget();
 
     ui->stackedWidget->addWidget(filterWidget);
     ui->stackedWidget->addWidget(edgeDetectionWidget);
+    ui->stackedWidget->addWidget(plotWidget);
+    ui->stackedWidget->addWidget(histogramWidget);
     ui->stackedWidget->addWidget(frequencyWidget);
     ui->stackedWidget->setCurrentIndex(index);
+
 
 
 }
@@ -64,8 +71,10 @@ void MainWindow::on_edgeDetectionBtn_clicked()
 
 void MainWindow::on_histogramsBtn_clicked()
 {
-    index = HistogramPage;
-    MainWindow::setFrameIndex(index);
+    index = 1;
+//    qDebug()<<1;
+//    MainWindow::setFrameIndex(index);
+    ui->stackedWidget->setCurrentIndex(index);
 }
 
 
