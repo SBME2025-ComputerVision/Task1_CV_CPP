@@ -32,8 +32,10 @@ extern string whalePth;
 
  enum FilterType{
     AvgFilter = 1,
-    MedianFilter = 2,
-    GaussianFilter = 3
+    MedianFilter,
+    GaussianFilter,
+    HighPassFilter,
+    LowPassFilter
 };
 
  enum Pages{

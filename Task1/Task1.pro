@@ -18,7 +18,6 @@ SOURCES += \
     Helpers/helpers.cpp \
     Models/filter.cpp \
     Models/fourier.cpp \
-    Models/frequency.cpp \
     Models/noise.cpp \
     Models/image.cpp \
     UI/filterswidget.cpp \
@@ -32,7 +31,6 @@ HEADERS += \
     Helpers/helpers.h \
     Models/filter.h \
     Models/fourier.h \
-    Models/frequency.h \
     Models/image.h \
     Models/noise.h \
     UI/filterswidget.h \

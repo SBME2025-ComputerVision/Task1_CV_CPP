@@ -5,18 +5,6 @@
 Fourier::Fourier(){}
 
 Mat Fourier::applyDFT(Mat img){
-
-    // int m = getOptimalDFTSize(img.rows);
-    // int n = getOptimalDFTSize(img.cols);
-
-    // // Add zero padding to the image to reach the optimal size
-    // Mat padded;
-    // copyMakeBorder(img, padded, 0, m - img.rows, 0, n - img.cols, BORDER_CONSTANT, Scalar::all(0));
-
-    // // Convert the image to floating point
-    // padded.convertTo(padded, CV_32F);
-    // Mat dftt
-    // Perform the DFT
     Mat fourierTransform;
     dft(img, fourierTransform, DFT_SCALE|DFT_COMPLEX_OUTPUT);
     return fourierTransform;
@@ -41,7 +29,6 @@ Mat Fourier::applyShifting(Mat img){
     q1 = outputShift(Rect(centerX, 0, centerX, centerY)); // upper right corner
     q2 = outputShift(Rect(0, centerY, centerX, centerY)); // lower left corner
     q3 = outputShift(Rect(centerX, centerY, centerX, centerY)); //lower right corner
-
 
     // switching q0 by q3 and q1 by q2
     q0.copyTo(tmp);

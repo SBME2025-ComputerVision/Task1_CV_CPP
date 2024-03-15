@@ -11,7 +11,6 @@ private:
 
 public:
     Fourier();
-
     static Mat applyDFT(Mat img);
     static Mat applyIDFT(Mat img);
     static Mat applyShifting(Mat img);
