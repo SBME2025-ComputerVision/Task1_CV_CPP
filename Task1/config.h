@@ -8,7 +8,6 @@
 #include"Models/filter.h"
 #include "Models/image.h"
 #include "Models/fourier.h"
-#include "Models/frequency.h"
 #include <QString>
 #include <QFileDialog>
 #include <QCoreApplication>
