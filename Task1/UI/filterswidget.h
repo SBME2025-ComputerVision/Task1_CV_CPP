@@ -2,7 +2,7 @@
 #define FILTERSWIDGET_H
 
 #include <QWidget>
-#include "Controllers/imagecontroller.h"
+#include "Controllers/filtercontroller.h"
 namespace Ui {
 class FiltersWidget;
 }
@@ -12,7 +12,7 @@ class FiltersWidget : public QWidget
     Q_OBJECT
 
 private:
-    ImageController *imageController;
+    FilterController *filterController;
     QPixmap originalImg;
     QPixmap processedImg;
 

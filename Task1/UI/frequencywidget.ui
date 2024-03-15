@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>FrequencyWidget</class>
- <widget class="QWidget" name="FrequencyWidget">
+ <class>Frequency_Widget</class>
+ <widget class="QWidget" name="Frequency_Widget">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1033</width>
-    <height>708</height>
+    <width>1066</width>
+    <height>648</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QFrame" name="frame_3">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>50</y>
+     <x>140</x>
+     <y>60</y>
      <width>681</width>
      <height>371</height>
     </rect>
@@ -80,8 +80,8 @@
   <widget class="QFrame" name="frame_6">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>430</y>
+     <x>140</x>
+     <y>450</y>
      <width>681</width>
      <height>171</height>
     </rect>

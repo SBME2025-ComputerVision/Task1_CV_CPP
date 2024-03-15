@@ -2,7 +2,8 @@
 #define FREQUENCYWIDGET_H
 
 #include <QWidget>
-#include "Controllers/imagecontroller.h"
+#include "Controllers/frequencycontroller.h"
+
 namespace Ui {
 class FrequencyWidget;
 }
@@ -10,13 +11,17 @@ class FrequencyWidget;
 class FrequencyWidget : public QWidget
 {
     Q_OBJECT
-private:
-    ImageController *imageController;
-    QPixmap originalImg;
-    QPixmap processedImg;
+
 public:
     explicit FrequencyWidget(QWidget *parent = nullptr);
     ~FrequencyWidget();
+
+private:
+    Ui::FrequencyWidget *ui;
+    FrequencyController *frequencyController;
+    QPixmap originalImg;
+    QPixmap processedImg;
+    
 
 private slots:
     void on_browseBtn_clicked();
@@ -26,9 +31,6 @@ private slots:
     void on_lowPassRadio_toggled(bool checked);
 
     void on_radiusSLider_sliderReleased();
-
-private:
-    Ui::FrequencyWidget *ui;
 };
 
 #endif // FREQUENCYWIDGET_H

@@ -233,6 +233,7 @@ Mat Filter::convertToGrayScale(Mat img)
 
 Mat Filter::applyFrequencyFilter(Mat img,int radius,int Filter){
 
+    img.convertTo(img,CV_32F);
     // Get DFT and split it to real and imaginary
     Mat complexDftImage = Fourier::applyDFT(img);
     Mat real, imag;

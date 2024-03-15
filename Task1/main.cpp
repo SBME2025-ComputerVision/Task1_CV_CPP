@@ -19,9 +19,14 @@ int main(int argc, char *argv[])
     // Image* cat = new Image("./Gallery/whale.jpg");
 
     // imwrite("orignal.jpg",cat->getOriginalImg());
-    // imwrite("grey.jpg",Filter::convertToGrayScale(cat->getOriginalImg()));
 
     // Mat grey = Filter::convertToGrayScale(cat->getOriginalImg());
+    // imwrite("grey.jpg",grey);
+
+    // Mat saltandpeper = Noise::saltAndPepperNoise(grey,15);
+
+    // imwrite("salt.jpg",saltandpeper);
+
 
     // Mat res = Frequency::applyFrequencyFilter(grey, 10,1);
 
