@@ -15,6 +15,8 @@ QPixmap ImageController::uploadImg() {
         delete this->img;
         this->img = new Image(path.toStdString());
         if (!img->isEmpty()) {
+            Mat lol = this->img->getOriginalImg();
+            cout<<lol.type();
             return Helpers::convertMatToPixmap(this->img->getOriginalImg());
         }
     }
@@ -93,7 +95,7 @@ QPixmap ImageController::frequencyFilter(int radius, bool flag){
         res = img->getOriginalImg();
         res= Filter::convertToGrayScale(res);
         res = Frequency::applyFrequencyFilter(res, radius, flag);
-        res.convertTo(res,CV_32F);
+        res.convertTo(res,CV_8UC1);
         processedImg = res;
         return Helpers::convertMatToPixmap(processedImg);
     }

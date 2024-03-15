@@ -32,7 +32,8 @@ Mat Frequency::applyFrequencyFilter(Mat img, int radius, bool flag){
         imag.setTo(Scalar(0), ~highPassMask);
     }
 
-
+    real = Fourier::applyShifting(real);
+    imag = Fourier::applyShifting(imag);
     Mat shifted_DFT_plane_img[] = {real ,imag };
 
     Mat MergeImg;
