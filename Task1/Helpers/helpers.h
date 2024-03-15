@@ -13,8 +13,9 @@ public:
     ~Helpers();
     static QString getImgPath();
     static Mat readImageMat();
+    static QString openFile();
     static QPixmap convertMatToPixmap(Mat img);
-    static void displayImg(Mat newImg,  QLabel *label);
+    
 };
 
 #endif // HELPERS_H

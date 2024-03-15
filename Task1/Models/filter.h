@@ -31,6 +31,9 @@ public:
     // Apply average filter to the image
     static Mat avgFilter(Mat img,int kernelSize);
 
+    // Apply Freq Filter
+    static Mat applyFrequencyFilter(Mat img,int radius,int Filter);
+
     //----------------------------------------------
 
     // Convert the image to gray scale
@@ -49,8 +52,6 @@ public:
     static Mat detectEdgePrewittY(Mat img);
 
     static Mat detectEdgeCanny(Mat img);
-
-
     static Mat edgeMagnitude(Mat edgeX, Mat edgeY);
 
     // OpenCV filters

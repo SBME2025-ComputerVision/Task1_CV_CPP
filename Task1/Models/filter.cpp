@@ -231,3 +231,51 @@ Mat Filter::convertToGrayScale(Mat img)
     return greyScaledImg;
 }
 
+Mat Filter::applyFrequencyFilter(Mat img,int radius,int Filter){
+
+    img.convertTo(img,CV_32F);
+    // Get DFT and split it to real and imaginary
+    Mat complexDftImage = Fourier::applyDFT(img);
+    Mat real, imag;
+    Mat planes[2];
+
+    split(complexDftImage,planes);
+
+    real = Fourier::applyShifting(planes[0]);
+    imag = Fourier::applyShifting(planes[1]);
+
+    // Create a circle mask
+    int centerX = real.cols/2;
+    int centerY = real.rows/2;
+    Mat mask = Mat::zeros(real.size(),CV_8U);
+    Mat alteredMask;
+    circle(mask, Point(centerX,centerY), radius,Scalar(255),-1);
+    bitwise_not(mask, alteredMask);
+
+    // Apply the filter
+    switch (Filter) {
+    case LowPassFilter:
+        real.setTo(Scalar(0), ~mask);
+        imag.setTo(Scalar(0), ~mask);
+        break;
+    case HighPassFilter:
+        real.setTo(Scalar(0), ~alteredMask);
+        imag.setTo(Scalar(0), ~alteredMask);
+    default:
+        break;
+    }
+
+    // Shift the dft to its original
+    real = Fourier::applyShifting(real);
+    imag = Fourier::applyShifting(imag);
+
+    planes[0]=real;
+    planes[1]=imag;
+    merge(planes, 2, img);
+
+    // INVERSE DFT
+    img = Fourier::applyIDFT(img);
+    return img;
+
+}
+
