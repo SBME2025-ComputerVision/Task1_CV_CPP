@@ -19,7 +19,7 @@ public:
     QPixmap getProcessedImg();
     QPixmap FilterImg(int filterType, int kernelSize);
     QPixmap addNoise(int noiseType, int r, float mean, float sigma);
-    
+    QPixmap DetectEdges(int detectorType, int lowThreshold , int highThreshold);
 };
 
 #endif // IMAGECONTROLLER_H&

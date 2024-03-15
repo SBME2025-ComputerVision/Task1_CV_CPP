@@ -7,6 +7,7 @@
 #include"Models/noise.h"
 #include"Models/filter.h"
 #include "Models/image.h"
+#include "Models/edgedetection.h"
 #include <QString>
 #include <QFileDialog>
 #include <QCoreApplication>
@@ -32,6 +33,13 @@ extern string whalePth;
     AvgFilter = 1,
     MedianFilter = 2,
     GaussianFilter = 3
+};
+
+ enum DetectorType{
+    SobelDetector = 1,
+    RobertDetector = 2,
+    PrewittDetector = 3,
+    CannyDetector   = 4
 };
 
  enum Pages{
