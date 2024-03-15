@@ -47,17 +47,40 @@ Mat Histogram:: normalizeImg(Mat input_image){
 Mat Histogram:: equalizeImg(const Mat& input_image){
     Mat equalized_image;
 
-    Mat gray_image;
-    if (input_image.channels() > 1) {
-        cvtColor(input_image, gray_image, COLOR_BGR2GRAY);
-    } else {
-        gray_image = input_image.clone();
-    }
+     Mat gray_image;
+     if (input_image.channels() > 1) {
+         cvtColor(input_image, gray_image, COLOR_BGR2GRAY);
+     } else {
+         gray_image = input_image.clone();
+     }
 
-    equalizeHist(gray_image, equalized_image);
+     // Compute histogram
+     int histSize = 256;
+     // const float* histRange = {range};
+     Mat histogram;
+     // calcHist(&gray_image, 1, nullptr, Mat(), histogram, 1, &histSize, &histRange, true, false);
+     histogram=calculateHistogram(gray_image);
 
-    return equalized_image;
+     // Calculate cumulative distribution function (CDF)
+     Mat cdf(histSize, 1, CV_32F);
+     cdf.at<float>(0) = histogram.at<float>(0) / (gray_image.rows * gray_image.cols);
+     for (int i = 1; i < histSize; ++i) {
+         cdf.at<float>(i) = cdf.at<float>(i - 1) + histogram.at<float>(i) / (gray_image.rows * gray_image.cols);
+     }
 
+     // Normalize the CDF
+     Mat normalized_cdf;
+     normalize(cdf, normalized_cdf, 0, 255, NORM_MINMAX, CV_8U);
+
+     // Apply histogram equalization
+     equalized_image = gray_image.clone();
+     for (int i = 0; i < gray_image.rows; ++i) {
+         for (int j = 0; j < gray_image.cols; ++j) {
+             equalized_image.at<uchar>(i, j) = saturate_cast<uchar>(normalized_cdf.at<uchar>(gray_image.at<uchar>(i, j)));
+         }
+     }
+
+     return equalized_image;
 }
 
 Mat Histogram:: distributionCurve(Mat histogram) {
