@@ -6,7 +6,10 @@
 #include<opencv2/core/core.hpp>
 
 #include "UI/filterswidget.h"
+
 #include "UI/edgedetectionwidget.h"
+#include "UI/frequencywidget.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,7 +25,10 @@ public:
 
 
     FiltersWidget *filterWidget = new FiltersWidget();
+
     EdgeDetectionWidget *edgeDetectionWidget = new EdgeDetectionWidget();
+    FrequencyWidget *frequencyWidget = new FrequencyWidget();
+
 
 private slots:
     void onBtnPlus();

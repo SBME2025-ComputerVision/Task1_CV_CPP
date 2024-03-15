@@ -218,16 +218,64 @@ Mat Filter::edgeMagnitude(Mat edgeX, Mat edgeY){
 
 Mat Filter::convertToGrayScale(Mat img)
 {
-    Mat greyScaledImg(img.rows, img.cols, CV_8UC1);
+    Mat greyScaledImg(img.rows, img.cols, CV_32F);
     float weights[3]  = {0.299, 0.587, 0.114};
     for(int i = 0; i < img.rows; i++){
         for(int j = 0; j < img.cols; j++){
             Vec3b currentPixel = img.at<Vec3b>(i, j); // Access pixel from input image
             float currentGreyValue = weights[0] * currentPixel[2] + weights[1] * currentPixel[1]
                                      + weights[2] * currentPixel[0];
-            greyScaledImg.at<uchar>(i, j) = static_cast<uchar>(currentGreyValue);
+            greyScaledImg.at<float>(i, j) = static_cast<float>(currentGreyValue);
         }
     }
     return greyScaledImg;
+}
+
+Mat Filter::applyFrequencyFilter(Mat img,int radius,int Filter){
+
+    img.convertTo(img,CV_32F);
+    // Get DFT and split it to real and imaginary
+    Mat complexDftImage = Fourier::applyDFT(img);
+    Mat real, imag;
+    Mat planes[2];
+
+    split(complexDftImage,planes);
+
+    real = Fourier::applyShifting(planes[0]);
+    imag = Fourier::applyShifting(planes[1]);
+
+    // Create a circle mask
+    int centerX = real.cols/2;
+    int centerY = real.rows/2;
+    Mat mask = Mat::zeros(real.size(),CV_8U);
+    Mat alteredMask;
+    circle(mask, Point(centerX,centerY), radius,Scalar(255),-1);
+    bitwise_not(mask, alteredMask);
+
+    // Apply the filter
+    switch (Filter) {
+    case LowPassFilter:
+        real.setTo(Scalar(0), ~mask);
+        imag.setTo(Scalar(0), ~mask);
+        break;
+    case HighPassFilter:
+        real.setTo(Scalar(0), ~alteredMask);
+        imag.setTo(Scalar(0), ~alteredMask);
+    default:
+        break;
+    }
+
+    // Shift the dft to its original
+    real = Fourier::applyShifting(real);
+    imag = Fourier::applyShifting(imag);
+
+    planes[0]=real;
+    planes[1]=imag;
+    merge(planes, 2, img);
+
+    // INVERSE DFT
+    img = Fourier::applyIDFT(img);
+    return img;
+
 }
 

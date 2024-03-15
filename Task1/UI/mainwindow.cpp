@@ -3,8 +3,10 @@
 #include <opencv2/opencv.hpp>
 
 #include "config.h"
+
 #include "UI/filterswidget.h"
 #include "UI/edgedetectionwidget.h"
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -13,12 +15,16 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     index = FilterPage;
 
-//    FiltersWidget *filterWidget = new FiltersWidget();
-//    EdgeDetectionWidget *edgeDetectionWidget = new EdgeDetectionWidget();
+
+    // FiltersWidget *filterWidget = new FiltersWidget();
+    // FrequencyWidget *frequencyWidget = new FrequencyWidget();
+
 
     ui->stackedWidget->addWidget(filterWidget);
     ui->stackedWidget->addWidget(edgeDetectionWidget);
+    ui->stackedWidget->addWidget(frequencyWidget);
     ui->stackedWidget->setCurrentIndex(index);
+
 
 }
 
@@ -52,6 +58,7 @@ void MainWindow::on_edgeDetectionBtn_clicked()
     //     }
     // }
    ui->stackedWidget->setCurrentWidget(edgeDetectionWidget);
+
 }
 
 
@@ -79,6 +86,7 @@ void MainWindow::on_frequencyBtn_clicked()
 {
     // index = FrequencyPage;
     // MainWindow::setFrameIndex(index);
+    ui->stackedWidget->setCurrentWidget(frequencyWidget);
 }
 
 void MainWindow::setFrameIndex(int index){
