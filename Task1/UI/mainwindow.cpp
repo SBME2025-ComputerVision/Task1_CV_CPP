@@ -3,7 +3,7 @@
 #include <opencv2/opencv.hpp>
 
 #include "config.h"
-#include "UI/filterswidget.h"
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,10 +12,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     index = FilterPage;
 
-    FiltersWidget *filterWidget = new FiltersWidget();
+    // FiltersWidget *filterWidget = new FiltersWidget();
+    // FrequencyWidget *frequencyWidget = new FrequencyWidget();
 
 
     ui->stackedWidget->addWidget(filterWidget);
+    ui->stackedWidget->addWidget(frequencyWidget);
+    ui->stackedWidget->setCurrentIndex(index);
 
 
 }
@@ -28,15 +31,28 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_filteringBtn_clicked()
 {
-    index = FilterPage;
-    MainWindow::setFrameIndex(index);
+    // index = FilterPage;
+    // MainWindow::setFrameIndex(index);
+    // while(index != FilterPage){
+    //     onBtnMinus();
+    // }
+    ui->stackedWidget->setCurrentWidget(filterWidget);
+
 }
 
 
 void MainWindow::on_edgeDetectionBtn_clicked()
 {
-    index = EdgeDetectionPage;
-    MainWindow::setFrameIndex(index);
+    // index = EdgeDetectionPage;
+    // setFrameIndex(index);
+    // while(index != EdgeDetectionPage){
+    //     if(index < EdgeDetectionPage){
+    //         onBtnPlus();
+    //     }else{
+    //         onBtnMinus();
+    //     }
+    // }
+
 }
 
 
@@ -60,10 +76,32 @@ void MainWindow::on_hybridBtn_clicked()
     MainWindow::setFrameIndex(index);
 }
 
+void MainWindow::on_frequencyBtn_clicked()
+{
+    // index = FrequencyPage;
+    // MainWindow::setFrameIndex(index);
+    ui->stackedWidget->setCurrentWidget(frequencyWidget);
+}
+
 void MainWindow::setFrameIndex(int index){
+    cout<<"idx"<<index<<endl;
+    // cout <<ui->stackedWidget->count()-1<<"mama"<<endl;
 
     if(index <ui->stackedWidget->count()-1){
+
         ui->stackedWidget->setCurrentIndex(index);
     }
 
+}
+
+void MainWindow::onBtnPlus(){
+    if (index < ui->stackedWidget->count()-1){
+        ui->stackedWidget->setCurrentIndex(++index);
+    }
+}
+
+void MainWindow::onBtnMinus(){
+    if (index > 0){
+        ui->stackedWidget->setCurrentIndex(--index);
+    }
 }

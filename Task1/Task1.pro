@@ -18,9 +18,11 @@ SOURCES += \
     Helpers/helpers.cpp \
     Models/filter.cpp \
     Models/fourier.cpp \
+    Models/frequency.cpp \
     Models/noise.cpp \
     Models/image.cpp \
     UI/filterswidget.cpp \
+    UI/frequencywidget.cpp \
     UI/mainwindow.cpp \
     config.cpp \
     main.cpp
@@ -30,14 +32,17 @@ HEADERS += \
     Helpers/helpers.h \
     Models/filter.h \
     Models/fourier.h \
+    Models/frequency.h \
     Models/image.h \
     Models/noise.h \
     UI/filterswidget.h \
+    UI/frequencywidget.h \
     UI/mainwindow.h \
     config.h \
 
 FORMS += \
     UI/filterswidget.ui \
+    UI/frequencywidget.ui \
     UI/mainwindow.ui
 
 # Default rules for deployment.

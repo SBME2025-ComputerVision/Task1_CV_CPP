@@ -87,7 +87,17 @@ QPixmap ImageController::addNoise(int noiseType, int r, float mean, float sigma)
 }
 
 
-
+QPixmap ImageController::frequencyFilter(int radius, bool flag){
+    if(!img->isEmpty()&&img->isProcessed()){
+        Mat res;
+        res = img->getOriginalImg();
+        res= Filter::convertToGrayScale(res);
+        res = Frequency::applyFrequencyFilter(res, radius, flag);
+        res.convertTo(res,CV_32F);
+        processedImg = res;
+        return Helpers::convertMatToPixmap(processedImg);
+    }
+}
 
 
 

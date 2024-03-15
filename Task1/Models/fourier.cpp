@@ -29,30 +29,6 @@ Mat Fourier::applyIDFT(Mat img){
 }
 
 Mat Fourier::applyShifting(Mat img){
-
-
-    // Mat fourier_output_img = img.clone();
-    // int cx = fourier_output_img.cols / 2;
-    // int cy = fourier_output_img.rows / 2;
-
-    // // divide the fourier input img into four parts ----------------------------------
-    // // rect ( x, y , w, h)
-    // Mat left_up(fourier_output_img, Rect(0, 0, cx, cy));
-    // Mat right_up(fourier_output_img, Rect(cx, 0, cx, cy));
-    // Mat left_down(fourier_output_img, Rect(0, cy, cx, cy));
-    // Mat right_down(fourier_output_img, Rect(cx, cy, cx, cy));
-
-    // // switch the four parts places to center the fourier transform ------------------
-    // Mat switch_variable;
-    // left_up.copyTo(switch_variable);
-    // right_down.copyTo(left_up);
-    // switch_variable.copyTo(right_down);
-    // right_up.copyTo(switch_variable);
-    // left_down.copyTo(right_up);
-    // switch_variable.copyTo(left_down);
-
-    // return fourier_output_img;
-
     Mat tmp, q0, q1, q2, q3; // quadrants that will be swapped
 
     Mat outputShift = img.clone();

@@ -7,6 +7,8 @@
 #include"Models/noise.h"
 #include"Models/filter.h"
 #include "Models/image.h"
+#include "Models/fourier.h"
+#include "Models/frequency.h"
 #include <QString>
 #include <QFileDialog>
 #include <QCoreApplication>
@@ -39,6 +41,7 @@ extern string whalePth;
     EdgeDetectionPage = 1,
     HistogramPage = 2,
     ThresholdingPage = 3,
-    HybridPage = 4
+    HybridPage = 4,
+    FrequencyPage = 5
 };
 #endif // CONFIG_H
