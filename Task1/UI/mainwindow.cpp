@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "UI/plotswidget.h"
 #include "ui_mainwindow.h"
 #include <opencv2/opencv.hpp>
 
@@ -15,9 +16,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     FiltersWidget *filterWidget = new FiltersWidget();
     HistogramWidget *histogramWidget=new HistogramWidget();
+    PlotsWidget *plotWidget =new PlotsWidget();
 
 
     ui->stackedWidget->addWidget(filterWidget);
+    ui->stackedWidget->addWidget(plotWidget);
+
     ui->stackedWidget->addWidget(histogramWidget);
 
 

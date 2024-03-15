@@ -92,3 +92,38 @@ QPixmap HistogramController::equalizeImg()
 
 }
 
+HistogramData HistogramController::rgbHistogram()
+{
+    HistogramData data;
+    if(!img->isEmpty()){
+        data=Histogram::rgbHistogram(img->getOriginalImg());
+    }
+    return data;
+}
+
+QPixmap HistogramController::plotgrayscaleHistogram()
+{
+    Mat grayscaleimg;
+    if(!img->isEmpty()){
+        grayscaleimg=Histogram::calculateHistogram(img->getOriginalImg());
+        grayscaleimg=Histogram::plotHistogram(grayscaleimg,255,255,100);
+        return Helpers::convertMatToPixmap(grayscaleimg);
+    }
+    return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
+
+
+}
+
+QPixmap HistogramController::plotgrayscaleDistribution()
+{
+    Mat grayscaleimg;
+    if(!img->isEmpty()){
+        grayscaleimg=Histogram::calculateHistogram(img->getOriginalImg());
+        grayscaleimg=Histogram::distributionCurve(grayscaleimg,255,255,100);
+        return Helpers::convertMatToPixmap(grayscaleimg);
+    }
+    return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
+
+}
+
+

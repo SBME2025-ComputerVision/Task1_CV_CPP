@@ -31,6 +31,10 @@ private:
     QPixmap processedImg;
     QPixmap originalHistogram;
     QPixmap processedHistogram;
+    QPixmap redHistogram;
+    QPixmap greenHistogram;
+    QPixmap blueHistorgram;
+    QPixmap rgbDistributionCurve;
 };
 
 #endif // HISTOGRAMWIDGET_H
