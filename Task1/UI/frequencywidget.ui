@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Frequency_Widget</class>
- <widget class="QWidget" name="Frequency_Widget">
+ <class>FrequencyWidget</class>
+ <widget class="QWidget" name="FrequencyWidget">
   <property name="geometry">
    <rect>
     <x>0</x>

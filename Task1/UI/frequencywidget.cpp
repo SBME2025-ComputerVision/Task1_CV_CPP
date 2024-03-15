@@ -1,5 +1,5 @@
 #include "frequencywidget.h"
-#include "ui_frequency_widget.h"
+#include "ui_frequencywidget.h"
 #include "config.h"
 
 FrequencyWidget::FrequencyWidget(QWidget *parent)
