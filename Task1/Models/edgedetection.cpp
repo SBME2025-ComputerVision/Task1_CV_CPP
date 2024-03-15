@@ -11,6 +11,7 @@ Mat EdgeDetection::detectEdgeSobel(Mat img){
     Mat sobelX = detectEdgeSobelX(img);
     Mat sobelY = detectEdgeSobelY(img);
     Mat magnitude = edgeMagnitude(sobelX,sobelY);
+    magnitude.convertTo(magnitude, CV_8U);
     return magnitude;
 
 }
@@ -63,6 +64,7 @@ Mat EdgeDetection::detectEdgeRobert(Mat img){
     Mat robertX = detectEdgeRobertX(img);
     Mat robertY = detectEdgeRobertY(img);
     Mat magnitude = edgeMagnitude(robertX,robertY);
+    magnitude.convertTo(magnitude, CV_8U);
     return magnitude;
 
 }
@@ -89,6 +91,7 @@ Mat EdgeDetection::detectEdgePrewitt(Mat img){
     Mat PrewittX = detectEdgePrewittX(img);
     Mat PrewittY = detectEdgePrewittY(img);
     Mat magnitude = edgeMagnitude(PrewittX,PrewittY);
+     magnitude.convertTo(magnitude, CV_8U);
     return magnitude;
 
 }
@@ -97,26 +100,20 @@ Mat EdgeDetection::detectEdgeCanny(Mat img, int t_low ,int t_high){
 //    int t_high= 250;
     Mat edges;
     cv::Canny(img,edges,t_low,t_high);
+    edges.convertTo(edges, CV_8U);
     return edges;
 }
 
 
 Mat EdgeDetection::edgeMagnitude(Mat edgeX, Mat edgeY){
 
-
-    Mat magnitude_Gradient = Mat::zeros(edgeX.rows,edgeX.cols,edgeX.type());
-    // for (int i = 0; i < edgeX.rows; i++)
-    // {
-    //     for (int j = 0; j < edgeX.cols; j++)
-    //     {
-    //         Magnitude_Gradient.at<float>(i, j) = sqrt(pow(edgeX.at<float>(i, j), 2) + pow(edgeY.at<float>(i, j), 2));
-    //     }
-    // }
-    // Magnitude_Gradient = edgeX + edgeY;
-
-
-    magnitude(edgeX,edgeY,magnitude_Gradient);
-    // cout <<Magnitude_Gradient.size();
-    return magnitude_Gradient;
-
+    Mat Magnitude_Gradient = Mat::zeros(Size(edgeX.cols, edgeX.rows), edgeX.type());
+        for (int i = 0; i < edgeX.rows; i++)
+        {
+            for (int j = 0; j < edgeX.cols; j++)
+            {
+                Magnitude_Gradient.at<float>(i, j) = sqrt(pow(edgeX.at<float>(i, j), 2) + pow(edgeY.at<float>(i, j), 2));
+            }
+        }
+         return Magnitude_Gradient;
 }
