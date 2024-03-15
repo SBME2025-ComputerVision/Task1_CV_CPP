@@ -4,6 +4,9 @@
 
 #include "config.h"
 
+#include "UI/filterswidget.h"
+#include "UI/edgedetectionwidget.h"
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,11 +15,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     index = FilterPage;
 
+
     // FiltersWidget *filterWidget = new FiltersWidget();
     // FrequencyWidget *frequencyWidget = new FrequencyWidget();
 
 
     ui->stackedWidget->addWidget(filterWidget);
+    ui->stackedWidget->addWidget(edgeDetectionWidget);
     ui->stackedWidget->addWidget(frequencyWidget);
     ui->stackedWidget->setCurrentIndex(index);
 
@@ -52,6 +57,7 @@ void MainWindow::on_edgeDetectionBtn_clicked()
     //         onBtnMinus();
     //     }
     // }
+   ui->stackedWidget->setCurrentWidget(edgeDetectionWidget);
 
 }
 

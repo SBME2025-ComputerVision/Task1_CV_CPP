@@ -19,9 +19,12 @@ CONFIG += c++17
 SOURCES += \
     Controllers/imagecontroller.cpp \
     Helpers/helpers.cpp \
+    Models/edgedetection.cpp \
     Models/filter.cpp \
     Models/noise.cpp \
     Models/image.cpp \
+    Models/histogram.cpp \
+    UI/edgedetectionwidget.cpp \
     UI/filterswidget.cpp \
     UI/mainwindow.cpp \
     config.cpp \
@@ -30,14 +33,18 @@ SOURCES += \
 HEADERS += \
     Controllers/imagecontroller.h \
     Helpers/helpers.h \
+    Models/edgedetection.h \
     Models/filter.h \
     Models/image.h \
     Models/noise.h \
+    Models/histogram.h \
+    UI/edgedetectionwidget.h \
     UI/filterswidget.h \
     UI/mainwindow.h \
     config.h \
 
 FORMS += \
+    UI/edgedetectionwidget.ui \
     UI/filterswidget.ui \
     UI/mainwindow.ui
 
@@ -113,29 +120,34 @@ PKGCONFIG += opencv4
 
 
 SOURCES += \
-    Controllers/filtercontroller.cpp \
     Controllers/imagecontroller.cpp \
-    Controllers/noisecontroller.cpp \
+    Helpers/helpers.cpp \
+    Models/edgedetection.cpp \
     Models/filter.cpp \
     Models/noise.cpp \
     Models/image.cpp \
+    Models/histogram.cpp \
+    UI/edgedetectionwidget.cpp \
     UI/filterswidget.cpp \
     UI/mainwindow.cpp \
     config.cpp \
     main.cpp
 
 HEADERS += \
-    Controllers/filtercontroller.h \
     Controllers/imagecontroller.h \
-    Controllers/noisecontroller.h \
+    Helpers/helpers.h \
+    Models/edgedetection.h \
     Models/filter.h \
     Models/image.h \
     Models/noise.h \
+    Models/histogram.h \
+    UI/edgedetectionwidget.h \
     UI/filterswidget.h \
     UI/mainwindow.h \
-    config.h
+    config.h \
 
 FORMS += \
+    UI/edgedetectionwidget.ui \
     UI/filterswidget.ui \
     UI/mainwindow.ui
 

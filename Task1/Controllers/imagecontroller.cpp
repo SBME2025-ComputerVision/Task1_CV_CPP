@@ -88,6 +88,31 @@ QPixmap ImageController::addNoise(int noiseType, int r, float mean, float sigma)
     return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
 }
 
+QPixmap ImageController::DetectEdges(int detectorType, int lowThreshold , int highThreshold) {
+    if(!img->isEmpty()&&img->isProcessed()){
+        Mat res;
+        switch (detectorType) {
+            case SobelDetector:
+                res = EdgeDetection::detectEdgeSobel(processedImg);
+                break;
+            case RobertDetector:
+                res = EdgeDetection::detectEdgeRobert(processedImg);
+                break;
+            case PrewittDetector:
+                res = EdgeDetection::detectEdgePrewitt(processedImg);
+                break;
+            case CannyDetector:
+                res = EdgeDetection::detectEdgeCanny(processedImg,lowThreshold ,highThreshold);
+                break;
+            default:
+                res = img->getOriginalImg();
+                break;
+        }
+        processedImg = res;
+        return Helpers::convertMatToPixmap(processedImg);
+    }
+    return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
+}
 
 QPixmap ImageController::frequencyFilter(int radius, int Filter){
     if(!img->isEmpty()&&img->isProcessed()){
@@ -100,6 +125,7 @@ QPixmap ImageController::frequencyFilter(int radius, int Filter){
         return Helpers::convertMatToPixmap(processedImg);
     }
 }
+
 
 
 

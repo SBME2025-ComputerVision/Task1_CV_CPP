@@ -22,15 +22,15 @@ QPixmap Helpers::convertMatToPixmap(Mat imageMat){
     // Colored Image
     case CV_8UC3:
     {
-        QImage qimage(imageMat.data, imageMat.cols, imageMat.rows, static_cast<int>(imageMat.step), QImage::Format_BGR888);
+        QImage qimage(imageMat.data, imageMat.cols, imageMat.rows, (imageMat.step), QImage::Format_BGR888);
         outputPixmap = QPixmap::fromImage(qimage);
         break;
     }
         // Grayscale Image
     case CV_8UC1:
     {
-        QImage qimage(imageMat.data, imageMat.cols, imageMat.rows, static_cast<int>(imageMat.step), QImage::Format_Grayscale8);
-        outputPixmap = QPixmap::fromImage(qimage.rgbSwapped());
+        QImage qimage(imageMat.data, imageMat.cols, imageMat.rows, (imageMat.step), QImage::Format_Grayscale8);
+        outputPixmap = QPixmap::fromImage(qimage);
         break;
     }
 
