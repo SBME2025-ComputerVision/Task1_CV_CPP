@@ -13,21 +13,20 @@ int main(int argc, char *argv[])
     w.show();
     return a.exec();
 
-//    Image *mama = new Image("Gallery/cat.jpg");
-//      imwrite("original.jpg", mama->getOriginalImg());
-//      // Mat avgFilter = Filter::avgFilter(mama->getOriginalImg(),5);
-//      // mama->setProcessedImg(avgFilter);
+    Image *mama = new Image("Gallery/cat.jpg");
+     imwrite("original.jpg", mama->getOriginalImg());
 
+     // Histogram::normalize_img(cur);
+     Mat original=mama->getOriginalImg();
+     // Mat norm=Histogram::normalize_img(original);
+     // Mat cur= Histogram::calculate_histogram(original);
+     Histogram::rgbHistogram(original);
 
-//      // Mat cur =mama->getOriginalImg();
-//      // Histogram::normalize_img(cur);
-//      Mat original=mama->getOriginalImg();
-//      // Mat norm=Histogram::normalize_img(original);
-//      Mat cur= Histogram::calculateHistogram(original);
-//      Mat distCurve=Histogram::distributionCurve(cur);
-//      Mat plot=Histogram::plotHistogram(cur,100,147,111);
-//      Mat cur2 = Histogram::equalizeImg(mama->getOriginalImg());
-//      imwrite("saltAndPepperNoise.jpg",cur2);
+//     Mat distCurve=Histogram::distributionCurve(cur);
+//     Mat plot=Histogram::plotHistogram(cur,100,147,111);
+    // Mat cur = Histogram::normalize_img(mama->getOriginalImg());
+//     imwrite("saltAndPepperNoise.jpg",cur);
+     return 0;
 
 
     return 0;

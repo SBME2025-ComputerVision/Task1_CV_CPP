@@ -4,6 +4,7 @@
 
 #include "config.h"
 #include "UI/filterswidget.h"
+#include "UI/histogramwidget.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -13,9 +14,11 @@ MainWindow::MainWindow(QWidget *parent)
     index = FilterPage;
 
     FiltersWidget *filterWidget = new FiltersWidget();
+    HistogramWidget *histogramWidget=new HistogramWidget();
 
 
     ui->stackedWidget->addWidget(filterWidget);
+    ui->stackedWidget->addWidget(histogramWidget);
 
 
 }
@@ -42,8 +45,10 @@ void MainWindow::on_edgeDetectionBtn_clicked()
 
 void MainWindow::on_histogramsBtn_clicked()
 {
-    index = HistogramPage;
-    MainWindow::setFrameIndex(index);
+    index = 1;
+//    qDebug()<<1;
+//    MainWindow::setFrameIndex(index);
+    ui->stackedWidget->setCurrentIndex(index);
 }
 
 

@@ -1,4 +1,5 @@
 #include "helpers.h"
+#include "config.h"
 
 Helpers::Helpers() {}
 Helpers::~Helpers(){}
@@ -56,4 +57,9 @@ QPixmap Helpers::convertMatToPixmap(Mat imageMat){
     }
     }
     return outputPixmap;
+}
+QString Helpers::  getImgPath(){
+    QString appDirPath = QCoreApplication::applicationDirPath();
+    QString path = QFileDialog::getOpenFileName(nullptr, "Choose an Image", appDirPath);
+    return path;
 }
