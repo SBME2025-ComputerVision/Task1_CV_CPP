@@ -33,7 +33,7 @@ void FrequencyWidget::on_browseBtn_clicked()
 void FrequencyWidget::on_highPassRadio_toggled(bool checked)
 {
     // bool highPassRadioBtn = ui->highPassRadio->isChecked();
-    processedImg = imageController->frequencyFilter(ui->radiusSLider->value(),0);
+    processedImg = imageController->frequencyFilter(ui->radiusSLider->value(),HighPassFilter);
     processedImg = processedImg.scaled(ui->processedImage->size(),Qt::IgnoreAspectRatio);
     ui->processedImage->setPixmap(processedImg);
 }
@@ -42,7 +42,7 @@ void FrequencyWidget::on_highPassRadio_toggled(bool checked)
 void FrequencyWidget::on_lowPassRadio_toggled(bool checked)
 {   qDebug()<< ui->radiusSLider->value();
     // bool lowPassRadioBtn = ui->lowPassRadio->isChecked();
-    processedImg = imageController->frequencyFilter(ui->radiusSLider->value(),1);
+    processedImg = imageController->frequencyFilter(ui->radiusSLider->value(),LowPassFilter);
     processedImg = processedImg.scaled(ui->processedImage->size(),Qt::IgnoreAspectRatio);
     ui->processedImage->setPixmap(processedImg);
 }
@@ -50,11 +50,11 @@ void FrequencyWidget::on_lowPassRadio_toggled(bool checked)
 
 void FrequencyWidget::on_radiusSLider_sliderReleased()
 {
-    bool flag;
+    int flag;
     if(ui->lowPassRadio->isChecked()==1){
-        flag =1;
+        flag =LowPassFilter;
     }else{
-        flag =0;
+        flag =HighPassFilter;
     }
     processedImg = imageController->frequencyFilter(ui->radiusSLider->value(),flag);
     processedImg = processedImg.scaled(ui->processedImage->size(),Qt::IgnoreAspectRatio);
