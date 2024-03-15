@@ -99,7 +99,6 @@ Mat EdgeDetection::detectEdgeCanny(Mat img, int t_low ,int t_high){
 //    int t_low = 50;
 //    int t_high= 250;
     Mat edges;
-    img.convertTo(img, CV_8U);
     cv::Canny(img,edges,t_low,t_high);
     edges.convertTo(edges,CV_8U);
     return edges;
