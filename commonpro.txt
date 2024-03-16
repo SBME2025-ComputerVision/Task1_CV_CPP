@@ -20,6 +20,7 @@ SOURCES += \
     Controllers/controller.cpp \
     Controllers/filtercontroller.cpp \
     Controllers/frequencycontroller.cpp \
+    Controllers/histogramcontroller.cpp \
     Controllers/imagecontroller.cpp \
     Helpers/helpers.cpp \
     Models/edgedetection.cpp \
@@ -31,6 +32,8 @@ SOURCES += \
     UI/edgedetectionwidget.cpp \
     UI/filterswidget.cpp \
     UI/frequencywidget.cpp \
+    UI/histogramwidget.cpp \
+    UI/plotswidget.cpp \
     UI/mainwindow.cpp \
     config.cpp \
     main.cpp
@@ -50,6 +53,8 @@ HEADERS += \
     UI/edgedetectionwidget.h \
     UI/filterswidget.h \
     UI/frequencywidget.h \
+    UI/histogramwidget.h \
+    UI/plotswidget.h \
     UI/mainwindow.h \
     config.h \
 
@@ -57,6 +62,8 @@ FORMS += \
     UI/edgedetectionwidget.ui \
     UI/filterswidget.ui \
     UI/frequencywidget.ui \
+    UI/histogramwidget.ui \
+    UI/plotswidget.ui \
     UI/mainwindow.ui
 
 
@@ -107,6 +114,7 @@ LIBS += -LD:\tools\opencv\release\lib\
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
 
 
 ```
