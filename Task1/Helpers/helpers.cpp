@@ -62,6 +62,9 @@ QPixmap Helpers::convertMatToPixmap(Mat imageMat){
 }
 
 QString Helpers::  getImgPath(){
+
+}
+
 QString Helpers::openFile(){
     QString appDirPath = QCoreApplication::applicationDirPath();
     QString path = QFileDialog::getOpenFileName(nullptr, "Choose an Image", appDirPath);

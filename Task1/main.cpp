@@ -18,10 +18,10 @@ int main(int argc, char *argv[])
 
 
      // Histogram::normalize_img(cur);
-     Mat original=mama->getOriginalImg();
+   //  Mat original=mama->getOriginalImg();
      // Mat norm=Histogram::normalize_img(original);
      // Mat cur= Histogram::calculate_histogram(original);
-     Histogram::rgbHistogram(original);
+    // Histogram::rgbHistogram(original);
 
 
     // Image* cat = new Image("./Gallery/whale.jpg");
