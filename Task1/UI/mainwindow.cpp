@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "UI/plotswidget.h"
+
 #include "ui_mainwindow.h"
 #include <opencv2/opencv.hpp>
 
@@ -7,7 +7,6 @@
 
 #include "UI/filterswidget.h"
 
-#include "UI/histogramwidget.h"
 #include "UI/edgedetectionwidget.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -21,13 +20,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     // FiltersWidget *filterWidget = new FiltersWidget();
     // FrequencyWidget *frequencyWidget = new FrequencyWidget();
-    HistogramWidget *histogramWidget=new HistogramWidget();
-    PlotsWidget *plotWidget =new PlotsWidget();
+
 
     ui->stackedWidget->addWidget(filterWidget);
     ui->stackedWidget->addWidget(edgeDetectionWidget);
-    ui->stackedWidget->addWidget(plotWidget);
     ui->stackedWidget->addWidget(histogramWidget);
+    ui->stackedWidget->addWidget(plotWidget);
     ui->stackedWidget->addWidget(frequencyWidget);
     ui->stackedWidget->setCurrentIndex(index);
 
@@ -74,14 +72,14 @@ void MainWindow::on_histogramsBtn_clicked()
     index = 1;
 //    qDebug()<<1;
 //    MainWindow::setFrameIndex(index);
-    ui->stackedWidget->setCurrentIndex(index);
+    ui->stackedWidget->setCurrentWidget(plotWidget);
 }
 
 
 void MainWindow::on_thresholdingBtn_clicked()
 {
-    index = ThresholdingPage;
-    MainWindow::setFrameIndex(index);
+//    index = ThresholdingPage;
+//    ui->stackedWidget->setCurrentWidget(plotWidget);
 }
 
 
@@ -120,3 +118,9 @@ void MainWindow::onBtnMinus(){
         ui->stackedWidget->setCurrentIndex(--index);
     }
 }
+
+void MainWindow::on_equalizationBtn_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(histogramWidget);
+}
+

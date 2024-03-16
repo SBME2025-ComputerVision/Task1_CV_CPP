@@ -86,9 +86,16 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="equalizationBtn">
+         <property name="text">
+          <string>Equalization</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="histogramsBtn">
          <property name="text">
-          <string>Histogram</string>
+          <string>Histogram Plots</string>
          </property>
         </widget>
        </item>

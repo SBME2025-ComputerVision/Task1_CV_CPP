@@ -9,6 +9,8 @@
 
 #include "UI/edgedetectionwidget.h"
 #include "UI/frequencywidget.h"
+#include "UI/plotswidget.h"
+#include "UI/histogramwidget.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -25,9 +27,10 @@ public:
 
 
     FiltersWidget *filterWidget = new FiltersWidget();
-
     EdgeDetectionWidget *edgeDetectionWidget = new EdgeDetectionWidget();
     FrequencyWidget *frequencyWidget = new FrequencyWidget();
+    HistogramWidget *histogramWidget=new HistogramWidget();
+    PlotsWidget *plotWidget =new PlotsWidget();
 
 
 private slots:
@@ -46,6 +49,8 @@ private slots:
     void on_hybridBtn_clicked();
 
     void on_frequencyBtn_clicked();
+
+    void on_equalizationBtn_clicked();
 
 private:
     Ui::MainWindow *ui;
