@@ -9,6 +9,7 @@
 #include "Models/image.h"
 #include "Models/edgedetection.h"
 #include "Models/fourier.h"
+#include "Models/histogram.h"
 #include <QString>
 #include <QFileDialog>
 #include <QCoreApplication>

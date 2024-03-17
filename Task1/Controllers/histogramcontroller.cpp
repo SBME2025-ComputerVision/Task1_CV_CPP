@@ -2,41 +2,11 @@
 #include "Helpers/helpers.h"
 #include"Models/histogram.h"
 
-HistogramController::HistogramController()
+HistogramController::HistogramController():Controller()
 {
-    img=new Image();
-}
-
-HistogramController::HistogramController(string path)
-{
-    img=new Image(path);
-}
-
-QPixmap HistogramController::uploadImg()
-{
-    QString appDirPath = QCoreApplication::applicationDirPath();
-    QString path = QFileDialog::getOpenFileName(nullptr, "Choose an Image", appDirPath);
-
-    if (!path.isEmpty()) {
-        delete this->img;
-        this->img = new Image(path.toStdString());
-        if (!img->isEmpty()) {
-            return Helpers::convertMatToPixmap(this->img->getOriginalImg());
-        }
-    }
-    return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
-}
-
-QPixmap HistogramController::getOriginalImg()
-{   Mat result;
-    if(!img->isEmpty()){
-        result=img->getOriginalImg();
-        return Helpers::convertMatToPixmap(result);
-    }
-
-    return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
 
 }
+
 
 
 QPixmap HistogramController::getProcessedHistogram()
