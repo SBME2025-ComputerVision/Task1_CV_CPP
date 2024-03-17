@@ -2,7 +2,7 @@
 #define EDGEDETECTIONWIDGET_H
 
 #include <QWidget>
-#include "Controllers/imagecontroller.h"
+#include "Controllers/edgecontroller.h"
 namespace Ui {
 class EdgeDetectionWidget;
 }
@@ -12,7 +12,7 @@ class EdgeDetectionWidget : public QWidget
     Q_OBJECT
 
 private:
-    ImageController *imageController;
+    EdgeController *edgeController;
     QPixmap originalImg;
     QPixmap processedImg;
 
