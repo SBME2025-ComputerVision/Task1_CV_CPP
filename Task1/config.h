@@ -38,6 +38,15 @@ extern string whalePth;
     LowPassFilter
 };
 
+ struct FilterAndEdgeParams{
+    int kernelSize = 3;
+    float SigmaFilter = 0;
+    float SigmaNoise = 0;
+    float MeanNoise = 0;
+    float SaltToPepperNoise = 15;
+
+ };
+
  enum DetectorType{
     SobelDetector = 1,
     RobertDetector = 2,

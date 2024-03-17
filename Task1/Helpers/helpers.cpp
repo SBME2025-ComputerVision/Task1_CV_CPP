@@ -71,3 +71,14 @@ QString Helpers::openFile(){
     return path;
 }
 
+float Helpers::convertQstringToFloat(const QString input){
+    bool ok;
+    float floatValue = input.toFloat(&ok);
+    if (ok) {
+
+    } else {
+        qDebug() << "Invalid input!";
+    }
+    return floatValue;
+}
+

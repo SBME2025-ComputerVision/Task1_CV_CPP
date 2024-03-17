@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "Controllers/filtercontroller.h"
+#include "config.h"
 namespace Ui {
 class FiltersWidget;
 }
@@ -39,8 +40,17 @@ private slots:
 
     void on_uploadImgBtn_clicked();
 
+    void on_sigmaLineEdit_textChanged(const QString &arg1);
+
+    void on_meanNoiseLineEdit_textChanged(const QString &arg1);
+
+    void on_sigmaNoiseLineEdit_textChanged(const QString &arg1);
+
+    void on_rNoiseLineEdit_textChanged(const QString &arg1);
+
 private:
     Ui::FiltersWidget *ui;
+    FilterAndEdgeParams filterParams;
 };
 
 #endif // FILTERSWIDGET_H
