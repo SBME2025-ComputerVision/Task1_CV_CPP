@@ -44,6 +44,8 @@ extern string whalePth;
     float SigmaNoise = 0;
     float MeanNoise = 0;
     float SaltToPepperNoise = 15;
+    float CannyLowThreshold = 50;
+    float CannyHighThreshold = 150;
 
  };
 

@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "Controllers/edgecontroller.h"
+#include "config.h"
 namespace Ui {
 class EdgeDetectionWidget;
 }
@@ -35,8 +36,13 @@ private slots:
     void on_resetFilterBtn_clicked();
 
 
+    void on_cannyHighEditLine_textChanged(const QString &arg1);
+
+    void on_cannyLowEditLine_textChanged(const QString &arg1);
+
 private:
     Ui::EdgeDetectionWidget *ui;
+    FilterAndEdgeParams filterParams;
 };
 
 #endif // EDGEDETECTIONWIDGET_H

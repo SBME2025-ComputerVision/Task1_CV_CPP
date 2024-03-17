@@ -1,6 +1,7 @@
 #include "edgedetectionwidget.h"
 #include "ui_edgedetectionwidget.h"
 #include "config.h"
+#include "Helpers/helpers.h"
 
 EdgeDetectionWidget::EdgeDetectionWidget(QWidget *parent) :
     QWidget(parent),
@@ -41,7 +42,7 @@ void EdgeDetectionWidget::on_apply_sobel_detector_clicked()
 
 void EdgeDetectionWidget::on_apply_canny_detector_clicked()
 {
-    processedImg = edgeController->detectEdges(CannyDetector,30,120);
+    processedImg = edgeController->detectEdges(CannyDetector,filterParams.CannyLowThreshold,filterParams.CannyHighThreshold);
     processedImg = processedImg.scaled(ui->imageDetected->size(),Qt::IgnoreAspectRatio);
     ui->imageDetected->setPixmap(processedImg);
 
@@ -66,4 +67,16 @@ void EdgeDetectionWidget::on_resetFilterBtn_clicked()
     ui->imageDetected->setPixmap(processedImg);
 }
 
+
+
+void EdgeDetectionWidget::on_cannyHighEditLine_textChanged(const QString &arg1)
+{
+ filterParams.CannyHighThreshold = Helpers::convertQstringToFloat(arg1);
+}
+
+
+void EdgeDetectionWidget::on_cannyLowEditLine_textChanged(const QString &arg1)
+{
+ filterParams.CannyLowThreshold = Helpers::convertQstringToFloat(arg1);
+}
 
