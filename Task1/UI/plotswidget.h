@@ -20,6 +20,8 @@ public:
 private slots:
     void on_uploadImgBtn_clicked();
 
+    void on_comboBox_currentIndexChanged(int index);
+
 private:
     Ui::PlotsWidget *ui;
     HistogramController*histogramContoller;
@@ -30,6 +32,8 @@ private:
     QPixmap rgbDistributionCurve;
     QPixmap grayscaleImgHistogram;
     QPixmap grayscaleImgDistributionCurve;
+    QPixmap cumulativePlot;
+    bool alreadyUploaded=0;
 
 };
 

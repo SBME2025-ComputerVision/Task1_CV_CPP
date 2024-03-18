@@ -14,40 +14,6 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QSplitter" name="splitter">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <widget class="QLabel" name="redHistogramLabel">
-      <property name="styleSheet">
-       <string notr="true">border: 2px solid rgb(15, 47, 89);;
-padding: 10px;</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="greenHistogramLabel">
-      <property name="styleSheet">
-       <string notr="true">border: 2px solid rgb(15, 47, 89);;
-padding: 10px;</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="blueHistogramLabel">
-      <property name="styleSheet">
-       <string notr="true">border: 2px solid rgb(15, 47, 89);;
-padding: 10px;</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </widget>
-   </item>
    <item row="1" column="0">
     <widget class="QSplitter" name="splitter_2">
      <property name="orientation">
@@ -87,6 +53,40 @@ padding: 10px;</string>
      <property name="text">
       <string>Upload Image</string>
      </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QLabel" name="redHistogramLabel">
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid rgb(15, 47, 89);;
+padding: 10px;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="greenHistogramLabel">
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid rgb(15, 47, 89);;
+padding: 10px;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="blueHistogramLabel">
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid rgb(15, 47, 89);;
+padding: 10px;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </widget>
    </item>
   </layout>

@@ -61,9 +61,29 @@ Mat Histogram:: plotHistogram(Mat histogram ,int r,int g,int b) {
  * @return Mat representing the normalized image.
  */
 Mat Histogram:: normalizeImg(Mat input_image){
-    Mat normalized_image;
-    normalize(input_image,normalized_image,0,255,NORM_MINMAX,CV_8U);
-    return normalized_image;
+//    Mat normalized_image;
+//    normalize(input_image,normalized_image,0,255,NORM_MINMAX,CV_8U);
+//    return normalized_image;
+    if (input_image.channels() > 1) {
+            cvtColor(input_image, input_image, COLOR_BGR2GRAY);
+        }
+    float image_min = input_image.at<uchar>(0 ,0), image_max = 0;
+         for (int row = 0; row < input_image.rows; ++row) {
+             for (int col = 0; col < input_image.cols; ++col) {
+                 if (input_image.at<uchar>(row ,col) <= image_min) {
+                     image_min = input_image.at<uchar>(row ,col);
+                 }
+                 if (input_image.at<uchar>(row ,col) >= image_max) {
+                     image_max = input_image.at<uchar>(row ,col);
+                 }
+             }
+         }
+         for (int row = 0; row < input_image.rows; ++row) {
+             for (int col = 0; col < input_image.cols; ++col) {
+                 input_image.at<uchar>(row, col) = ((float)(input_image.at<uchar>(row, col) - image_min)/(image_max - image_min))*255;
+             }
+         }
+     return input_image;
 }
 /**
  * @brief Equalize the image histogram.
@@ -97,15 +117,23 @@ Mat Histogram:: equalizeImg(const Mat& input_image){
          cdf.at<float>(i) = cdf.at<float>(i - 1) + histogram.at<float>(i) / (gray_image.rows * gray_image.cols);
      }
 
-     // Normalize the CDF
-     Mat normalized_cdf;
-     normalize(cdf, normalized_cdf, 0, 255, NORM_MINMAX, CV_8U);
+
+//     normalize(cdf, normalized_cdf, 0, 255, NORM_MINMAX, CV_8U);
+
+     // Calculate the maximum value in the CDF
+     float max_cdf = cdf.at<float>(histSize - 1);
+
+     Mat normalized_cdf = Mat::zeros(histSize, 1, CV_32F);
+     for (int i = 0; i < histSize; ++i) {
+         normalized_cdf.at<float>(i) = cdf.at<float>(i) * 255 / max_cdf;
+     }
+
 
      // Apply histogram equalization
      equalized_image = gray_image.clone();
      for (int i = 0; i < gray_image.rows; ++i) {
          for (int j = 0; j < gray_image.cols; ++j) {
-             equalized_image.at<uchar>(i, j) = saturate_cast<uchar>(normalized_cdf.at<uchar>(gray_image.at<uchar>(i, j)));
+             equalized_image.at<uchar>(i, j) = saturate_cast<uchar>(normalized_cdf.at<float>(gray_image.at<uchar>(i, j)));
          }
      }
 
@@ -202,5 +230,61 @@ HistogramData Histogram::rgbHistogram(Mat inputImage){
        histogramdata.hist_image=hist_image;
        return histogramdata;
 
+}
+
+cumulativeData Histogram:: plot_rgb_distribution_function(cv::Mat image)
+ {
+    cumulativeData hist;
+    vector<Mat> bgr_planes;
+      split(image, bgr_planes);
+
+      const int num_bins = 256;
+      const int hist_height = 400;
+      const int hist_width = 512;
+      const int bin_width = cvRound(static_cast<double>(hist_width) / num_bins);
+
+      // Create histograms for each color channel
+      Mat b_hist, g_hist, r_hist;
+
+      b_hist=calculateHistogram(bgr_planes[0]);
+      g_hist=calculateHistogram(bgr_planes[1]);
+      r_hist=calculateHistogram(bgr_planes[2]);
+
+      // Create cumulative histograms
+      Mat cumulative_b, cumulative_g, cumulative_r;
+      b_hist.copyTo(cumulative_b);
+      g_hist.copyTo(cumulative_g);
+      r_hist.copyTo(cumulative_r);
+
+      for (int j = 1; j < num_bins; j++) {
+          cumulative_b.at<float>(j) += cumulative_b.at<float>(j - 1);
+          cumulative_g.at<float>(j) += cumulative_g.at<float>(j - 1);
+          cumulative_r.at<float>(j) += cumulative_r.at<float>(j - 1);
+      }
+
+      normalize(cumulative_b, cumulative_b, 0, hist_height, NORM_MINMAX, -1, Mat());
+      normalize(cumulative_g, cumulative_g, 0, hist_height, NORM_MINMAX, -1, Mat());
+      normalize(cumulative_r, cumulative_r, 0, hist_height, NORM_MINMAX, -1, Mat());
+
+      // Create separate images for each histogram
+      Mat b_CDF(hist_height, hist_width, CV_8UC3, Scalar(0, 0, 0));
+      Mat g_CDF(hist_height, hist_width, CV_8UC3, Scalar(0, 0, 0));
+      Mat r_CDF(hist_height, hist_width, CV_8UC3, Scalar(0, 0, 0));
+
+      // Plot the histograms
+      for (int i = 1; i < num_bins; i++) {
+          line(b_CDF, Point(bin_width * (i - 1), hist_height - cvRound(cumulative_b.at<float>(i - 1))),
+              Point(bin_width * i, hist_height - cvRound(cumulative_b.at<float>(i))), Scalar(255, 0, 0), 2, LINE_AA);
+          line(g_CDF, Point(bin_width * (i - 1), hist_height - cvRound(cumulative_g.at<float>(i - 1))),
+              Point(bin_width * i, hist_height - cvRound(cumulative_g.at<float>(i))), Scalar(0, 255, 0), 2, LINE_AA);
+          line(r_CDF, Point(bin_width * (i - 1), hist_height - cvRound(cumulative_r.at<float>(i - 1))),
+              Point(bin_width * i, hist_height - cvRound(cumulative_r.at<float>(i))), Scalar(0, 0, 255), 2, LINE_AA);
+      }
+
+      hist.red=r_CDF;
+      hist.blue=b_CDF;
+      hist.green=g_CDF;
+      return hist;
 
 }
+

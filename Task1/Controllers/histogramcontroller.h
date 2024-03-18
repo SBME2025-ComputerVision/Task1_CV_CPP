@@ -3,6 +3,8 @@
 #include "controller.h"
 #include "config.h"
 
+
+
 class HistogramController : public Controller
 {
 public:
@@ -12,9 +14,13 @@ public:
     QPixmap getOriginalHistogram();
     QPixmap normalizeImg();
     QPixmap equalizeImg();
-    HistogramData rgbHistogram();
     QPixmap plotgrayscaleHistogram();
     QPixmap plotgrayscaleDistribution();
+    cumulativeData plotCumulativeDistribution();
+    HistogramData rgbHistogram();
+
+
+
 
 
 

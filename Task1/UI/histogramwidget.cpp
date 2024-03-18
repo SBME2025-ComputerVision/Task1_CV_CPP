@@ -1,6 +1,7 @@
 #include "histogramwidget.h"
 #include "ui_histogramwidget.h"
 
+
 HistogramWidget::HistogramWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::HistogramWidget)
@@ -15,7 +16,7 @@ HistogramWidget::~HistogramWidget()
 }
 
 void HistogramWidget::on_normalizeBtn_clicked()
-{
+    {   /*processedImg=histogramController->convertToGrayScale();*/
     processedImg=histogramController->normalizeImg();
     processedHistogram=histogramController->getProcessedHistogram();
     originalHistogram=histogramController->getOriginalHistogram();
@@ -52,6 +53,7 @@ void HistogramWidget::on_equalizeImg_clicked()
 void HistogramWidget::on_uploadImgBtn_clicked()
 {
     originalImg = histogramController->uploadImg();
+    originalImg=histogramController->convertToGrayScale();
     processedImg = histogramController->convertToGrayScale();
     originalImg = originalImg.scaled(ui->originalImgLabel->size(),Qt::IgnoreAspectRatio);
     processedImg = processedImg.scaled(ui->processedImgLabel->size(),Qt::IgnoreAspectRatio);
