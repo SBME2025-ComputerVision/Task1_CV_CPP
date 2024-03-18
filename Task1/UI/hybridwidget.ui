@@ -52,6 +52,12 @@
             <height>500</height>
            </size>
           </property>
+          <property name="styleSheet">
+           <string notr="true">
+           border: 2px solid rgb(15, 47, 89);
+          border-radius: 10px;
+      </string>
+          </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
@@ -132,6 +138,12 @@
             <height>500</height>
            </size>
           </property>
+          <property name="styleSheet">
+           <string notr="true">
+           border: 2px solid rgb(15, 47, 89);
+          border-radius: 10px;
+      </string>
+          </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
@@ -205,6 +217,12 @@
             <width>16777215</width>
             <height>500</height>
            </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+           border: 2px solid rgb(15, 47, 89);
+          border-radius: 10px;
+      </string>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>

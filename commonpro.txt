@@ -19,10 +19,10 @@ CONFIG += c++17
 SOURCES += \
     Controllers/controller.cpp \
     Controllers/filtercontroller.cpp \
-    Controllers/edgecontroller.cpp \
     Controllers/frequencycontroller.cpp \
     Controllers/histogramcontroller.cpp \
     Controllers/imagecontroller.cpp \
+    Controllers/edgecontroller.cpp  \
     Controllers/hybridcontroller.cpp \
     Helpers/helpers.cpp \
     Models/edgedetection.cpp \
@@ -45,9 +45,9 @@ SOURCES += \
 HEADERS += \
     Controllers/controller.h \
     Controllers/filtercontroller.h \
-    Controllers/edgecontroller.h \
     Controllers/frequencycontroller.h \
     Controllers/histogramcontroller.h \
+    Controllers/edgecontroller.h  \
     Controllers/imagecontroller.h \
     Controllers/hybridcontroller.h \
     Helpers/helpers.h \
@@ -75,6 +75,7 @@ FORMS += \
     UI/plotswidget.ui \
     UI/hybridwidget.ui \
     UI/mainwindow.ui
+
 
 
 

@@ -109,7 +109,7 @@
        <item>
         <widget class="QPushButton" name="hybridBtn">
          <property name="text">
-          <string>Task 4</string>
+          <string>Hybrid Image</string>
          </property>
         </widget>
        </item>
