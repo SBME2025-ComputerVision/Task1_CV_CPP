@@ -20,16 +20,28 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <widget class="QLabel" name="redHistogramLabel">
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid rgb(15, 47, 89);;
+padding: 10px;</string>
+      </property>
       <property name="text">
        <string/>
       </property>
      </widget>
      <widget class="QLabel" name="greenHistogramLabel">
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid rgb(15, 47, 89);;
+padding: 10px;</string>
+      </property>
       <property name="text">
        <string/>
       </property>
      </widget>
      <widget class="QLabel" name="blueHistogramLabel">
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid rgb(15, 47, 89);;
+padding: 10px;</string>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -42,16 +54,28 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <widget class="QLabel" name="rgbDistributionHistogramLabel">
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid rgb(15, 47, 89);;
+padding: 10px;</string>
+      </property>
       <property name="text">
        <string/>
       </property>
      </widget>
      <widget class="QLabel" name="grayscaleDistributionCurveLabel">
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid rgb(15, 47, 89);;
+padding: 10px;</string>
+      </property>
       <property name="text">
        <string/>
       </property>
      </widget>
      <widget class="QLabel" name="grayscaleHistogramlabel">
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid rgb(15, 47, 89);;
+padding: 10px;</string>
+      </property>
       <property name="text">
        <string/>
       </property>

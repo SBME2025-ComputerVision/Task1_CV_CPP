@@ -4,6 +4,7 @@
 #include<QPixmap>
 #include<QFileDialog>
 #include<QLabel>
+#include<qstring.h>
 #include<opencv2/opencv.hpp>
 using namespace cv;
 class Helpers
@@ -15,6 +16,7 @@ public:
     static Mat readImageMat();
     static QString openFile();
     static QPixmap convertMatToPixmap(Mat img);
+    static float  convertQstringToFloat(const QString input);
     
 };
 

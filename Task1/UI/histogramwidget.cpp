@@ -52,7 +52,7 @@ void HistogramWidget::on_equalizeImg_clicked()
 void HistogramWidget::on_uploadImgBtn_clicked()
 {
     originalImg = histogramController->uploadImg();
-    processedImg = histogramController->getOriginalImg();
+    processedImg = histogramController->convertToGrayScale();
     originalImg = originalImg.scaled(ui->originalImgLabel->size(),Qt::IgnoreAspectRatio);
     processedImg = processedImg.scaled(ui->processedImgLabel->size(),Qt::IgnoreAspectRatio);
     ui->originalImgLabel->setPixmap(originalImg);

@@ -19,6 +19,7 @@ CONFIG += c++17
 SOURCES += \
     Controllers/controller.cpp \
     Controllers/filtercontroller.cpp \
+    Controllers/edgecontroller.cpp \
     Controllers/frequencycontroller.cpp \
     Controllers/histogramcontroller.cpp \
     Controllers/imagecontroller.cpp \
@@ -41,6 +42,7 @@ SOURCES += \
 HEADERS += \
     Controllers/controller.h \
     Controllers/filtercontroller.h \
+    Controllers/edgecontroller.h \
     Controllers/frequencycontroller.h \
     Controllers/histogramcontroller.h \
     Controllers/imagecontroller.h \
