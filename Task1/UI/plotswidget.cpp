@@ -18,7 +18,10 @@ PlotsWidget::~PlotsWidget()
 
 void PlotsWidget::on_uploadImgBtn_clicked()
 {
+//    if(!alreadyUploaded){
     image=histogramContoller->uploadImg();
+//    alreadyUploaded=alreadyUploaded+1;
+//    }
 
 
     HistogramData data;
@@ -56,11 +59,31 @@ void PlotsWidget::on_uploadImgBtn_clicked()
 
     ui->grayscaleHistogramlabel->setPixmap(grayscaleImgHistogram);
     ui->grayscaleDistributionCurveLabel->setPixmap(grayscaleImgDistributionCurve);
+}
+
+void PlotsWidget::on_comboBox_currentIndexChanged(int index)
+{
+    cumulativeData hist;
+    QPixmap red,blue,green;
+    if(index==1){
+        hist=histogramContoller->plotCumulativeDistribution();
+        red=Helpers::convertMatToPixmap(hist.red);
+        blue=Helpers::convertMatToPixmap(hist.blue);
+        green=Helpers::convertMatToPixmap(hist.green);
 
 
+        red=red.scaled(ui->rgbDistributionHistogramLabel->size(),Qt::IgnoreAspectRatio);
+        ui->rgbDistributionHistogramLabel->setPixmap(red);
 
+        blue=blue.scaled(ui->grayscaleDistributionCurveLabel->size(),Qt::IgnoreAspectRatio);
+        ui->grayscaleDistributionCurveLabel->setPixmap(blue);
 
+        green=green.scaled(ui->grayscaleHistogramlabel->size(),Qt::IgnoreAspectRatio);
+        ui->grayscaleHistogramlabel->setPixmap(green);
 
-
+    }
+    if(index==0){
+        on_uploadImgBtn_clicked();
+    }
 }
 

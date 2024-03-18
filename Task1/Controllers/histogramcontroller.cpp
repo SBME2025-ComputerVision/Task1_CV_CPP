@@ -1,6 +1,8 @@
 #include "histogramcontroller.h"
 #include "Helpers/helpers.h"
 #include "Models/histogram.h"
+#include<opencv2/opencv.hpp>
+
 
 /**
  * @brief Constructor for HistogramController class.
@@ -42,8 +44,13 @@ QPixmap HistogramController::getProcessedHistogram()
 QPixmap HistogramController::getOriginalHistogram()
 {
     Mat originalHistogram;
+    Mat grayscaleImg;
     if(!img->isEmpty()){ // Checks if the image is not empty
-        originalHistogram=Histogram::calculateHistogram(img->getOriginalImg()); // Calculates histogram of original image
+        grayscaleImg=img->getOriginalImg();
+        cvtColor(grayscaleImg, grayscaleImg, COLOR_BGR2GRAY);
+
+
+        originalHistogram=Histogram::calculateHistogram(grayscaleImg); // Calculates histogram of original image
         originalHistogram=Histogram::plotHistogram(originalHistogram,255,200,100); // Plots the histogram
         return Helpers::convertMatToPixmap(originalHistogram); // Converts the histogram to QPixmap
     }
@@ -141,4 +148,14 @@ QPixmap HistogramController::plotgrayscaleDistribution()
         return Helpers::convertMatToPixmap(grayscaleimg); // Converts the curve to QPixmap
     }
     return Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1)); // Returns a blank QPixmap if conditions are not met
+}
+
+cumulativeData HistogramController:: plotCumulativeDistribution()
+{
+    cumulativeData hist;
+    if(!img->isEmpty()){
+         hist=Histogram::plot_rgb_distribution_function(img->getOriginalImg());
+    }
+    return hist;
+
 }
