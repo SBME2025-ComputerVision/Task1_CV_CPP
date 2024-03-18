@@ -11,6 +11,7 @@
 #include "UI/plotswidget.h"
 #include "UI/histogramwidget.h"
 #include "UI/hybridwidget.h"
+#include "UI/thresholdwidget.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -32,6 +33,8 @@ public:
     HistogramWidget *histogramWidget=new HistogramWidget();
     PlotsWidget *plotWidget =new PlotsWidget();
     HybridWidget *hybridWidget = new HybridWidget();
+    ThresholdWidget *thresholdWidget = new ThresholdWidget();
+
 
 
 private slots:

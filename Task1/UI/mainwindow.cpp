@@ -28,7 +28,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->stackedWidget->addWidget(plotWidget);
     ui->stackedWidget->addWidget(hybridWidget);
     ui->stackedWidget->addWidget(frequencyWidget);
+    ui->stackedWidget->addWidget(thresholdWidget);
     ui->stackedWidget->setCurrentIndex(index);
+
 
 
 
@@ -81,6 +83,7 @@ void MainWindow::on_thresholdingBtn_clicked()
 {
 //    index = ThresholdingPage;
 //    ui->stackedWidget->setCurrentWidget(plotWidget);
+    ui->stackedWidget->setCurrentWidget(thresholdWidget);
 }
 
 
