@@ -2,7 +2,8 @@
 #define EDGEDETECTIONWIDGET_H
 
 #include <QWidget>
-#include "Controllers/imagecontroller.h"
+#include "Controllers/edgecontroller.h"
+#include "config.h"
 namespace Ui {
 class EdgeDetectionWidget;
 }
@@ -12,7 +13,7 @@ class EdgeDetectionWidget : public QWidget
     Q_OBJECT
 
 private:
-    ImageController *imageController;
+    EdgeController *edgeController;
     QPixmap originalImg;
     QPixmap processedImg;
 
@@ -35,8 +36,13 @@ private slots:
     void on_resetFilterBtn_clicked();
 
 
+    void on_cannyHighEditLine_textChanged(const QString &arg1);
+
+    void on_cannyLowEditLine_textChanged(const QString &arg1);
+
 private:
     Ui::EdgeDetectionWidget *ui;
+    FilterAndEdgeParams filterParams;
 };
 
 #endif // EDGEDETECTIONWIDGET_H

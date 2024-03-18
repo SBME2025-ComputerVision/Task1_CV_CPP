@@ -10,6 +10,7 @@
 #include "Models/edgedetection.h"
 #include "Models/fourier.h"
 #include "Models/hybrid.h"
+#include "Models/histogram.h"
 #include <QString>
 #include <QFileDialog>
 #include <QCoreApplication>
@@ -38,6 +39,17 @@ extern string whalePth;
     HighPassFilter,
     LowPassFilter
 };
+
+ struct FilterAndEdgeParams{
+    int kernelSize = 3;
+    float SigmaFilter = 0;
+    float SigmaNoise = 0;
+    float MeanNoise = 0;
+    float SaltToPepperNoise = 15;
+    float CannyLowThreshold = 50;
+    float CannyHighThreshold = 150;
+
+ };
 
  enum DetectorType{
     SobelDetector = 1,

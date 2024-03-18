@@ -1,19 +1,13 @@
 #ifndef HISTOGRAMCONTROLLER_H
 #define HISTOGRAMCONTROLLER_H
-#include "Models/image.h"
-#include "Models/histogram.h"
+#include "controller.h"
+#include "config.h"
 
-class HistogramController
+class HistogramController : public Controller
 {
-private:
-    Image *img;
-    Mat processedImg;
 public:
     HistogramController();
     HistogramController(string path);
-    QPixmap uploadImg();
-    QPixmap getOriginalImg();
-    QPixmap getProcessedImg();
     QPixmap getProcessedHistogram();
     QPixmap getOriginalHistogram();
     QPixmap normalizeImg();
