@@ -6,11 +6,11 @@
 #include<opencv2/core/core.hpp>
 
 #include "UI/filterswidget.h"
-
 #include "UI/edgedetectionwidget.h"
 #include "UI/frequencywidget.h"
 #include "UI/plotswidget.h"
 #include "UI/histogramwidget.h"
+#include "UI/hybridwidget.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -31,6 +31,7 @@ public:
     FrequencyWidget *frequencyWidget = new FrequencyWidget();
     HistogramWidget *histogramWidget=new HistogramWidget();
     PlotsWidget *plotWidget =new PlotsWidget();
+    HybridWidget *hybridWidget = new HybridWidget();
 
 
 private slots:

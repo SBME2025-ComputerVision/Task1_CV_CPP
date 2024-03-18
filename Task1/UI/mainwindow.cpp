@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->stackedWidget->addWidget(edgeDetectionWidget);
     ui->stackedWidget->addWidget(histogramWidget);
     ui->stackedWidget->addWidget(plotWidget);
+    ui->stackedWidget->addWidget(hybridWidget);
     ui->stackedWidget->addWidget(frequencyWidget);
     ui->stackedWidget->setCurrentIndex(index);
 
@@ -85,8 +86,7 @@ void MainWindow::on_thresholdingBtn_clicked()
 
 void MainWindow::on_hybridBtn_clicked()
 {
-    index = HybridPage;
-    MainWindow::setFrameIndex(index);
+ ui->stackedWidget->setCurrentWidget(hybridWidget);
 }
 
 void MainWindow::on_frequencyBtn_clicked()

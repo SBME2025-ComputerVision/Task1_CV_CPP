@@ -1,11 +1,6 @@
 #include "UI/mainwindow.h"
-#include<opencv2/opencv.hpp>
-#include<Models/image.h>
-#include<Models/filter.h>
-#include<Models/noise.h>
-#include<Models/histogram.h>
-#include<Models/fourier.h>
-#include"config.h"
+#include "Models/filter.h"
+#include <opencv2/opencv.hpp>
 #include <QApplication>
 #include <QFile>
 int main(int argc, char *argv[])
@@ -13,6 +8,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
+
 
     //  import style sheets
         QFile file("ManjaroMix.qss");
@@ -53,60 +49,43 @@ int main(int argc, char *argv[])
 
     // imwrite("yarab.jpg",res);
 
+//     if (originalImga.empty()||originalImgb.empty()) {
+//         qDebug() << "Failed to load image!";
+//         return -1;
+//     }
 
-    // Mat dftImg = Fourier::applyDFT(grey);
+//     // Resize both images
+//     // cv::Size newSize(900, 900);
+//     cv::resize(originalImga, originalImga, originalImgb.size());
+//     // cv::resize(originalImgb, originalImgb, newSize);
 
-    // Mat planes[2];
-    // split(dftImg,planes);
+//     cv::Mat lowpassImg, highpassImg;
 
-    // Mat mag, phaz;
+//     lowpassImg = Filter::applyFrequencyFilter(originalImga,30,HighPassFilter);
+//     highpassImg = Filter::applyFrequencyFilter(originalImgb,30,LowPassFilter);
 
-    // magnitude(planes[0],planes[1],mag);
-    // phase(planes[0],planes[1],phaz,true);
+//     cv::Mat hybridImg;
+//     hybridImg = lowpassImg + highpassImg;
+//     cv::normalize(hybridImg, hybridImg, 0, 255, cv::NORM_MINMAX);
 
-
-    // log(mag,mag);
-    // mag *=20;
-    // normalize(mag,mag,0,1,NORM_MINMAX);
-    // Mat real, imag;
-    // real = Fourier::applyShifting(planes[0]);
-    // imag = Fourier::applyShifting(planes[1]);
-
-
-    // int cx = real.cols / 2;
-    // int cy = real.rows / 2;
-
-
-    // int radius = 100;
-
-
-
-    // // Create a mask to zero out frequencies outside the central region
-    // Mat mask = Mat::zeros(mag.size(), CV_8U);
-
-    // circle(mask, Point(cx, cy), radius, Scalar(255), -1);
-
-    // Mat highPassMask;
-    // bitwise_not(mask, highPassMask);
-
-
-    // real.setTo(Scalar(0), ~mask);
-    // imag.setTo(Scalar(0), ~mask);
-
-    // Mat shifted_DFT_plane_img[] = {real ,imag };
-
-    // Mat MergeImg;
-    // merge(shifted_DFT_plane_img, 2, MergeImg);
+//     cv::imwrite("hybrid_image.jpg", hybridImg);
 
 
 
 
-    // Mat img = Fourier::applyIDFT(MergeImg);
+    // cv::imwrite("mama1.jpg", highpassImg);
+    // cv::imwrite("mama2.jpg", lowpassImg);
 
 
+    // // Verify sizes and types of matrices
+    // if (filteredFourierImga.size() != filteredFourierImgb.size() ||
+    //     filteredFourierImga.type() != filteredFourierImgb.type()) {
+    //     qDebug() << "Sizes or types of filtered Fourier images do not match!";
+    //     return -1;
+    // }
 
-    // imwrite("inversing.jpg",img);
-    return 0;
+    // // Normalize the hybrid image to 0-255 range
 
-
+    // cv::imwrite("hybrid_image.jpg", hybridImg);
+    return a.exec();
 }
