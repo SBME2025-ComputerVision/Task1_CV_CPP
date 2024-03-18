@@ -24,6 +24,7 @@ SOURCES += \
     Controllers/imagecontroller.cpp \
     Controllers/edgecontroller.cpp  \
     Controllers/hybridcontroller.cpp \
+    Controllers/thresholdcontroller.cpp \
     Helpers/helpers.cpp \
     Models/edgedetection.cpp \
     Models/filter.cpp \
@@ -32,6 +33,7 @@ SOURCES += \
     Models/image.cpp \
     Models/histogram.cpp \
     Models/hybrid.cpp   \
+    Models/threshold.cpp \
     UI/edgedetectionwidget.cpp \
     UI/filterswidget.cpp \
     UI/frequencywidget.cpp \
@@ -39,6 +41,7 @@ SOURCES += \
     UI/plotswidget.cpp \
     UI/hybridwidget.cpp \
     UI/mainwindow.cpp \
+    UI/thresholdwidget.cpp \
     config.cpp \
     main.cpp
 
@@ -50,6 +53,7 @@ HEADERS += \
     Controllers/edgecontroller.h  \
     Controllers/imagecontroller.h \
     Controllers/hybridcontroller.h \
+    Controllers/thresholdcontroller.h \
     Helpers/helpers.h \
     Models/edgedetection.h \
     Models/filter.h \
@@ -58,6 +62,7 @@ HEADERS += \
     Models/noise.h \
     Models/histogram.h \
     Models/hybrid.h   \
+    Models/threshold.h \
     UI/edgedetectionwidget.h \
     UI/filterswidget.h \
     UI/frequencywidget.h \
@@ -65,6 +70,7 @@ HEADERS += \
     UI/plotswidget.h \
     UI/hybridwidget.h \
     UI/mainwindow.h \
+    UI/thresholdwidget.h \
     config.h \
 
 FORMS += \
@@ -74,7 +80,9 @@ FORMS += \
     UI/histogramwidget.ui \
     UI/plotswidget.ui \
     UI/hybridwidget.ui \
-    UI/mainwindow.ui
+    UI/thresholdwidget.ui  \
+    UI/mainwindow.ui \
+
 
 
 
