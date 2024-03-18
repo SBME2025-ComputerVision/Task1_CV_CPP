@@ -2,21 +2,37 @@
 #define HYBRIDWIDGET_H
 
 #include <QWidget>
+#include"Controllers/hybridcontroller.h"
 
 namespace Ui {
-class hybridwidget;
+class HybridWidget;
 }
 
-class hybridwidget : public QWidget
+class HybridWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit hybridwidget(QWidget *parent = nullptr);
-    ~hybridwidget();
+    explicit HybridWidget(QWidget *parent = nullptr);
+    ~HybridWidget();
+
+private slots:
+    void on_lpImgBtn_clicked();
+
+    void on_hpImgBtn_clicked();
+
+    void on_mixImgBtn_clicked();
+
+    void on_pushButton_clicked();
 
 private:
-    Ui::hybridwidget *ui;
+    Ui::HybridWidget *ui;
+    HybridController* hybridController;
+    QPixmap originalImg;
+    QPixmap originalImg2;
+    QPixmap processedImg;
+    QPixmap processedImg2;
+    QPixmap MixedImg;
 };
 
 #endif // HYBRIDWIDGET_H

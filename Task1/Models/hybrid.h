@@ -3,21 +3,15 @@
 
 #include <bits/stdc++.h>
 #include<opencv2/opencv.hpp>
+#include<config.h>
 using namespace cv;
 
-class hybrid
+class Hybrid
 {
-private:
-    Mat lowpassImg;
-    Mat highpassImg;
-    Mat hybridImg;
 public:
     //constructor
-    hybrid();
-
-    static Mat getLpImg();
-
-    static Mat mixImg();
+    Hybrid();
+    static Mat mixImg(Mat originalImga, Mat originalImgb, int maskRadiusLP,int maskRadiusHP);
 
 };
 
