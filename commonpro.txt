@@ -23,6 +23,7 @@ SOURCES += \
     Controllers/frequencycontroller.cpp \
     Controllers/histogramcontroller.cpp \
     Controllers/imagecontroller.cpp \
+    Controllers/hybridcontroller.cpp \
     Helpers/helpers.cpp \
     Models/edgedetection.cpp \
     Models/filter.cpp \
@@ -30,11 +31,13 @@ SOURCES += \
     Models/noise.cpp \
     Models/image.cpp \
     Models/histogram.cpp \
+    Models/hybrid.cpp   \
     UI/edgedetectionwidget.cpp \
     UI/filterswidget.cpp \
     UI/frequencywidget.cpp \
     UI/histogramwidget.cpp \
     UI/plotswidget.cpp \
+    UI/hybridwidget.cpp \
     UI/mainwindow.cpp \
     config.cpp \
     main.cpp
@@ -46,6 +49,7 @@ HEADERS += \
     Controllers/frequencycontroller.h \
     Controllers/histogramcontroller.h \
     Controllers/imagecontroller.h \
+    Controllers/hybridcontroller.h \
     Helpers/helpers.h \
     Models/edgedetection.h \
     Models/filter.h \
@@ -53,11 +57,13 @@ HEADERS += \
     Models/image.h \
     Models/noise.h \
     Models/histogram.h \
+    Models/hybrid.h   \
     UI/edgedetectionwidget.h \
     UI/filterswidget.h \
     UI/frequencywidget.h \
     UI/histogramwidget.h \
     UI/plotswidget.h \
+    UI/hybridwidget.h \
     UI/mainwindow.h \
     config.h \
 
@@ -67,6 +73,7 @@ FORMS += \
     UI/frequencywidget.ui \
     UI/histogramwidget.ui \
     UI/plotswidget.ui \
+    UI/hybridwidget.ui \
     UI/mainwindow.ui
 
 
