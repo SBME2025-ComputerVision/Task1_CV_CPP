@@ -11,6 +11,7 @@
 #include "Models/fourier.h"
 #include "Models/hybrid.h"
 #include "Models/histogram.h"
+#include "Models/threshold.h"
 #include <QString>
 #include <QFileDialog>
 #include <QCoreApplication>
@@ -40,6 +41,11 @@ extern string whalePth;
     LowPassFilter
 };
 
+ enum ThresholdingType{
+     LocalThresholding = 1,
+     GlobalThresholding,
+ };
+
  struct FilterAndEdgeParams{
     int kernelSize = 3;
     float SigmaFilter = 0;
@@ -48,6 +54,13 @@ extern string whalePth;
     float SaltToPepperNoise = 15;
     float CannyLowThreshold = 50;
     float CannyHighThreshold = 150;
+
+ };
+
+ struct ThresholdParams{
+    int ThresholdKernelSize = 3;
+    int ThresholdValue = 210;
+    int CParam = 2;
 
  };
 

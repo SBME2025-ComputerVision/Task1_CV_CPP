@@ -8,6 +8,9 @@ ThresholdWidget::ThresholdWidget(QWidget *parent)
 {
     ui->setupUi(this);
     thresholdController = new ThresholdController();
+    ui->radiusSLider->setMinimum(0);
+    ui->radiusSLider->setMaximum(250);
+    ui->radiusSLider->setValue(210);
 }
 
 ThresholdWidget::~ThresholdWidget()
@@ -20,13 +23,17 @@ ThresholdWidget::~ThresholdWidget()
 
 void ThresholdWidget::on_globalThresholdBtn_clicked()
 {
-
+  thresholdedImg = thresholdController->ThresholdingFilter(GlobalThresholding,ui->radiusSLider->value(), thresholdParams.ThresholdKernelSize, thresholdParams.CParam);
+  thresholdedImg.scaled(ui->processedImage->size(),Qt::IgnoreAspectRatio);
+  ui->processedImage->setPixmap(thresholdedImg);
 }
 
 
 void ThresholdWidget::on_localThresholdBtn_clicked()
 {
-
+    thresholdedImg = thresholdController->ThresholdingFilter(LocalThresholding,thresholdParams.ThresholdValue, thresholdParams.ThresholdKernelSize, thresholdParams.CParam);
+    thresholdedImg.scaled(ui->processedImage->size(),Qt::IgnoreAspectRatio);
+    ui->processedImage->setPixmap(thresholdedImg);
 }
 
 
@@ -38,5 +45,11 @@ void ThresholdWidget::on_uploadBtn_clicked()
     processedImg = processedImg.scaled(ui->processedImage->size(),Qt::IgnoreAspectRatio);
     ui->originalImage->setPixmap(originalImg);
     ui->processedImage->setPixmap(processedImg);
+}
+
+
+void ThresholdWidget::on_radiusSLider_sliderReleased()
+{
+     on_globalThresholdBtn_clicked();
 }
 

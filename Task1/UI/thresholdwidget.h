@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "Controllers/thresholdcontroller.h"
+#include "config.h"
 namespace Ui {
 class ThresholdWidget;
 }
@@ -20,6 +21,8 @@ private:
     ThresholdController *thresholdController;
     QPixmap originalImg;
     QPixmap processedImg;
+    QPixmap thresholdedImg;
+    ThresholdParams thresholdParams;
 private slots:
     void on_globalThresholdBtn_clicked();
 
@@ -28,6 +31,7 @@ private slots:
     void on_uploadBtn_clicked();
 
 
+    void on_radiusSLider_sliderReleased();
 };
 
 #endif // THRESHOLDWIDGET_H
