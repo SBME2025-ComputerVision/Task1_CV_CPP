@@ -1,7 +1,14 @@
 #include"histogram.h"
 
 
-
+/**
+ * @brief Calculate the histogram of an image.
+ *
+ * This function calculates the histogram of the input image.
+ *
+ * @param image Input image.
+ * @return Mat representing the histogram.
+ */
 
 Mat Histogram:: calculateHistogram(Mat image) {
     Mat hist;
@@ -19,6 +26,17 @@ Mat Histogram:: calculateHistogram(Mat image) {
     }
     return hist;
 }
+/**
+ * @brief Plot the histogram.
+ *
+ * This function plots the histogram.
+ *
+ * @param histogram Histogram data.
+ * @param r Red channel value.
+ * @param g Green channel value.
+ * @param b Blue channel value.
+ * @return Mat representing the histogram image.
+ */
 Mat Histogram:: plotHistogram(Mat histogram ,int r,int g,int b) {
     Mat histogram_image(400, 512, CV_8UC3, Scalar(0, 0, 0));
     Mat normalized_histogram;
@@ -34,13 +52,27 @@ Mat Histogram:: plotHistogram(Mat histogram ,int r,int g,int b) {
 
 };
 
-
+/**
+ * @brief Normalize the image.
+ *
+ * This function normalizes the input image.
+ *
+ * @param input_image Input image.
+ * @return Mat representing the normalized image.
+ */
 Mat Histogram:: normalizeImg(Mat input_image){
     Mat normalized_image;
     normalize(input_image,normalized_image,0,255,NORM_MINMAX,CV_8U);
     return normalized_image;
 }
-
+/**
+ * @brief Equalize the image histogram.
+ *
+ * This function performs histogram equalization on the input image.
+ *
+ * @param input_image Input image.
+ * @return Mat representing the equalized image.
+ */
 Mat Histogram:: equalizeImg(const Mat& input_image){
     Mat equalized_image;
 
@@ -79,7 +111,17 @@ Mat Histogram:: equalizeImg(const Mat& input_image){
 
      return equalized_image;
 }
-
+/**
+ * @brief Plot the distribution curve.
+ *
+ * This function plots the distribution curve based on the histogram data.
+ *
+ * @param histogram Histogram data.
+ * @param b Blue channel value.
+ * @param g Green channel value.
+ * @param r Red channel value.
+ * @return Mat representing the distribution curve image.
+ */
 Mat Histogram:: distributionCurve(Mat histogram,int b,int g ,int r) {
 
     int num_bins = histogram.rows;
@@ -109,7 +151,14 @@ Mat Histogram:: distributionCurve(Mat histogram,int b,int g ,int r) {
 
 
 
-
+/**
+ * @brief Calculate the RGB histogram of an image.
+ *
+ * This function calculates the RGB histogram of the input image.
+ *
+ * @param inputImage Input image.
+ * @return HistogramData structure containing RGB histogram data.
+ */
 HistogramData Histogram::rgbHistogram(Mat inputImage){
     HistogramData histogramdata;
 

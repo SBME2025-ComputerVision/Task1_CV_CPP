@@ -4,15 +4,17 @@
 #include "qapplication.h"
 
 Helpers::Helpers() {}
-Helpers::~Helpers(){}
+Helpers::~Helpers() {}
 
-// QPixmap Helpers::convertMatToPixmap (Mat img){
-//     QPixmap outputPixmapImage;
-//     QImage  curImg(img.data, img.cols,img.rows,static_cast<int>(img.step),QImage::Format_BGR888);
-//     outputPixmapImage = QPixmap::fromImage(curImg);
-//     return outputPixmapImage;
-// }
-
+/**
+ * @brief Converts a cv::Mat image to a QPixmap.
+ *
+ * This function takes a cv::Mat image and converts it into a QPixmap,
+ * which can be used for display purposes in Qt applications.
+ *
+ * @param imageMat Input cv::Mat image.
+ * @return QPixmap representing the input image.
+ */
 QPixmap Helpers::convertMatToPixmap(Mat imageMat){
 
     QPixmap outputPixmap;
@@ -27,7 +29,7 @@ QPixmap Helpers::convertMatToPixmap(Mat imageMat){
         outputPixmap = QPixmap::fromImage(qimage);
         break;
     }
-        // Grayscale Image
+    // Grayscale Image
     case CV_8UC1:
     {
         QImage qimage(imageMat.data, imageMat.cols, imageMat.rows, (imageMat.step), QImage::Format_Grayscale8);
@@ -61,24 +63,32 @@ QPixmap Helpers::convertMatToPixmap(Mat imageMat){
     return outputPixmap;
 }
 
-QString Helpers::  getImgPath(){
-
-}
-
+/**
+ * @brief Opens a file dialog to select an image file and returns the file path.
+ *
+ * @return QString representing the path of the selected image file.
+ */
 QString Helpers::openFile(){
     QString appDirPath = QCoreApplication::applicationDirPath();
     QString path = QFileDialog::getOpenFileName(nullptr, "Choose an Image", appDirPath);
     return path;
 }
 
+/**
+ * @brief Converts a QString to a float value.
+ *
+ * This function takes a QString input and converts it into a float value.
+ *
+ * @param input QString to be converted.
+ * @return Float value converted from the input QString.
+ */
 float Helpers::convertQstringToFloat(const QString input){
     bool ok;
     float floatValue = input.toFloat(&ok);
     if (ok) {
-
+        // Conversion successful
     } else {
         qDebug() << "Invalid input!";
     }
     return floatValue;
 }
-
