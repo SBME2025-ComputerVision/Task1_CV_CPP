@@ -21,6 +21,7 @@ private slots:
     void on_uploadImgBtn_clicked();
 
     void on_comboBox_currentIndexChanged(int index);
+    void loadHistoPlots();
 
 private:
     Ui::PlotsWidget *ui;

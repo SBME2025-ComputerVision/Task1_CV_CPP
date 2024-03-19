@@ -7,47 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>1314</width>
-    <height>647</height>
+    <height>751</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="0">
-    <widget class="QSplitter" name="splitter_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <widget class="QLabel" name="rgbDistributionHistogramLabel">
-      <property name="styleSheet">
-       <string notr="true">border: 2px solid rgb(15, 47, 89);;
-padding: 10px;</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="grayscaleDistributionCurveLabel">
-      <property name="styleSheet">
-       <string notr="true">border: 2px solid rgb(15, 47, 89);;
-padding: 10px;</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="grayscaleHistogramlabel">
-      <property name="styleSheet">
-       <string notr="true">border: 2px solid rgb(15, 47, 89);;
-padding: 10px;</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </widget>
-   </item>
    <item row="2" column="0">
     <widget class="QPushButton" name="uploadImgBtn">
      <property name="text">
@@ -87,6 +53,54 @@ padding: 10px;</string>
        <string/>
       </property>
      </widget>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QSplitter" name="splitter_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QLabel" name="rgbDistributionHistogramLabel">
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid rgb(15, 47, 89);;
+padding: 10px;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="grayscaleDistributionCurveLabel">
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid rgb(15, 47, 89);;
+padding: 10px;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="grayscaleHistogramlabel">
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid rgb(15, 47, 89);;
+padding: 10px;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QComboBox" name="comboBox">
+     <item>
+      <property name="text">
+       <string>Normal</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CDF</string>
+      </property>
+     </item>
     </widget>
    </item>
   </layout>

@@ -15,15 +15,7 @@ PlotsWidget::~PlotsWidget()
 {
     delete ui;
 }
-
-void PlotsWidget::on_uploadImgBtn_clicked()
-{
-//    if(!alreadyUploaded){
-    image=histogramContoller->uploadImg();
-//    alreadyUploaded=alreadyUploaded+1;
-//    }
-
-
+void PlotsWidget::loadHistoPlots(){
     HistogramData data;
     data=histogramContoller->rgbHistogram();
     Mat hist_image,plot_b_hist,plot_g_hist,plot_r_hist;
@@ -59,6 +51,14 @@ void PlotsWidget::on_uploadImgBtn_clicked()
 
     ui->grayscaleHistogramlabel->setPixmap(grayscaleImgHistogram);
     ui->grayscaleDistributionCurveLabel->setPixmap(grayscaleImgDistributionCurve);
+     setWindowState(Qt::WindowMaximized);
+}
+
+void PlotsWidget::on_uploadImgBtn_clicked()
+{
+
+    image=histogramContoller->uploadImg();
+    loadHistoPlots();
 }
 
 void PlotsWidget::on_comboBox_currentIndexChanged(int index)
@@ -83,7 +83,7 @@ void PlotsWidget::on_comboBox_currentIndexChanged(int index)
 
     }
     if(index==0){
-        on_uploadImgBtn_clicked();
+        loadHistoPlots();
     }
 }
 

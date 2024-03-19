@@ -15,13 +15,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     index = FilterPage;
-
-
-
-    // FiltersWidget *filterWidget = new FiltersWidget();
-    // FrequencyWidget *frequencyWidget = new FrequencyWidget();
-
-
     ui->stackedWidget->addWidget(filterWidget);
     ui->stackedWidget->addWidget(edgeDetectionWidget);
     ui->stackedWidget->addWidget(histogramWidget);
@@ -29,7 +22,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->stackedWidget->addWidget(hybridWidget);
     ui->stackedWidget->addWidget(frequencyWidget);
     ui->stackedWidget->addWidget(thresholdWidget);
-    ui->stackedWidget->setCurrentIndex(index);
 
 
 
@@ -44,65 +36,47 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_filteringBtn_clicked()
 {
-    // index = FilterPage;
-    // MainWindow::setFrameIndex(index);
-    // while(index != FilterPage){
-    //     onBtnMinus();
-    // }
     ui->stackedWidget->setCurrentWidget(filterWidget);
+     setWindowState(Qt::WindowMaximized);
 
 }
 
 
 void MainWindow::on_edgeDetectionBtn_clicked()
 {
-    // index = EdgeDetectionPage;
-    // setFrameIndex(index);
-    // while(index != EdgeDetectionPage){
-    //     if(index < EdgeDetectionPage){
-    //         onBtnPlus();
-    //     }else{
-    //         onBtnMinus();
-    //     }
-    // }
    ui->stackedWidget->setCurrentWidget(edgeDetectionWidget);
+    setWindowState(Qt::WindowMaximized);
 
 }
 
 
 void MainWindow::on_histogramsBtn_clicked()
 {
-    index = 1;
-//    qDebug()<<1;
-//    MainWindow::setFrameIndex(index);
     ui->stackedWidget->setCurrentWidget(plotWidget);
+     setWindowState(Qt::WindowMaximized);
 }
 
 
 void MainWindow::on_thresholdingBtn_clicked()
 {
-//    index = ThresholdingPage;
-//    ui->stackedWidget->setCurrentWidget(plotWidget);
     ui->stackedWidget->setCurrentWidget(thresholdWidget);
+     setWindowState(Qt::WindowMaximized);
 }
 
 
 void MainWindow::on_hybridBtn_clicked()
 {
  ui->stackedWidget->setCurrentWidget(hybridWidget);
+  setWindowState(Qt::WindowMaximized);
 }
 
 void MainWindow::on_frequencyBtn_clicked()
 {
-    // index = FrequencyPage;
-    // MainWindow::setFrameIndex(index);
     ui->stackedWidget->setCurrentWidget(frequencyWidget);
+     setWindowState(Qt::WindowMaximized);
 }
 
 void MainWindow::setFrameIndex(int index){
-    cout<<"idx"<<index<<endl;
-    // cout <<ui->stackedWidget->count()-1<<"mama"<<endl;
-
     if(index <ui->stackedWidget->count()-1){
 
         ui->stackedWidget->setCurrentIndex(index);
@@ -125,5 +99,6 @@ void MainWindow::onBtnMinus(){
 void MainWindow::on_equalizationBtn_clicked()
 {
     ui->stackedWidget->setCurrentWidget(histogramWidget);
+     setWindowState(Qt::WindowMaximized);
 }
 
