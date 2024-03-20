@@ -9,6 +9,8 @@ FiltersWidget::FiltersWidget(QWidget *parent) :
 {
     filterController = new FilterController();
     ui->setupUi(this);
+    kernels.append(ui->threeByThreeKernelBtn);
+    kernels.append(ui->fiveByFiveKernelBtn);
 }
 
 FiltersWidget::~FiltersWidget()
@@ -117,5 +119,67 @@ void FiltersWidget::on_sigmaNoiseLineEdit_textChanged(const QString &arg1)
 void FiltersWidget::on_rNoiseLineEdit_textChanged(const QString &arg1)
 {
  filterParams.SaltToPepperNoise = Helpers::convertQstringToFloat(arg1);
+}
+
+void FiltersWidget::changeButtonColors(QList<QPushButton*> list, QString style){
+    foreach (QPushButton *btn, list) {
+        btn->setStyleSheet(style);
+    }
+}
+
+
+void FiltersWidget::on_threeByThreeKernelBtn_clicked()
+{
+    QString style ="\
+        QPushButton {\
+            background-color: #316669;\
+            border: none;\
+            border-radius: 6px;\
+            color: #EEEEEE;\
+            font-size: 14px;\
+            font-weight: 500;\
+            line-height: 20px;\
+            list-style: none;\
+            padding: 4px 12px;\
+            height: 30px;\
+    }\
+        QPushButton:hover {\
+            background-color: rgba(118, 171, 174, 203);\
+            text-decoration: none;\
+    }\
+        QPushButton:focus {\
+            outline: 1px transparent;\
+    }";
+    changeButtonColors(kernels,style);
+
+    ui->threeByThreeKernelBtn->setStyleSheet("background-color: #76ABAE;");
+
+}
+
+
+void FiltersWidget::on_fiveByFiveKernelBtn_clicked()
+{
+    QString style ="\
+        QPushButton {\
+            background-color: #316669;\
+            border: none;\
+            border-radius: 6px;\
+            color: #EEEEEE;\
+            font-size: 14px;\
+            font-weight: 500;\
+            line-height: 20px;\
+            list-style: none;\
+            padding: 4px 12px;\
+            height: 30px;\
+    }\
+        QPushButton:hover {\
+            background-color: rgba(118, 171, 174, 203);\
+            text-decoration: nonethreeByThreeKernelBtn;\
+    }\
+        QPushButton:focus {\
+            outline: 1px transparent;\
+    }";
+    changeButtonColors(kernels,style);
+    ui->fiveByFiveKernelBtn->setStyleSheet("background-color: #76ABAE;");
 }
 

@@ -48,9 +48,15 @@ private slots:
 
     void on_rNoiseLineEdit_textChanged(const QString &arg1);
 
+    void on_threeByThreeKernelBtn_clicked();
+
+    void on_fiveByFiveKernelBtn_clicked();
+
 private:
     Ui::FiltersWidget *ui;
     FilterAndEdgeParams filterParams;
+    void changeButtonColors(QList<QPushButton*> list,QString style);
+    QList<QPushButton*> kernels;
 };
 
 #endif // FILTERSWIDGET_H
