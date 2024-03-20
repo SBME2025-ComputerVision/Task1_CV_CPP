@@ -60,5 +60,8 @@ private:
     Ui::MainWindow *ui;
     int index;
     void setFrameIndex(int index);
+    void changeButtonColors(QList<QPushButton*> list,QString style);
+    QList<QPushButton*> menuBtns;
+    QString style;
 };
 #endif // MAINWINDOW_H

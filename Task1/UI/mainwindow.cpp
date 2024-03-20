@@ -23,6 +23,35 @@ MainWindow::MainWindow(QWidget *parent)
     ui->stackedWidget->addWidget(frequencyWidget);
     ui->stackedWidget->addWidget(thresholdWidget);
 
+    menuBtns.append(ui->filteringBtn);
+    menuBtns.append(ui->frequencyBtn);
+    menuBtns.append(ui->edgeDetectionBtn);
+    menuBtns.append(ui->histogramsBtn);
+    menuBtns.append(ui->thresholdingBtn);
+    menuBtns.append(ui->equalizationBtn);
+    menuBtns.append(ui->hybridBtn);
+
+    style="\
+        QPushButton {\
+            background-color: #316669;\
+            border: none;\
+            border-radius: 6px;\
+            color: #EEEEEE;\
+            font-size: 14px;\
+            font-weight: 500;\
+            line-height: 20px;\
+            list-style: none;\
+            padding: 4px 12px;\
+            height: 40px;\
+    }\
+        QPushButton:hover {\
+            background-color: rgba(118, 171, 174, 203);\
+            text-decoration: none;\
+    }\
+        QPushButton:focus {\
+            outline: 1px transparent;\
+    }";
+    ui->filteringBtn->setStyleSheet("background-color: #76ABAE;");
 
 
 
@@ -36,6 +65,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_filteringBtn_clicked()
 {
+    changeButtonColors(menuBtns,style);
+    ui->filteringBtn->setStyleSheet("background-color: #76ABAE;");
     ui->stackedWidget->setCurrentWidget(filterWidget);
      setWindowState(Qt::WindowMaximized);
 
@@ -44,6 +75,8 @@ void MainWindow::on_filteringBtn_clicked()
 
 void MainWindow::on_edgeDetectionBtn_clicked()
 {
+    changeButtonColors(menuBtns,style);
+    ui->edgeDetectionBtn->setStyleSheet("background-color: #76ABAE;");
    ui->stackedWidget->setCurrentWidget(edgeDetectionWidget);
     setWindowState(Qt::WindowMaximized);
 
@@ -52,6 +85,8 @@ void MainWindow::on_edgeDetectionBtn_clicked()
 
 void MainWindow::on_histogramsBtn_clicked()
 {
+    changeButtonColors(menuBtns,style);
+    ui->histogramsBtn->setStyleSheet("background-color: #76ABAE;");
     ui->stackedWidget->setCurrentWidget(plotWidget);
      setWindowState(Qt::WindowMaximized);
 }
@@ -59,6 +94,8 @@ void MainWindow::on_histogramsBtn_clicked()
 
 void MainWindow::on_thresholdingBtn_clicked()
 {
+    changeButtonColors(menuBtns,style);
+    ui->thresholdingBtn->setStyleSheet("background-color: #76ABAE;");
     ui->stackedWidget->setCurrentWidget(thresholdWidget);
      setWindowState(Qt::WindowMaximized);
 }
@@ -66,12 +103,16 @@ void MainWindow::on_thresholdingBtn_clicked()
 
 void MainWindow::on_hybridBtn_clicked()
 {
+    changeButtonColors(menuBtns,style);
+    ui->hybridBtn->setStyleSheet("background-color: #76ABAE;");
  ui->stackedWidget->setCurrentWidget(hybridWidget);
   setWindowState(Qt::WindowMaximized);
 }
 
 void MainWindow::on_frequencyBtn_clicked()
 {
+    changeButtonColors(menuBtns,style);
+    ui->frequencyBtn->setStyleSheet("background-color: #76ABAE;");
     ui->stackedWidget->setCurrentWidget(frequencyWidget);
      setWindowState(Qt::WindowMaximized);
 }
@@ -98,7 +139,15 @@ void MainWindow::onBtnMinus(){
 
 void MainWindow::on_equalizationBtn_clicked()
 {
+    changeButtonColors(menuBtns,style);
+    ui->equalizationBtn->setStyleSheet("background-color: #76ABAE;");
     ui->stackedWidget->setCurrentWidget(histogramWidget);
      setWindowState(Qt::WindowMaximized);
+}
+
+void MainWindow::changeButtonColors(QList<QPushButton*> list, QString style){
+    foreach (QPushButton *btn, list) {
+        btn->setStyleSheet(style);
+    }
 }
 
