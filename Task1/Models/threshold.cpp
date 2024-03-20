@@ -7,7 +7,7 @@ Mat Threshold::globalThresholding(Mat img, int thresholdValue){
     for(int i = 0;i<res.rows;i++){
         for(int j=0;j<res.cols;j++){
             if(res.at<uchar>(i,j) >= thresholdValue ){
-                res.at<uchar>(i,j)= 250;
+                res.at<uchar>(i,j)= 255;
             }else{
                 res.at<uchar>(i,j)=0;
             }
