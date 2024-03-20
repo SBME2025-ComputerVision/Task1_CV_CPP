@@ -138,7 +138,7 @@
       </property>
       <property name="styleSheet">
        <string notr="true">
-           border: 2px solid rgb(15, 47, 89);
+           border: 2px solid #316669;
           border-radius: 10px;
       </string>
       </property>
@@ -191,7 +191,7 @@
       </property>
       <property name="styleSheet">
        <string notr="true">
-           border: 2px solid rgb(15, 47, 89);
+           border: 2px solid  #316669;
           border-radius: 10px;
       </string>
       </property>
