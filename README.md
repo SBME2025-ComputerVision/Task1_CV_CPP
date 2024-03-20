@@ -37,19 +37,62 @@ VisionX is a sophisticated desktop application crafted in C++ utilizing the Qt f
 
 ## Getting Started
 
+## Dependenices
+    - Qt Version 6.4.2
+    - OpenCV 4.9.0
+    
 ### Installation
 
 1. Ensure Qt is installed on your system.
 2. Clone the VisionX repository to your local machine.
 
+## How to run the project
+- Download and Install Qt from the online installer using minGW 64 architecture.
+```
+www.qt.io
+```
+- Download and build openCV 4.7.0 from their website
+```
+www.opencv.org/releases/
+```
+- if you don't know how to build OpenCV on your PC please refer to the installCV.md
+
+- Go to the Task1.pro file and ensure that openCV libraries are referred to in your pc like that.
+
+Windows
+``` 
+INCLUDEPATH += <yourCV build folder path>\install\include
+
+LIBS += -L<yourCV build folder path>\release\lib \
+    -lopencv_calib3d490                 \
+    -lopencv_core490                    \
+    -lopencv_features2d490              \
+    -lopencv_flann490                   \
+    -lopencv_highgui490                 \
+    -lopencv_imgproc490                 \
+    -lopencv_imgcodecs490               \
+    -lopencv_photo490                   \
+    -lopencv_stitching490               \
+    -lopencv_ts490                      \
+    -lopencv_video490                   \
+    -lopencv_videoio490                 \
+    -lopencv_objdetect490               \
+```
+
+Linux
+```
+CONFIG += link_pkgconfig
+PKGCONFIG += opencv4
+```
 ### Building
 
 1. Open the project in Qt Creator.
-2. Build the project to generate the executable.
+2. Make sure your profile matches commonpro.txt file
+3. Build the project to generate the executable.
 
 ### Usage
 
-1. Launch the VisionX application.
+1. Launch the application.
 2. Open an image file.
 3. Select desired operations from the menu.
 4. Adjust parameters as needed.
