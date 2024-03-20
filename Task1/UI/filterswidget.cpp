@@ -153,7 +153,7 @@ void FiltersWidget::on_threeByThreeKernelBtn_clicked()
     changeButtonColors(kernels,style);
 
     ui->threeByThreeKernelBtn->setStyleSheet("background-color: #76ABAE;");
-
+     filterParams.kernelSize = 3;
 }
 
 
@@ -181,5 +181,6 @@ void FiltersWidget::on_fiveByFiveKernelBtn_clicked()
     }";
     changeButtonColors(kernels,style);
     ui->fiveByFiveKernelBtn->setStyleSheet("background-color: #76ABAE;");
+    filterParams.kernelSize = 5;
 }
 
