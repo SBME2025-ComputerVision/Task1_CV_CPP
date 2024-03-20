@@ -245,16 +245,17 @@ cumulativeData Histogram:: plot_rgb_distribution_function(cv::Mat image)
 
       // Create histograms for each color channel
       Mat b_hist, g_hist, r_hist;
-
-      b_hist=calculateHistogram(bgr_planes[0]);
-      g_hist=calculateHistogram(bgr_planes[1]);
-      r_hist=calculateHistogram(bgr_planes[2]);
-
-      // Create cumulative histograms
       Mat cumulative_b, cumulative_g, cumulative_r;
-      b_hist.copyTo(cumulative_b);
-      g_hist.copyTo(cumulative_g);
-      r_hist.copyTo(cumulative_r);
+
+
+      cumulative_b=calculateHistogram(bgr_planes[0]);
+      cumulative_g=calculateHistogram(bgr_planes[1]);
+      cumulative_r=calculateHistogram(bgr_planes[2]);
+
+//      // Create cumulative histograms
+//      b_hist.copyTo(cumulative_b);
+//      g_hist.copyTo(cumulative_g);
+//      r_hist.copyTo(cumulative_r);
 
       for (int j = 1; j < num_bins; j++) {
           cumulative_b.at<float>(j) += cumulative_b.at<float>(j - 1);
