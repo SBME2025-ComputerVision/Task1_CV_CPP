@@ -24,17 +24,20 @@ ThresholdWidget::~ThresholdWidget()
 void ThresholdWidget::on_globalThresholdBtn_clicked()
 {
   thresholdedImg = thresholdController->ThresholdingFilter(GlobalThresholding,ui->radiusSLider->value(), thresholdParams.ThresholdKernelSize, thresholdParams.CParam);
-  thresholdedImg.scaled(ui->processedImage->size(),Qt::IgnoreAspectRatio);
+  thresholdedImg = thresholdedImg.scaled(ui->processedImage->size(),Qt::IgnoreAspectRatio);
   ui->processedImage->setPixmap(thresholdedImg);
+  ui->processedImage->setAlignment(Qt::AlignCenter);
 }
 
 
 void ThresholdWidget::on_localThresholdBtn_clicked()
 {
     thresholdedImg = thresholdController->ThresholdingFilter(LocalThresholding,thresholdParams.ThresholdValue, thresholdParams.ThresholdKernelSize, thresholdParams.CParam);
-    thresholdedImg.scaled(ui->processedImage->size(),Qt::IgnoreAspectRatio);
+    thresholdedImg = thresholdedImg.scaled(ui->processedImage->size(), Qt::IgnoreAspectRatio);
     ui->processedImage->setPixmap(thresholdedImg);
+    ui->processedImage->setAlignment(Qt::AlignCenter);
 }
+
 
 
 void ThresholdWidget::on_uploadBtn_clicked()

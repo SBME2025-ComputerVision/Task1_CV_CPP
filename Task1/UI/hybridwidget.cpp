@@ -39,7 +39,7 @@ void HybridWidget::on_hpImgBtn_clicked()
 void HybridWidget::on_mixImgBtn_clicked()
 {
    MixedImg = hybridController->Mix(30,30);
-   MixedImg.scaled(ui->hybridMixedImg->size(),Qt::KeepAspectRatio);
+   MixedImg = MixedImg.scaled(ui->hybridMixedImg->size(),Qt::IgnoreAspectRatio);
    MixedImg.save("hamooot.jpg");
    ui->hybridMixedImg->setPixmap(MixedImg);
 }
