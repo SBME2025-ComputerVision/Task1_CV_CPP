@@ -33,7 +33,7 @@ QPushButton{
   	line-height: 20px;
   	list-style: none;
   	padding: 4px 12px;
-  	height:40px;
+  	height:30px;
 }
 QPushButton:hover{
 	background-color: rgba(118, 171, 174, 203);
@@ -94,6 +94,12 @@ QFrame{
         <width>300</width>
         <height>16777215</height>
        </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+	
+  	height:40px;
+}</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
