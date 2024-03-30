@@ -24,6 +24,7 @@ SOURCES += \
     Controllers/filtercontroller.cpp \
     Controllers/frequencycontroller.cpp \
     Controllers/histogramcontroller.cpp \
+    Controllers/houghcontroller.cpp \
     Controllers/imagecontroller.cpp \
     Controllers/edgecontroller.cpp  \
     Controllers/hybridcontroller.cpp \
@@ -47,6 +48,7 @@ SOURCES += \
     UI/hybridwidget.cpp \
     UI/mainwindow.cpp \
     UI/thresholdwidget.cpp \
+    UI/houghtransormwidget.cpp \
     config.cpp \
     main.cpp
 
@@ -56,6 +58,7 @@ HEADERS += \
     Controllers/frequencycontroller.h \
     Controllers/histogramcontroller.h \
     Controllers/edgecontroller.h  \
+    Controllers/houghcontroller.h \
     Controllers/imagecontroller.h \
     Controllers/hybridcontroller.h \
     Controllers/thresholdcontroller.h \
@@ -78,6 +81,7 @@ HEADERS += \
     UI/hybridwidget.h \
     UI/mainwindow.h \
     UI/thresholdwidget.h \
+    UI/houghtransormwidget.h \
     config.h \
 
 FORMS += \
@@ -88,6 +92,7 @@ FORMS += \
     UI/plotswidget.ui \
     UI/hybridwidget.ui \
     UI/thresholdwidget.ui  \
+    UI/houghtransormwidget.ui \
     UI/mainwindow.ui \
 
 
