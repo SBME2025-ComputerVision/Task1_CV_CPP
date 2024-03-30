@@ -21,6 +21,9 @@ using namespace std;
 using namespace cv;
 // externs
 
+
+const double PI = 3.14159265358979323846264338327950288;
+
 extern string birdPth;
 extern string catPth;
 extern string cutiePth;

@@ -19,6 +19,7 @@ SOURCES += \
     Controllers/filtercontroller.cpp \
     Controllers/frequencycontroller.cpp \
     Controllers/histogramcontroller.cpp \
+    Controllers/houghcontroller.cpp \
     Controllers/imagecontroller.cpp \
     Controllers/edgecontroller.cpp  \
     Controllers/hybridcontroller.cpp \
@@ -32,6 +33,7 @@ SOURCES += \
     Models/histogram.cpp \
     Models/hybrid.cpp   \
     Models/threshold.cpp \
+    Models/houghtransform.cpp \
     UI/edgedetectionwidget.cpp \
     UI/filterswidget.cpp \
     UI/frequencywidget.cpp \
@@ -49,6 +51,7 @@ HEADERS += \
     Controllers/frequencycontroller.h \
     Controllers/histogramcontroller.h \
     Controllers/edgecontroller.h  \
+    Controllers/houghcontroller.h \
     Controllers/imagecontroller.h \
     Controllers/hybridcontroller.h \
     Controllers/thresholdcontroller.h \
@@ -61,6 +64,7 @@ HEADERS += \
     Models/histogram.h \
     Models/hybrid.h   \
     Models/threshold.h \
+    Models/houghtransform.h \
     UI/edgedetectionwidget.h \
     UI/filterswidget.h \
     UI/frequencywidget.h \
