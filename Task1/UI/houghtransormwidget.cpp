@@ -1,5 +1,6 @@
 #include "houghtransormwidget.h"
 #include "ui_houghtransormwidget.h"
+#include "config.h"
 
 HoughTransormWidget::HoughTransormWidget(QWidget *parent)
     : QWidget(parent)
@@ -32,6 +33,7 @@ HoughTransormWidget::HoughTransormWidget(QWidget *parent)
     }";
     ui->lineShapeBtn->setStyleSheet("background-color: #76ABAE;");
     houghController = new HoughController();
+    type = Line;
 
 }
 
@@ -54,11 +56,6 @@ void HoughTransormWidget::on_uploadImgBtn_clicked()
     processedImg = processedImg.scaled(ui->imageDetected->size(),Qt::IgnoreAspectRatio);
     ui->imageOriginal->setPixmap(originalImg);
     ui->imageDetected->setPixmap(processedImg);
-
-
-
-
-
 }
 
 
@@ -66,6 +63,7 @@ void HoughTransormWidget::on_lineShapeBtn_clicked()
 {
     changeButtonColors(shapes,style);
     ui->lineShapeBtn->setStyleSheet("background-color: #76ABAE;");
+    type = Line;
 }
 
 
@@ -73,6 +71,7 @@ void HoughTransormWidget::on_circleShapeBtn_clicked()
 {
     changeButtonColors(shapes,style);
     ui->circleShapeBtn->setStyleSheet("background-color: #76ABAE;");
+    type = Circle;
 }
 
 
@@ -80,6 +79,7 @@ void HoughTransormWidget::on_EllipseShapeBtn_clicked()
 {
     changeButtonColors(shapes,style);
     ui->EllipseShapeBtn->setStyleSheet("background-color: #76ABAE;");
+    type = Ellipse;
 }
 
 
