@@ -4,3 +4,8 @@ HoughController::HoughController():Controller()
 {
 
 }
+
+QPixmap HoughController::detectLines(int threshold)
+{
+
+}

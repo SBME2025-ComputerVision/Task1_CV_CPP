@@ -8,6 +8,7 @@ class HoughController : public Controller
 {
 public:
     HoughController();
+    QPixmap detectLines(int threshold);
 };
 
 #endif // HOUGHCONTROLLER_H

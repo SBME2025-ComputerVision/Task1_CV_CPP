@@ -41,6 +41,7 @@ private:
     QPixmap originalImg;
     QPixmap processedImg;
     HoughController *houghController;
+    int type;
 };
 
 #endif // HOUGHTRANSORMWIDGET_H

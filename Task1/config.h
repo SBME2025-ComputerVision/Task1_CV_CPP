@@ -12,6 +12,7 @@
 #include "Models/hybrid.h"
 #include "Models/histogram.h"
 #include "Models/threshold.h"
+#include "Models/houghtransform.h"
 #include <QString>
 #include <QFileDialog>
 #include <QCoreApplication>
