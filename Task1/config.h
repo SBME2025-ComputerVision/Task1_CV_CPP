@@ -23,6 +23,8 @@ using namespace cv;
 
 
 const double PI = 3.14159265358979323846264338327950288;
+const double deg2rad = (CV_PI/180.0);
+
 
 extern string birdPth;
 extern string catPth;
