@@ -33,6 +33,10 @@ private slots:
 
     void on_maxRadiusSlider_valueChanged(int value);
 
+    void on_circleThresholdSlider_valueChanged(int value);
+
+    void on_applyBtn_clicked();
+
 private:
     Ui::HoughTransormWidget *ui;
     QList<QPushButton*> shapes;

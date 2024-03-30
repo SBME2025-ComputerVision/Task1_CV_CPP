@@ -1,6 +1,7 @@
 #include "houghtransormwidget.h"
 #include "ui_houghtransormwidget.h"
 #include "config.h"
+#include "Helpers/helpers.h"
 
 HoughTransormWidget::HoughTransormWidget(QWidget *parent)
     : QWidget(parent)
@@ -83,9 +84,6 @@ void HoughTransormWidget::on_EllipseShapeBtn_clicked()
 }
 
 
-
-
-
 void HoughTransormWidget::on_lineThresholdSlider_valueChanged(int value)
 {
     ui->lineThresholdValue->clear();
@@ -107,5 +105,43 @@ void HoughTransormWidget::on_maxRadiusSlider_valueChanged(int value)
     ui->maxRadiusValue->clear();
     double r = (((double) value+1) / 100.0 )*150;
     ui->maxRadiusValue->setNum((int) r-1);
+}
+
+
+void HoughTransormWidget::on_circleThresholdSlider_valueChanged(int value)
+{
+    ui->circleThresholdValue->clear();
+    double r = (((double) value+1) / 100.0 )*150;
+    ui->circleThresholdValue->setNum((int) r-1);
+}
+
+
+void HoughTransormWidget::on_applyBtn_clicked()
+{
+    int threshold = (int) Helpers::convertQstringToFloat(ui->circleThresholdValue->text());
+    int minRadius = (int) Helpers::convertQstringToFloat(ui->minRadiusValue->text());
+    int maxRadius = (int) Helpers::convertQstringToFloat(ui->maxRadiusValue->text());
+    switch (type) {
+        case Line:
+
+            processedImg = houghController->detectLines((int) Helpers::convertQstringToFloat(ui->lineThresholdValue->text()));
+            processedImg = processedImg.scaled(ui->imageDetected->size(),Qt::IgnoreAspectRatio);
+            ui->imageDetected->setPixmap(processedImg);
+            break;
+
+        case Circle:
+
+            processedImg = houghController->detectCircles(threshold,minRadius,maxRadius);
+            processedImg = processedImg.scaled(ui->imageDetected->size(),Qt::IgnoreAspectRatio);
+            ui->imageDetected->setPixmap(processedImg);
+            break;
+        case Ellipse:
+            processedImg = houghController->detectEllipses();
+            processedImg = processedImg.scaled(ui->imageDetected->size(),Qt::IgnoreAspectRatio);
+            ui->imageDetected->setPixmap(processedImg);
+            break;
+        default:
+            break;
+    }
 }
 
