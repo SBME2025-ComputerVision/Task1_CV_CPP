@@ -114,7 +114,7 @@
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QSlider" name="horizontalSlider">
+          <widget class="QSlider" name="lineThresholdSlider">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>

@@ -55,6 +55,10 @@ void HoughTransormWidget::on_uploadImgBtn_clicked()
     ui->imageOriginal->setPixmap(originalImg);
     ui->imageDetected->setPixmap(processedImg);
 
+
+
+
+
 }
 
 
@@ -76,5 +80,32 @@ void HoughTransormWidget::on_EllipseShapeBtn_clicked()
 {
     changeButtonColors(shapes,style);
     ui->EllipseShapeBtn->setStyleSheet("background-color: #76ABAE;");
+}
+
+
+
+
+
+void HoughTransormWidget::on_lineThresholdSlider_valueChanged(int value)
+{
+    ui->lineThresholdValue->clear();
+    double r = (((double) value+1) / 100.0 )*150;
+    ui->lineThresholdValue->setNum((int) r-1);
+}
+
+
+void HoughTransormWidget::on_minRadiusSlider_valueChanged(int value)
+{
+    ui->minRadiusValue->clear();
+    double r = (((double) value+1) / 100.0 )*150;
+    ui->minRadiusValue->setNum((int) r-1);
+}
+
+
+void HoughTransormWidget::on_maxRadiusSlider_valueChanged(int value)
+{
+    ui->maxRadiusValue->clear();
+    double r = (((double) value+1) / 100.0 )*150;
+    ui->maxRadiusValue->setNum((int) r-1);
 }
 
