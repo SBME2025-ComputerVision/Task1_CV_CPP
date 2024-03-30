@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->stackedWidget->addWidget(hybridWidget);
     ui->stackedWidget->addWidget(frequencyWidget);
     ui->stackedWidget->addWidget(thresholdWidget);
+    ui->stackedWidget->addWidget(houghTransformWidget);
 
     menuBtns.append(ui->filteringBtn);
     menuBtns.append(ui->frequencyBtn);
@@ -30,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     menuBtns.append(ui->thresholdingBtn);
     menuBtns.append(ui->equalizationBtn);
     menuBtns.append(ui->hybridBtn);
+    menuBtns.append(ui->houghTransformBtn);
 
     style="\
         QPushButton {\
@@ -105,7 +107,7 @@ void MainWindow::on_hybridBtn_clicked()
 {
     changeButtonColors(menuBtns,style);
     ui->hybridBtn->setStyleSheet("background-color: #76ABAE;");
- ui->stackedWidget->setCurrentWidget(hybridWidget);
+    ui->stackedWidget->setCurrentWidget(hybridWidget);
   setWindowState(Qt::WindowMaximized);
 }
 
@@ -149,5 +151,14 @@ void MainWindow::changeButtonColors(QList<QPushButton*> list, QString style){
     foreach (QPushButton *btn, list) {
         btn->setStyleSheet(style);
     }
+}
+
+
+void MainWindow::on_houghTransformBtn_clicked()
+{
+    changeButtonColors(menuBtns,style);
+    ui->houghTransformBtn->setStyleSheet("background-color: #76ABAE;");
+    ui->stackedWidget->setCurrentWidget(houghTransformWidget);
+    setWindowState(Qt::WindowMaximized);
 }
 

@@ -12,6 +12,7 @@
 #include "UI/histogramwidget.h"
 #include "UI/hybridwidget.h"
 #include "UI/thresholdwidget.h"
+#include "UI/houghtransormwidget.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -34,6 +35,8 @@ public:
     PlotsWidget *plotWidget =new PlotsWidget();
     HybridWidget *hybridWidget = new HybridWidget();
     ThresholdWidget *thresholdWidget = new ThresholdWidget();
+    HoughTransormWidget *houghTransformWidget = new HoughTransormWidget();
+
 
 
 
@@ -55,6 +58,8 @@ private slots:
     void on_frequencyBtn_clicked();
 
     void on_equalizationBtn_clicked();
+
+    void on_houghTransformBtn_clicked();
 
 private:
     Ui::MainWindow *ui;
