@@ -3,6 +3,7 @@
 
 #include "qpushbutton.h"
 #include <QWidget>
+#include "Controllers/houghcontroller.h"
 
 namespace Ui {
 class HoughTransormWidget;
@@ -30,6 +31,9 @@ private:
     QList<QPushButton*> shapes;
     void changeButtonColors(QList<QPushButton*> list,QString style);
     QString style;
+    QPixmap originalImg;
+    QPixmap processedImg;
+    HoughController *houghController;
 };
 
 #endif // HOUGHTRANSORMWIDGET_H

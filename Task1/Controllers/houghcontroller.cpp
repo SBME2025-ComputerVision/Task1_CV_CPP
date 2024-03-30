@@ -1,6 +1,6 @@
 #include "houghcontroller.h"
 
-HoughController::HoughController()
+HoughController::HoughController():Controller()
 {
 
 }

@@ -31,6 +31,7 @@ HoughTransormWidget::HoughTransormWidget(QWidget *parent)
             outline: 1px transparent;\
     }";
     ui->lineShapeBtn->setStyleSheet("background-color: #76ABAE;");
+    houghController = new HoughController();
 
 }
 
@@ -47,6 +48,12 @@ void HoughTransormWidget::changeButtonColors(QList<QPushButton*> list, QString s
 
 void HoughTransormWidget::on_uploadImgBtn_clicked()
 {
+    originalImg = houghController->uploadImg();
+    processedImg = houghController->convertToGrayScale();
+    originalImg = originalImg.scaled(ui->imageOriginal->size(),Qt::IgnoreAspectRatio);
+    processedImg = processedImg.scaled(ui->imageDetected->size(),Qt::IgnoreAspectRatio);
+    ui->imageOriginal->setPixmap(originalImg);
+    ui->imageDetected->setPixmap(processedImg);
 
 }
 
