@@ -76,6 +76,12 @@ extern string whalePth;
     CannyDetector   = 4
 };
 
+ enum ShapeType{
+     Line,
+     Circle,
+     Ellipse
+ };
+
  enum Pages{
     FilterPage = 0,
     EdgeDetectionPage = 1,
