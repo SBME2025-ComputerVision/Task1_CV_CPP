@@ -42,6 +42,7 @@ SOURCES += \
     UI/hybridwidget.cpp \
     UI/mainwindow.cpp \
     UI/thresholdwidget.cpp \
+    UI/houghtransormwidget.cpp \
     config.cpp \
     main.cpp
 
@@ -73,6 +74,7 @@ HEADERS += \
     UI/hybridwidget.h \
     UI/mainwindow.h \
     UI/thresholdwidget.h \
+    UI/houghtransormwidget.h \
     config.h \
 
 FORMS += \
@@ -83,6 +85,7 @@ FORMS += \
     UI/plotswidget.ui \
     UI/hybridwidget.ui \
     UI/thresholdwidget.ui  \
+    UI/houghtransormwidget.ui \
     UI/mainwindow.ui \
 
 
