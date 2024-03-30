@@ -1,6 +1,7 @@
 #ifndef HOUGHTRANSORMWIDGET_H
 #define HOUGHTRANSORMWIDGET_H
 
+#include "qpushbutton.h"
 #include <QWidget>
 
 namespace Ui {
@@ -15,8 +16,20 @@ public:
     explicit HoughTransormWidget(QWidget *parent = nullptr);
     ~HoughTransormWidget();
 
+private slots:
+    void on_uploadImgBtn_clicked();
+
+    void on_lineShapeBtn_clicked();
+
+    void on_circleShapeBtn_clicked();
+
+    void on_EllipseShapeBtn_clicked();
+
 private:
     Ui::HoughTransormWidget *ui;
+    QList<QPushButton*> shapes;
+    void changeButtonColors(QList<QPushButton*> list,QString style);
+    QString style;
 };
 
 #endif // HOUGHTRANSORMWIDGET_H
