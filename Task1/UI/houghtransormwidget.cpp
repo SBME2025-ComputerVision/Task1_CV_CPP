@@ -87,7 +87,7 @@ void HoughTransormWidget::on_EllipseShapeBtn_clicked()
 void HoughTransormWidget::on_lineThresholdSlider_valueChanged(int value)
 {
     ui->lineThresholdValue->clear();
-    double r = (((double) value+1) / 100.0 )*150;
+    double r = (((double) value+1) / 100.0 )*200;
     ui->lineThresholdValue->setNum((int) r-1);
 }
 
