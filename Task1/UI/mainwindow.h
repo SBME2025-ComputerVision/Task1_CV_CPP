@@ -13,6 +13,7 @@
 #include "UI/hybridwidget.h"
 #include "UI/thresholdwidget.h"
 #include "UI/houghtransormwidget.h"
+#include "UI/activecontourwidget.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -36,6 +37,7 @@ public:
     HybridWidget *hybridWidget = new HybridWidget();
     ThresholdWidget *thresholdWidget = new ThresholdWidget();
     HoughTransormWidget *houghTransformWidget = new HoughTransormWidget();
+    ActiveContourWidget *activeContourWidget = new ActiveContourWidget();
 
 
 
@@ -60,6 +62,8 @@ private slots:
     void on_equalizationBtn_clicked();
 
     void on_houghTransformBtn_clicked();
+
+    void on_ActiveContourBtn_clicked();
 
 private:
     Ui::MainWindow *ui;
