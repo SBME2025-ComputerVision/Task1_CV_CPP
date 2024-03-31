@@ -29,7 +29,8 @@ private:
     static double calculate_point_enegy(Mat image, Point point, Point previousPoint, Point nextPoint, double alpha, double beta, double gamma);
 
     static void snake_operation(Mat image, vector<Point>& curve, int window_size, double alpha, double beta, double gamma);
-    static void draw_contours(Mat image, Mat &outputimage, vector<Point> snake_points);
+    static void draw_contours(Mat image, Mat &outputimage, vector<Point> snake_points, vector<int>& chain_code);
+    static vector<int> generate_chain_code(vector<Point> snake_points);
 };
 
 #endif // SNAKE_H

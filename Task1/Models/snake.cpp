@@ -118,15 +118,82 @@ double Snake::calculate_contour_perimeter(vector<Point> snake_points)
     return distance_sum;
 }
 
-void Snake::draw_contours(Mat image, Mat &outputimage, vector<Point> snake_points){
+//void Snake::draw_contours(Mat image, Mat &outputimage, vector<Point> snake_points, vector<int>& chain_code){
+//    outputimage = image.clone();
+//    for (int i = 0; i < snake_points.size(); i++) {
+//        circle(outputimage, snake_points[i], 4, Scalar(0, 0, 255), -1);
+//        if (i > 0) {
+//            line(outputimage, snake_points[i-1], snake_points[i], Scalar(255, 0, 0), 2);
+//        }
+//    }
+//    line(outputimage, snake_points[0], snake_points[snake_points.size()-1], Scalar(255, 0, 0), 2);
+//}
+
+void Snake::draw_contours(Mat image, Mat &outputimage, vector<Point> snake_points, vector<int>& chain_code) {
     outputimage = image.clone();
+    chain_code.clear(); // Clear the chain code vector before generating new one
     for (int i = 0; i < snake_points.size(); i++) {
         circle(outputimage, snake_points[i], 4, Scalar(0, 0, 255), -1);
         if (i > 0) {
-            line(outputimage, snake_points[i-1], snake_points[i], Scalar(255, 0, 0), 2);
+            line(outputimage, snake_points[i - 1], snake_points[i], Scalar(255, 0, 0), 2);
         }
+        line(outputimage, snake_points[0], snake_points[snake_points.size() - 1], Scalar(255, 0, 0), 2);
+
+        // Generate chain code while drawing the contour
+        int dx = snake_points[(i + 1) % snake_points.size()].x - snake_points[i].x;
+        int dy = snake_points[(i + 1) % snake_points.size()].y - snake_points[i].y;
+
+        // Convert the relative motion to a chain code
+        int code;
+        if (dx == 0 && dy == 1)
+            code = 0;
+        else if (dx == 1 && dy == 1)
+            code = 1;
+        else if (dx == 1 && dy == 0)
+            code = 2;
+        else if (dx == 1 && dy == -1)
+            code = 3;
+        else if (dx == 0 && dy == -1)
+            code = 4;
+        else if (dx == -1 && dy == -1)
+            code = 5;
+        else if (dx == -1 && dy == 0)
+            code = 6;
+        else if (dx == -1 && dy == 1)
+            code = 7;
+
+        chain_code.push_back(code);
     }
-    line(outputimage, snake_points[0], snake_points[snake_points.size()-1], Scalar(255, 0, 0), 2);
+}
+
+vector<int> Snake::generate_chain_code(vector<Point> snake_points) {
+    vector<int> chain_code;
+    for (int i = 0; i < snake_points.size(); i++) {
+        int dx = snake_points[(i + 1) % snake_points.size()].x - snake_points[i].x;
+        int dy = snake_points[(i + 1) % snake_points.size()].y - snake_points[i].y;
+
+        // Convert the relative motion to a chain code
+        int code;
+        if (dx == 0 && dy == 1)
+            code = 0;
+        else if (dx == 1 && dy == 1)
+            code = 1;
+        else if (dx == 1 && dy == 0)
+            code = 2;
+        else if (dx == 1 && dy == -1)
+            code = 3;
+        else if (dx == 0 && dy == -1)
+            code = 4;
+        else if (dx == -1 && dy == -1)
+            code = 5;
+        else if (dx == -1 && dy == 0)
+            code = 6;
+        else if (dx == -1 && dy == 1)
+            code = 7;
+
+        chain_code.push_back(code);
+    }
+    return chain_code;
 }
 
 vector<Point> Snake::active_contour(Mat inputimage, Mat &outputimage,
@@ -151,8 +218,12 @@ vector<Point> Snake::active_contour(Mat inputimage, Mat &outputimage,
         snake_operation(grayimage, curve, window_size, alpha, beta, gamma);
     }
 
-    draw_contours(inputimage, outputimage, curve);
-
+    vector<int> chain_code;
+    draw_contours(inputimage, outputimage, curve , chain_code);
+    for(int i=0;i<chain_code.size();i++){
+        cout<<chain_code[i];
+    }
+    cout<<endl;
     return curve;
 }
 
