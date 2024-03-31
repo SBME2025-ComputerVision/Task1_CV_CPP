@@ -25,6 +25,8 @@ private slots:
     void reloadInitialContour();
 
     void on_raduis_valueChanged(int arg1);
+    void on_generate_btn_clicked();
+
 protected:
     void resizeEvent(QResizeEvent* e);
 private:

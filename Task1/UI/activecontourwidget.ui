@@ -332,7 +332,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Start Contouring</string>
+           <string>Generate Contour</string>
           </property>
          </widget>
         </item>

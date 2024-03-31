@@ -8,7 +8,8 @@ class ActiveContourController : public Controller
 {
 public:
     ActiveContourController();
-    static QImage uploadImg();
+    QImage uploadImg();
+    Mat getMatImg();
 };
 
 #endif // ACTIVECONTOURCONTROLLER_H
