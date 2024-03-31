@@ -42,6 +42,12 @@ public:
     static ellipse_data ellipse_detection(Mat edges, int minimized_size = 64, int min_vote = 4, int min_dist = 5);
     static vector<ellipse_data> detect_ellipses(Mat src, int minimized_size = 64, unsigned int number_of_ellipses = 1);
     static Mat elipseTransform(Mat edges,unsigned int nmb_of_ellipses = 1,unsigned int minimised_size = 128);
+    /////////////////////////////////////// Elipse Detection Imp2
+    static void HoughEllipse(cv::Mat img, std::vector<cv::Vec6d>& ellipses, int threshold, int minRadius, int maxRadius);
+    static void drawEllipse(cv::Mat& img, std::vector<cv::Vec6d> ellipses, cv::Scalar color);
+private:
+    static void oneThreadHough(std::vector<cv::Vec2d> nonZeroImg, std::vector<cv::Vec6d>& ellipses, std::mutex& myMutex, int threshold, int minRadius, int maxRadius, int start, int end);
+
 };
 
 #endif // HOUGHTRANSFORM_H
