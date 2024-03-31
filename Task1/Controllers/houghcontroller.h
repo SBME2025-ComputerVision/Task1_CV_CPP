@@ -10,7 +10,7 @@ public:
     HoughController();
     QPixmap detectLines(int threshold);
     QPixmap detectCircles(int threshold,int minRadius , int maxRadius);
-    QPixmap detectEllipses(unsigned int nmb_of_ellipses = 1,unsigned int minimised_size = 128);
+    QPixmap detectEllipses(int threshold=8 ,int minRadius=20, int maxRadius=70);
 };
 
 #endif // HOUGHCONTROLLER_H

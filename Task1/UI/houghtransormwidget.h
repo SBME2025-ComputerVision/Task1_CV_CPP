@@ -37,6 +37,12 @@ private slots:
 
     void on_applyBtn_clicked();
 
+    void on_minElipseRadiusSlider_valueChanged(int value);
+
+    void on_maxElipseRadiusSlider_valueChanged(int value);
+
+    void on_elipseThresholdSlider_valueChanged(int value);
+
 private:
     Ui::HoughTransormWidget *ui;
     QList<QPushButton*> shapes;

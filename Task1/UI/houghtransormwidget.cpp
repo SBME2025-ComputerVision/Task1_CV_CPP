@@ -121,6 +121,9 @@ void HoughTransormWidget::on_applyBtn_clicked()
     int threshold = (int) Helpers::convertQstringToFloat(ui->circleThresholdValue->text());
     int minRadius = (int) Helpers::convertQstringToFloat(ui->minRadiusValue->text());
     int maxRadius = (int) Helpers::convertQstringToFloat(ui->maxRadiusValue->text());
+    int elipseThreshold = (int) Helpers::convertQstringToFloat(ui->elipseThresholdValue->text());
+    int elipseMinRadius = (int) Helpers::convertQstringToFloat(ui->minElipseRadiusValue->text());
+    int elipseMaxRadius = (int) Helpers::convertQstringToFloat(ui->maxElipseRadiusValue->text());
     switch (type) {
         case Line:
 
@@ -136,12 +139,35 @@ void HoughTransormWidget::on_applyBtn_clicked()
             ui->imageDetected->setPixmap(processedImg);
             break;
         case Ellipse:
-            processedImg = houghController->detectEllipses();
+            processedImg = houghController->detectEllipses(elipseThreshold,elipseMinRadius,elipseMaxRadius);
             processedImg = processedImg.scaled(ui->imageDetected->size(),Qt::IgnoreAspectRatio);
             ui->imageDetected->setPixmap(processedImg);
             break;
         default:
             break;
     }
+}
+
+
+void HoughTransormWidget::on_minElipseRadiusSlider_valueChanged(int value)
+{
+    ui->minElipseRadiusValue->clear();
+    double r = (((double) value+1) / 100.0 )*150;
+    ui->minElipseRadiusValue->setNum((int) r-1);
+}
+
+
+void HoughTransormWidget::on_maxElipseRadiusSlider_valueChanged(int value)
+{
+    ui->maxElipseRadiusValue->clear();
+    double r = (((double) value+1) / 100.0 )*150;
+    ui->maxElipseRadiusValue->setNum((int) r-1);
+}
+
+
+void HoughTransormWidget::on_elipseThresholdSlider_valueChanged(int value)
+{
+    ui->elipseThresholdValue->clear();
+     ui->elipseThresholdValue->setNum((int) value);
 }
 

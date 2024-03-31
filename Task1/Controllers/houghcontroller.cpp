@@ -22,9 +22,14 @@ QPixmap HoughController::detectCircles(int threshold ,int minRadius, int maxRadi
     return Helpers::convertMatToPixmap(res);
 }
 
-QPixmap HoughController::detectEllipses(unsigned int nmb_of_ellipses, unsigned int minimised_size)
+QPixmap HoughController::detectEllipses(int threshold ,int minRadius, int maxRadius)
 {
-    Mat res;
-    res = HoughTransform::elipseTransform(img->getOriginalImg());
+    Mat res,edges;
+    img->getOriginalImg().copyTo(res);
+    edges=img->getOriginalImg();
+    Canny(img->getOriginalImg(), edges, 100, 200);
+    std::vector<cv::Vec6d> ellipses;
+    HoughTransform::HoughEllipse(edges, ellipses, threshold, minRadius, maxRadius);
+    HoughTransform::drawEllipse(res, ellipses, cv::Scalar(0,0,255));
     return Helpers::convertMatToPixmap(res);
 }
