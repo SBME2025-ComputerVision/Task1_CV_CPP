@@ -178,6 +178,20 @@ QFrame{
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="houghTransformBtn">
+         <property name="text">
+          <string>Hough Transform</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="ActiveContourBtn">
+         <property name="text">
+          <string>Active Contour</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>

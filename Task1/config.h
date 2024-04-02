@@ -12,6 +12,7 @@
 #include "Models/hybrid.h"
 #include "Models/histogram.h"
 #include "Models/threshold.h"
+#include "Models/houghtransform.h"
 #include <QString>
 #include <QFileDialog>
 #include <QCoreApplication>
@@ -20,6 +21,11 @@
 using namespace std;
 using namespace cv;
 // externs
+
+
+const double PI = 3.14159265358979323846264338327950288;
+const double deg2rad = (CV_PI/180.0);
+
 
 extern string birdPth;
 extern string catPth;
@@ -70,6 +76,12 @@ extern string whalePth;
     PrewittDetector = 3,
     CannyDetector   = 4
 };
+
+ enum ShapeType{
+     Line,
+     Circle,
+     Ellipse
+ };
 
  enum Pages{
     FilterPage = 0,
