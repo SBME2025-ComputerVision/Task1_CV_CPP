@@ -192,6 +192,13 @@ QFrame{
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="matchingBtn">
+         <property name="text">
+          <string>Matching</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>

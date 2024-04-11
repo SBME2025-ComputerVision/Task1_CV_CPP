@@ -14,6 +14,7 @@
 #include "UI/thresholdwidget.h"
 #include "UI/houghtransormwidget.h"
 #include "UI/activecontourwidget.h"
+#include "UI/matchwidget.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -38,7 +39,7 @@ public:
     ThresholdWidget *thresholdWidget = new ThresholdWidget();
     HoughTransormWidget *houghTransformWidget = new HoughTransormWidget();
     ActiveContourWidget *activeContourWidget = new ActiveContourWidget();
-
+    MatchWidget *matchWidget = new MatchWidget();
 
 
 
@@ -64,6 +65,8 @@ private slots:
     void on_houghTransformBtn_clicked();
 
     void on_ActiveContourBtn_clicked();
+
+    void on_matchingBtn_clicked();
 
 private:
     Ui::MainWindow *ui;

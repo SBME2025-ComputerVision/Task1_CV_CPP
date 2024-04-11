@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->stackedWidget->addWidget(thresholdWidget);
     ui->stackedWidget->addWidget(houghTransformWidget);
     ui->stackedWidget->addWidget(activeContourWidget);
+    ui->stackedWidget->addWidget(matchWidget);
     menuBtns.append(ui->filteringBtn);
     menuBtns.append(ui->frequencyBtn);
     menuBtns.append(ui->edgeDetectionBtn);
@@ -33,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
     menuBtns.append(ui->hybridBtn);
     menuBtns.append(ui->houghTransformBtn);
     menuBtns.append(ui->ActiveContourBtn);
+    menuBtns.append(ui->matchingBtn);
 
     style="\
         QPushButton {\
@@ -169,6 +171,15 @@ void MainWindow::on_ActiveContourBtn_clicked()
     changeButtonColors(menuBtns,style);
     ui->ActiveContourBtn->setStyleSheet("background-color: #76ABAE;");
     ui->stackedWidget->setCurrentWidget(activeContourWidget);
+     setWindowState(Qt::WindowMaximized);
+}
+
+
+void MainWindow::on_matchingBtn_clicked()
+{
+    changeButtonColors(menuBtns,style);
+    ui->matchingBtn->setStyleSheet("background-color: #76ABAE;");
+    ui->stackedWidget->setCurrentWidget(matchWidget);
      setWindowState(Qt::WindowMaximized);
 }
 
