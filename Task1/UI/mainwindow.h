@@ -15,6 +15,7 @@
 #include "UI/houghtransormwidget.h"
 #include "UI/activecontourwidget.h"
 #include "UI/matchwidget.h"
+#include "UI/harriswidget.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -40,7 +41,7 @@ public:
     HoughTransormWidget *houghTransformWidget = new HoughTransormWidget();
     ActiveContourWidget *activeContourWidget = new ActiveContourWidget();
     MatchWidget *matchWidget = new MatchWidget();
-
+    HarrisWidget *harrisWidget = new HarrisWidget();
 
 
 private slots:
@@ -67,6 +68,8 @@ private slots:
     void on_ActiveContourBtn_clicked();
 
     void on_matchingBtn_clicked();
+
+    void on_harrisBtn_clicked();
 
 private:
     Ui::MainWindow *ui;
