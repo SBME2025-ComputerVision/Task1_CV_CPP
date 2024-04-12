@@ -52,6 +52,15 @@ extern string whalePth;
      GlobalThresholding,
  };
 
+ enum cornerDetectionType{
+      HarrisDetector = 1,
+      LambdaDetector,
+ };
+
+ struct CornerDetectionParams{
+    int kernelSize = 3;
+ };
+
  struct FilterAndEdgeParams{
     int kernelSize = 3;
     float SigmaFilter = 0;

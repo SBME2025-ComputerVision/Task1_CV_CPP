@@ -167,7 +167,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="uploadImgBtn_2">
+           <widget class="QPushButton" name="applyBtn">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -217,12 +217,22 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="styleSheet">
+        <string notr="true">
+           border: 2px solid  #316669;
+
+      </string>
+       </property>
        <property name="title">
         <string>Harris Modes</string>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QLabel" name="label_3">
+          <property name="styleSheet">
+           <string notr="true">border: none;
+border-radius: 0;</string>
+          </property>
           <property name="text">
            <string>Operator Type</string>
           </property>
@@ -230,14 +240,18 @@
         </item>
         <item>
          <widget class="QComboBox" name="comboBox">
+          <property name="styleSheet">
+           <string notr="true">border: none;
+border-radius: 0;</string>
+          </property>
           <item>
            <property name="text">
-            <string>Lamda-</string>
+            <string>Harris</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Harris</string>
+            <string>Lamda-</string>
            </property>
           </item>
          </widget>
@@ -259,38 +273,40 @@
          </spacer>
         </item>
         <item>
-         <widget class="QLabel" name="label">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+         <widget class="QGroupBox" name="groupBox_4">
+          <property name="title">
+           <string>Kernel Size</string>
           </property>
-          <property name="text">
-           <string>Kernal Size</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="ksize">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimum">
-           <number>1</number>
-          </property>
-          <property name="maximum">
-           <number>5</number>
-          </property>
-          <property name="singleStep">
-           <number>2</number>
-          </property>
-          <property name="stepType">
-           <enum>QAbstractSpinBox::DefaultStepType</enum>
-          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item>
+              <widget class="QPushButton" name="threeByThreeKernelBtn">
+               <property name="styleSheet">
+                <string notr="true">QPushButton{
+	background-color: #76ABAE;
+border: none;
+}</string>
+               </property>
+               <property name="text">
+                <string>3*3</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="fiveByFiveKernelBtn">
+               <property name="styleSheet">
+                <string notr="true">border: none;
+</string>
+               </property>
+               <property name="text">
+                <string>5*5</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
          </widget>
         </item>
         <item>
@@ -317,6 +333,10 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="styleSheet">
+           <string notr="true">border: none;
+border-radius: 0;</string>
+          </property>
           <property name="text">
            <string>Threshold</string>
           </property>
@@ -330,8 +350,15 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="styleSheet">
+           <string notr="true">border: none;
+border-radius: 0;</string>
+          </property>
           <property name="maximum">
            <double>500.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>100.000000000000000</double>
           </property>
          </widget>
         </item>

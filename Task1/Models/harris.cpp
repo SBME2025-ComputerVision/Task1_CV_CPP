@@ -8,7 +8,7 @@ Harris::Harris()
 
 
 Mat Harris::harrisDetection(Mat img , double threshold , int kernelSize){
-     cvtColor(img, img, COLOR_BGR2GRAY);
+      cvtColor(img, img, COLOR_BGR2GRAY);
    Mat gradientX, gradientY;
    Sobel(img,gradientX,CV_32F,1,0,kernelSize);
    Sobel(img,gradientY,CV_32F,0,1,kernelSize);
