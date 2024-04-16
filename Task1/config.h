@@ -92,6 +92,11 @@ extern string whalePth;
      Ellipse
  };
 
+ enum lossType{
+     SSDIndex = 0,
+     CrossCorrIndex = 1,
+ };
+
  enum Pages{
     FilterPage = 0,
     EdgeDetectionPage = 1,

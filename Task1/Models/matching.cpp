@@ -13,12 +13,13 @@ void Matching::SumOfSqauredDiff(Mat img , Mat src, Rect & roi){
  ret.create(height,width,CV_32S);
  for(int i =0;i<height;i++){
      for(int j = 0;j<width;j++){
-         Rect roiTemp = Rect(j,i,src.cols,img.cols);
+         Rect roiTemp = Rect(j,i,src.cols,src.rows);
          Mat roiToImg = img(roiTemp);
          Mat cur = roiToImg - src;
-         cur = (cur*cur);
+         // cur = (cur*cur);
+         cv::pow(cur, 2, cur);
          cv::Scalar ans = cv::sum(cur);
-         ret.at<int>(i,j) = ans.val[0];
+         ret.at<int>(i,j) = ans[0];
      }
  }
 
