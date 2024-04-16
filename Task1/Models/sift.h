@@ -15,6 +15,12 @@ public:
     tuple<Point, int> localizeExtremum(int ii, int jj, int sc, vector<Mat> Octave, int octaveIndex);
     Mat computeGradient(Mat current, Mat up, Mat down);
     Mat computeHessian(Mat current, Mat up, Mat down);
+    vector<float> computeOrientation(Point P, int octave, int scale, Mat gaussian_image);
+    vector<KeyPoint> removeDuplicates(vector<KeyPoint> keypoints);
+    vector<Mat> getDescriptors(vector<KeyPoint> keypoints, vector<vector<Mat>> scale_space);
+    Mat gaussian_kernel(double sigma);
+    Mat compute_hist(Mat scr);
+    int quantize_orientation(double angle);
 };
 
 #endif // SIFTX_H

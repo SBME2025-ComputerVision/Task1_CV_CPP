@@ -251,7 +251,7 @@ tuple<Point, int> SIFTX::localizeExtremum(int ii, int jj, int sc, vector<Mat> Oc
 
 /**
  * @brief Computes the gradient vector at a given point in the difference of Gaussian (DoG) images.
- *
+ *int octave, int scale, Mat gaussian_image);
  * @param current The current DoG image.
  * @param up The DoG image corresponding to a higher scale level.
  * @param down The DoG image corresponding to a lower scale level.
@@ -349,7 +349,7 @@ vector<KeyPoint> SIFTX::getKeyPoints(vector<vector<Mat>> DoG, vector<vector<Mat>
                                        DoG[oct][scale - 1](Rect(j - 1, i - 1, 3, 3)), threshold)) {
                         candidate = localizeExtremum(i, j, scale, DoG[oct], oct);
                         if (get<0>(candidate).x != -1 && get<0>(candidate).y != -1) {
-                            vector<float> Orientations = compute_orientation(get<0>(candidate), oct, scale, scaledImages[oct][get<1>(candidate)]);
+                            vector<float> Orientations = computeOrientation(get<0>(candidate), oct, scale, scaledImages[oct][get<1>(candidate)]);
                             for (int angle = 0; angle < Orientations.size(); angle++) {
                                 KeyPoint key;
                                 key.angle = Orientations[angle];
@@ -366,7 +366,220 @@ vector<KeyPoint> SIFTX::getKeyPoints(vector<vector<Mat>> DoG, vector<vector<Mat>
     }
 
     vector<KeyPoint> unique_keys;
-    unique_keys = remove_duplicate(keypoints);
+    unique_keys = SIFTX::removeDuplicates(keypoints);
     return unique_keys;
+}
+
+
+vector<float> SIFTX::computeOrientation(Point P, int octave, int scale, Mat gaussian_image) {
+
+    double sigma = scale * 1.5;
+    vector<float> Orientations;
+    Mat kernel = gaussian_kernel(sigma);
+    int radius = int(2 * ceil(sigma) + 1);
+    int x, y;
+    double weight;
+    Mat raw_histogram = Mat::zeros(36, 1, CV_64FC1); // num_bins  = 36
+
+
+    for (int i = -radius; i <= radius; i++)
+    {
+        y = int(round((P.y / pow(2, octave)))) + i;
+        if (y <= 0 || y >= gaussian_image.rows - 1) continue;
+
+        for (int j = -radius; j <= radius; j++)
+        {
+            x = int(round((P.x / pow(2, octave)))) + j;
+            if (x <= 0 || x >= gaussian_image.cols - 1) continue;
+
+            double dx = gaussian_image.at<float>(y, x + 1) - gaussian_image.at<float>(y, x - 1);
+            double dy = gaussian_image.at<float>(y + 1, x) - gaussian_image.at<float>(y - 1, x);
+            double magnitude = sqrt(dx * dx + dy * dy);
+            double orientation = atan2(dy, dx)  * (180.0 / 3.14159265);
+
+            if (orientation < 0) orientation = orientation + 360;
+
+            int histogram_index = int(floor(orientation * 36.0 / 360.0));
+            /*Each sample added to the histogram is weighted by its gradient magnitude
+                and by a Gaussian-weighted circular window with a  that is 1.5 times that of the scale
+                of the keypoint.*/
+            weight = kernel.at<double>(j + radius, i + radius) * magnitude;
+            raw_histogram.at<double>(histogram_index, 0) += weight;
+        }
+    }
+
+    /*Finally, a parabola is fit to the 3 histogram values closest to each peak to interpolate the peak position
+        for better accuracy.
+        You can find more details from here: https://ccrma.stanford.edu/~jos/sasp/Quadratic_Interpolation_Spectral_Peaks.html
+        */
+
+    double maxVal;
+    Point maxLoc;
+    double left_value, right_value, orientation, interpolated_peak_index;
+    minMaxLoc(raw_histogram, NULL, &maxVal, NULL, &maxLoc);
+
+    for (int bin = 0; bin < raw_histogram.rows; bin++)
+    {
+        if (raw_histogram.at<double>(bin, 0) >= (0.8 * maxVal))
+        {
+            if (bin == 0) left_value = raw_histogram.at<double>(35, 0);
+            else left_value = raw_histogram.at<double>(bin - 1, 0);
+
+            if (bin == 35) right_value = raw_histogram.at<double>(0, 0);
+            else right_value = raw_histogram.at<double>(bin + 1, 0);
+
+            interpolated_peak_index = bin + 0.5 * (left_value - right_value) / (left_value - 2 * raw_histogram.at<double>(bin, 0) + right_value);
+            orientation = interpolated_peak_index * 360.0 / 36.0;
+
+            if (orientation < 0 || orientation >= 360) orientation = abs(360 - abs(orientation));
+            Orientations.push_back(orientation);
+        }
+    }
+    return Orientations;
+
+}
+
+
+vector<KeyPoint> SIFTX::removeDuplicates(vector<KeyPoint> keypoints) {
+    vector<KeyPoint> unique_keypoints;
+
+    if (keypoints.size() < 2)
+    {
+        return keypoints;
+    }
+
+    struct myclass {
+        bool operator() (KeyPoint key1, KeyPoint key2) {
+            if (key1.pt.x != key2.pt.x)
+            {
+                return (key1.pt.x < key2.pt.x);
+            }
+            else
+            {
+                return (key1.pt.y < key2.pt.y);
+            }
+        }
+    } myobject;
+    sort(keypoints.begin(), keypoints.end(), myobject);
+
+    unique_keypoints.push_back(keypoints[0]);
+    for (int i = 1; i < keypoints.size(); i++)
+    {
+        if (unique_keypoints.back().pt.x != keypoints[i].pt.x || unique_keypoints.back().pt.y != keypoints[i].pt.y || unique_keypoints.back().angle != keypoints[i].angle)
+        {
+            unique_keypoints.push_back(keypoints[i]);
+        }
+    }
+
+    return unique_keypoints;
+}
+
+
+Mat SIFTX::gaussian_kernel(double sigma) {
+    /* https://theailearner.com/2019/05/06/gaussian-blurring/
+        For Gaussian, we know that 99.3% of the distribution falls within 3 standard deviations after
+        which the values are effectively close to zero. So, we limit the kernel size to contain only
+        values within 3? from the mean. This approximation generally yields a result sufficiently
+        close to that obtained by the entire Gaussian distribution.*/
+
+    /*Note: The approximated kernel weights would not sum exactly 1 so, normalize the weights
+        by the overall kernel sum. Otherwise, this will cause darkening or brightening of the image.
+        A normalized 3×3 Gaussian filter is shown below (See the weight distribution)*/
+
+    /*First, the Gaussian kernel is linearly separable. This means we can break
+        any 2-d filter into two 1-d filters. Because of this, the computational complexity
+        is reduced from O(n2) to O(n). Lets see an example*/
+    int r = ceil(3 * sigma);
+    Mat kernel(2 * r + 1, 2 * r + 1, CV_64FC1);
+    for (int i = -r; i <= r; i++)
+    {
+        for (int j = -r; j <= r; j++)
+        {
+            kernel.at<double>(i + r, j + r) = exp(-(i*i + j*j) / (2.0 * sigma*sigma));
+        }
+    }
+    kernel = kernel / sum(kernel);
+    return kernel;
+}
+
+
+
+vector<Mat> SIFTX::getDescriptors(vector<KeyPoint> keypoints, vector<vector<Mat>> scale_space) {
+    int w = 16;
+    Mat kernel = gaussian_kernel(w / 6.0);
+    Mat feature_vector = Mat::zeros(128, 1, CV_64FC1);
+    vector<Mat> features;
+    for (int kp = 0; kp < keypoints.size(); kp++)
+    {
+        int octave = keypoints[kp].octave;
+        int scale = keypoints[kp].size;
+        int y_c = keypoints[kp].pt.y / pow(2, octave);
+        int x_c = keypoints[kp].pt.x / pow(2, octave);
+
+        Mat magnitude = Mat::zeros(Size(17, 17), CV_64FC1);
+        Mat orientation = Mat::zeros(Size(17, 17), CV_64FC1);
+
+        Mat gaussian_image = scale_space[octave][scale];
+        if (x_c - w/2 >0 && y_c - w/2 > 0 && x_c + w/2 < gaussian_image.cols -1 && y_c + w/2 < gaussian_image.rows -1)
+        {
+            for (int i = -w / 2; i <= w / 2; i++)
+            {
+                int y = y_c + i;
+                for (int j = -w / 2; j <= w / 2; j++)
+                {
+                    int x = x_c + j;
+
+                    double dx = gaussian_image.at<float>(y, x + 1) - gaussian_image.at<float>(y, x - 1);
+                    double dy = gaussian_image.at<float>(y + 1, x) - gaussian_image.at<float>(y - 1, x);
+                    magnitude.at<double>(i + w/2, j + w/2) = sqrt(dx * dx + dy * dy);
+                    double theta = atan2(dy, dx)  * (180.0 / 3.14159265);
+                    if (theta < 0) theta = theta + 360;
+                    orientation.at<double>(i + w/2, j + w/2) = theta;
+                }
+            }
+            Mat weighted_grad = magnitude.mul(kernel);
+            Mat Q, hist_Q;
+            for (int i = 0; i <=13 ; i = i+4)
+            {
+                int m = 0;
+                for (int j = 0; j <=13; j = j+4)
+                {
+                    Q = orientation(Rect(i, j, 4, 4));
+                    hist_Q = compute_hist(Q);
+                    hist_Q.copyTo(feature_vector(Rect(0, m, 1, 8)));
+                    m = m + 8;
+                    if (j == 4) j = j + 1;
+                }
+                if (i == 4) i = i + 1;
+            }
+            feature_vector = feature_vector / max(1e-6, norm(feature_vector, NORM_L2));
+            threshold(feature_vector, feature_vector, 0.2, 255,THRESH_TRUNC);
+            feature_vector = feature_vector / max(1e-6, norm(feature_vector, NORM_L2));
+            features.push_back(feature_vector);
+        }
+    }
+    return features;
+}
+
+Mat SIFTX::compute_hist(Mat scr) {
+    Mat hist = Mat::zeros(8, 1, CV_64FC1);
+    int value = 0;
+    int quantize_value;
+    for (int i = 0; i < scr.rows; i++)
+    {
+        for (int j = 0; j < scr.cols; j++)
+        {
+            value = scr.at<double>(i, j);
+            quantize_value = quantize_orientation(value);
+            hist.at<double>(quantize_value) = hist.at<double>(quantize_value) + 1;
+        }
+    }
+    return hist;
+}
+
+//-------------------------------------------------------------------------------
+
+int SIFTX::quantize_orientation(double angle) {
+    return floor(angle / 45.0);
 }
 
