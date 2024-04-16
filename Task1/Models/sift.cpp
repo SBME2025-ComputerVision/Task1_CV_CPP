@@ -2,9 +2,11 @@
 
 SIFTX::SIFTX() {}
 
-// SIFTX::baseLineImage(Mat image) {
-//     // Implementation
-// }
+Mat SIFTX::baseLineImage(Mat image) {
+     GaussianBlur(image, image, Size(0, 0), 0.5, 0.5);
+             resize(image, image, Size(0, 0), 2, 2, INTER_LINEAR);
+             return image;
+ }
 
 /**
  * @brief Computes the number of octaves in the scale space representation of an image for SIFTX.
