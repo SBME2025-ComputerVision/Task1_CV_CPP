@@ -15,9 +15,9 @@ QPixmap HarrisController::detectCorners(int detectorType,double threshold, int k
         case HarrisDetector:
             res = Harris::harrisDetection(img->getOriginalImg(),threshold,kernelSize);
             break;
-//        case LambdaDetector:
-//            res = Noise::saltAndPepperNoise(processedImg,r);
-//            break;
+        case LambdaDetector:
+            res = Harris::lamdaDetection(img->getOriginalImg(), threshold, kernelSize);
+            break;
         default:
             res = img->getOriginalImg();
             break;

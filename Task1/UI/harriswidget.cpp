@@ -1,6 +1,6 @@
 #include "harriswidget.h"
 #include "ui_harriswidget.h"
-
+#include <QDebug>
 HarrisWidget::HarrisWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::HarrisWidget)
@@ -91,9 +91,16 @@ void HarrisWidget::on_uploadImgBtn_clicked()
 
 void HarrisWidget::on_applyBtn_clicked()
 {
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     processedImg = harriscontroller->detectCorners(ui->comboBox->currentIndex()+1, ui->threshold->value(),cornerDetectionParams.kernelSize );
     processedImg = processedImg.scaled(ui->imageDetected->size(),Qt::IgnoreAspectRatio);
     ui->imageDetected->setPixmap(processedImg);
+
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    std::string time="Time Elapsed:  "+std::to_string(std::chrono::duration_cast<std::chrono::microseconds> (end - begin).count()) + "  µsec" ;
+    qDebug()<<std::chrono::duration_cast<std::chrono::microseconds> (end - begin).count();
+    //ui->time_label->setText( QString::fromStdString(time));
+
 }
 
 

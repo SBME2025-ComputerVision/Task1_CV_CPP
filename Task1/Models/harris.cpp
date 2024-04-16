@@ -28,6 +28,32 @@ Mat Harris::harrisDetection(Mat img , double threshold , int kernelSize){
     normalize(harrisComp, harrisComp, 0, 255, NORM_MINMAX, CV_32FC1, Mat());
     return plotCorners(img,harrisComp,threshold);
 }
+
+Mat Harris::lamdaDetection(Mat img, double threshold, int kernelSize)
+{
+    cvtColor(img, img, COLOR_BGR2GRAY);
+ Mat gradientX, gradientY;
+ Sobel(img,gradientX,CV_32F,1,0,kernelSize);
+ Sobel(img,gradientY,CV_32F,0,1,kernelSize);
+
+ Mat gradientXX = gradientX.mul(gradientX);
+ Mat gradientYY = gradientY.mul(gradientY);
+ Mat gradientXY = gradientX.mul(gradientY);
+
+ Mat SXX ,SYY,SXY;
+  cv::boxFilter(gradientXX,SXX,CV_32FC1,cv::Size(kernelSize,kernelSize));
+  cv::boxFilter(gradientYY,SYY,CV_32FC1,cv::Size(kernelSize,kernelSize));
+  cv::boxFilter(gradientXY,SXY,CV_32FC1,cv::Size(kernelSize,kernelSize));
+
+  Mat determinant = SXX.mul(SYY) - SXY.mul(SXY);
+  Mat trace = SXX + SYY;
+  Mat harrisComp ;
+  divide(determinant, trace, harrisComp);
+  qDebug()<<"a7a";
+  normalize(harrisComp, harrisComp, 0, 255, NORM_MINMAX, CV_32FC1, Mat());
+  return plotCorners(img,harrisComp,threshold);
+}
+
 Mat Harris::plotCorners(Mat img, Mat harrisComp  ,double threshold ){
 
  Mat ret;

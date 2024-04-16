@@ -8,6 +8,7 @@ public:
     Harris();
 
     static Mat harrisDetection(Mat img , double threshold , int kernelSize);
+     static Mat lamdaDetection(Mat img , double threshold , int kernelSize);
     static Mat plotCorners(Mat img, Mat harrisComp  ,double threshold );
 
 
