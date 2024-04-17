@@ -48,6 +48,8 @@ public:
     );
     bool isExtremum(const vector<Mat> octave, int scale, int row, int col);
     tuple<float, float, float, float> fitQuadratic(KeyPoint keypoint, const vector<Mat> octave, int scale);
+    KeyPoint findImgCoordinates(KeyPoint kp,float offset_s, float offset_x, float offset_y, float sigma_min=SIGMA_MIN,
+                           float min_pix_dist=MIN_PIX_DIST, int n_spo=N_SPO);
 };
 
 #endif // SIFT2_H

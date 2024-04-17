@@ -199,15 +199,17 @@ tuple<float, float, float,float> SIFT2::fitQuadratic(KeyPoint keypoint, const ve
  * @param dog_pyramid The scale space pyramid of Difference of Gaussian (DoG) images.
  * @param contrastThresh The contrast threshold for detecting keypoints.
  * @param edgeThresh The edge threshold for detecting keypoints.
+ * @param scale The scale index within the octave at which the keypoint is located.
  * @return A vector of KeyPoint objects representing the detected keypoints.
  */
-bool SIFT2::isOnEdge(const KeyPoint keypoint, const vector<Mat> octave, float edgeThresh) {
+bool SIFT2::isOnEdge(const KeyPoint keypoint, const vector<Mat> octave, float edgeThresh ) {
     // Check this 
     //  keypoint.octave * (octave.size() - 1) + keypoint.layer = keypoint.scale
-    const Mat img = octave[keypoint.octave * (octave.size() - 1) + keypoint.layer];
+    const Mat img = octave[keypoint.size];
     float h11, h12, h22;
     float x = keypoint.pt.x;
     float y = keypoint.pt.y;
+
 
     h11 = img.at<float>(x+1, y) + img.at<float>(x-1, y) - 2 * img.at<float>(x, y);
     h22 = img.at<float>(x, y+1) + img.at<float>(x, y-1) - 2 * img.at<float>(x, y);
@@ -223,6 +225,26 @@ bool SIFT2::isOnEdge(const KeyPoint keypoint, const vector<Mat> octave, float ed
     return false;
 
 }
+
+KeyPoint SIFT2::findImgCoordinates(
+    KeyPoint kp,
+    float offset_s, float offset_x, float offset_y, float sigma_min,
+    float min_pix_dist, int n_spo
+) {
+    KeyPoint kp_new;
+    kp_new.size = kp.size;
+    kp_new.octave = kp.octave;
+    kp_new.angle = kp.angle;
+    kp_new.response = kp.response;
+    kp_new.class_id = kp.class_id;
+    kp_new.pt.x = min_pix_dist * pow(2, kp.octave) * (offset_x + kp.pt.x);
+    kp_new.pt.y = min_pix_dist * pow(2, kp.octave) * (offset_y + kp.pt.y);
+    kp_new.size = min_pix_dist * pow(2, kp.octave) * (offset_s + kp.size);
+    return kp_new;
+}
+
+
+
 
 
     
