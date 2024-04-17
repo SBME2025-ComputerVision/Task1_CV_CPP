@@ -64,4 +64,31 @@ ScaleSpacePyramid SIFT2::generateGaussianPyramid(const Mat img, float sigmaMin,i
     return pyramid;
 }
 
+/**
+ * Generates a scale space pyramid of Difference of Gaussian (DoG) images.
+ *
+ * @param img_pyramid The scale space pyramid of Gaussian blurred images.
+ * @return ScaleSpacePyramid containing the scale space pyramid of DoG images.
+ */
+
+ScaleSpacePyramid SIFT2::generateDogPyramid(const ScaleSpacePyramid img_pyramid){
+    ScaleSpacePyramid dog_pyramid;
+    dog_pyramid.numOctaves = img_pyramid.numOctaves;
+    dog_pyramid.numScales = img_pyramid.numScales - 1;
+    dog_pyramid.octaves = vector<vector<Mat>>(dog_pyramid.numOctaves);
+
+    for (int i = 0; i < dog_pyramid.numOctaves; i++)
+    {
+        dog_pyramid.octaves[i].reserve(dog_pyramid.numScales);
+        for (int j = 1; j < img_pyramid.numScales; j++)
+        {
+            Mat dog;
+            subtract(img_pyramid.octaves[i][j], img_pyramid.octaves[i][j - 1], dog);
+            dog_pyramid.octaves[i].push_back(dog);
+        }
+    }
+
+    return dog_pyramid;
+}
+
     
