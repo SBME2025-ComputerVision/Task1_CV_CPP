@@ -91,4 +91,54 @@ ScaleSpacePyramid SIFT2::generateDogPyramid(const ScaleSpacePyramid img_pyramid)
     return dog_pyramid;
 }
 
+/**
+ * Generates a scale space pyramid of gradient images.
+ *
+ * @param pyramid The scale space pyramid of Gaussian blurred images.
+ * @return ScaleSpacePyramid containing the scale space pyramid of gradient images.
+ */
+
+bool SIFT2::isExtremum(const vector<Mat> octave, int scale, int row, int col) {
+    Mat img = octave[scale];
+    Mat img_prev = octave[scale - 1];
+    Mat img_next = octave[scale + 1];
+    bool isMax = true;
+    bool isMin = true;
+    float val = img.at<float>(row, col);
+    float neighborVal;
+
+    for (int dx = -1; dx <= 1; i++){
+        for (int dy = -1; dy <= 1; j++){
+            neighborVal = img_prev.at<float>(row + dx, col + dy);
+            if (val < neighborVal){
+                isMax = false;
+            }
+            if (val > neighborVal){
+                isMin = false;
+            }
+            neighborVal = img.at<float>(row + dx, col + dy);
+            if (val < neighborVal){
+                isMax = false;
+            }
+            if (val > neighborVal){
+                isMin = false;
+            }
+            neighborVal = img_next.at<float>(row + dx, col + dy);
+            if (val < neighborVal){
+                isMax = false;
+            }
+            if (val > neighborVal){
+                isMin = false;
+            }
+
+            if (!isMax && !isMin){
+                return false;
+            }
+
+        }
+    }
+
+    return true;
+    
+}
     
