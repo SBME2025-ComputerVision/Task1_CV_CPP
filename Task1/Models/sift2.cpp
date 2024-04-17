@@ -139,6 +139,58 @@ bool SIFT2::isExtremum(const vector<Mat> octave, int scale, int row, int col) {
     }
 
     return true;
-    
 }
+
+
+/**
+ * Fits a quadratic function to the neighborhood of a keypoint in the scale space pyramid.
+ *
+ * @param keypoint The keypoint around which the quadratic function is fitted.
+ * @param octave A vector of images representing the octave in the scale space pyramid.
+ * @param scale The scale index within the octave at which the keypoint is located.
+ * @return A tuple containing the offsets in x, y, and scale dimensions, and the value of the interpolated extremum.
+ */
+
+tuple<float, float, float,float> SIFT2::fitQuadratic(KeyPoint keypoint, const vector<Mat> octave, int scale) {
+    const Mat img = octave[scale];
+    const Mat img_prev = octave[scale - 1];
+    const Mat img_next = octave[scale + 1];
+
+    float g1, g2, g3;
+    float h11, h12, h13, h22, h23, h33;
+
+    float x = keypoint.pt.x;
+    float y = keypoint.pt.y;
+
+    g1 = 0.5 * (img_next.at<float>(x,y) - img_prev.at<float>(x,y));
+    g2 = 0.5 * (img.at<float>(x+1,y) - img.at<float>(x-1,y));
+    g3 = 0.5 * (img.at<float>(x, y+1) - img.at<float>(x, x - 1));
+
+    h11 = img_next.at<float>(x, y) - 2 * img.at<float>(x, y) + img_prev.at<float>(x, y);
+    h22 = img.at<float>(x+1, y) - 2 * img.at<float>(x, y) + img.at<float>(x-1, y);
+    h33 = img.at<float>(x, y+1) - 2 * img.at<float>(x, y) + img.at<float>(x, y-1);
+    h12 = 0.25 * (img_next.at<float>(x+1, y) - img_next.at<float>(x-1, y) - img_prev.at<float>(x+1, y) + img_prev.at<float>(x-1, y));
+    h13 = 0.25 * (img_next.at<float>(x, y+1) - img_next.at<float>(x, y-1) - img_prev.at<float>(x, y+1) + img_prev.at<float>(x, y-1));
+    h23 = 0.25 * (img.at<float>(x+1, y+1) - img.at<float>(x+1, y-1) - img.at<float>(x-1, y+1) + img.at<float>(x-1, y-1));
+
+    float det = h11*h22*h33 - h11*h23*h23 - h12*h12*h33 + 2*h12*h13*h23 - h13*h13*h22;
+
+    float hInve11 =  (h22*h33 - h23*h23) / det;
+    float hInve12 =  ( h13*h23 - h12*h33 ) / det;
+    float hInve13 =  ( h12*h23 - h13*h22 ) / det;
+    float hInve22 = ( h11*h33 - h13*h13 ) / det;
+    float hInve23 = ( h12*h13 - h11*h23 ) / det;
+    float hInve33 = ( h11*h22 - h12*h12 ) / det;
+
+    // Find offsets of the interpolated extremum from the discrete extremum
+    float offset_x = - hInve11 * g1 - hInve12 * g2 - hInve13 * g3;
+    float offset_y = - hInve12 * g1 - hInve22 * g2 - hInve23 * g3;
+    float offset_s = - hInve13 * g1 - hInve23 * g2 - hInve33 * g3;
+
+    float interpolatedExtremaVal = img.at<float>(x, y) + 0.5 * (g1 * offset_x + g2 * offset_y + g3 * offset_s);
+    return make_tuple(offset_x, offset_y, offset_s, interpolatedExtremaVal);
+
+}
+
+
     

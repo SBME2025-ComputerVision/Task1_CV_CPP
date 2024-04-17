@@ -42,6 +42,7 @@ public:
     Mat drawMatchesRectangle(const Mat img1, const Mat img2, const vector<Point> matchedPoints);
     double ssd(const vector<float> desc1, const vector<float> desc2);
     bool isExtremum(const vector<Mat> octave, int scale, int row, int col);
+    tuple<float, float, float, float> fitQuadratic(KeyPoint keypoint, const vector<Mat> octave, int scale);
 };
 
 #endif // SIFT2_H
