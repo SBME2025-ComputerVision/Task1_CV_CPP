@@ -107,8 +107,8 @@ bool SIFT2::isExtremum(const vector<Mat> octave, int scale, int row, int col) {
     float val = img.at<float>(row, col);
     float neighborVal;
 
-    for (int dx = -1; dx <= 1; i++){
-        for (int dy = -1; dy <= 1; j++){
+    for (int dx = -1; dx <= 1; dx++){
+        for (int dy = -1; dy <= 1; dy++){
             neighborVal = img_prev.at<float>(row + dx, col + dy);
             if (val < neighborVal){
                 isMax = false;
@@ -189,6 +189,38 @@ tuple<float, float, float,float> SIFT2::fitQuadratic(KeyPoint keypoint, const ve
 
     float interpolatedExtremaVal = img.at<float>(x, y) + 0.5 * (g1 * offset_x + g2 * offset_y + g3 * offset_s);
     return make_tuple(offset_x, offset_y, offset_s, interpolatedExtremaVal);
+
+}
+
+
+/**
+ * Detects keypoints in the scale space pyramid.
+ *
+ * @param dog_pyramid The scale space pyramid of Difference of Gaussian (DoG) images.
+ * @param contrastThresh The contrast threshold for detecting keypoints.
+ * @param edgeThresh The edge threshold for detecting keypoints.
+ * @return A vector of KeyPoint objects representing the detected keypoints.
+ */
+bool SIFT2::isOnEdge(const KeyPoint keypoint, const vector<Mat> octave, float edgeThresh) {
+    // Check this 
+    //  keypoint.octave * (octave.size() - 1) + keypoint.layer = keypoint.scale
+    const Mat img = octave[keypoint.octave * (octave.size() - 1) + keypoint.layer];
+    float h11, h12, h22;
+    float x = keypoint.pt.x;
+    float y = keypoint.pt.y;
+
+    h11 = img.at<float>(x+1, y) + img.at<float>(x-1, y) - 2 * img.at<float>(x, y);
+    h22 = img.at<float>(x, y+1) + img.at<float>(x, y-1) - 2 * img.at<float>(x, y);
+    h12 = 0.25 * (img.at<float>(x+1, y+1) - img.at<float>(x+1, y-1) - img.at<float>(x-1, y+1) + img.at<float>(x-1, y-1));
+
+    float detHessian = h11*h22 - h12*h12;
+    float traceHessian = h11 + h22;
+    float edgeness = traceHessian*traceHessian / detHessian;
+
+    if (edgeness >= (pow(edgeThresh + 1, 2) / edgeThresh)){
+        return true;
+    }
+    return false;
 
 }
 
