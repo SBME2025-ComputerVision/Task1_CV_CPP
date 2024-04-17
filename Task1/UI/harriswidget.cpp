@@ -99,7 +99,7 @@ void HarrisWidget::on_applyBtn_clicked()
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     std::string time="Time Elapsed:  "+std::to_string(std::chrono::duration_cast<std::chrono::microseconds> (end - begin).count()) + "  µsec" ;
     qDebug()<<std::chrono::duration_cast<std::chrono::microseconds> (end - begin).count();
-    //ui->time_label->setText( QString::fromStdString(time));
+    ui->time_label->setText( QString::fromStdString(time));
 
 }
 
