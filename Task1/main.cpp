@@ -36,19 +36,26 @@ int main(int argc, char *argv[])
 
     Mat img, scr, base_img;
 
-        img = imread("./Gallery/match_images/0.png");
-        img.convertTo(scr, CV_32FC1);
+    img = imread("./Gallery/cameraman.jpg");
+    // imwrite("./Gallery/cameraman.jpg",img);
+    img.convertTo(scr, CV_32FC1);
 
-        int num_intervals = 3;
-        double sigma = 1.6;
-        SIFTX *mama = new SIFTX();
+    int num_intervals = 3;
+    double sigma = 1.6;
+    SIFTX *mama = new SIFTX();
+    qDebug()<<"1";
 
-        base_img = mama->baseLineImage(scr);
+    base_img = mama->baseLineImage(scr);
+    qDebug()<<"2";
 
-        vector<double> sigmas = mama->generateSigmaValues(sigma, num_intervals);
-        tuple<vector<vector<Mat>>, vector<vector<Mat>>> Scale_DoG = mama->generateGaussianPyramid(base_img, num_intervals, sigmas);
-        vector<KeyPoint> keypoints = mama->getKeyPoints(get<1>(Scale_DoG), get<0>(Scale_DoG), num_intervals, sigma);
-        vector<Mat> key_descriptors = mama->getDescriptors(keypoints, get<0>(Scale_DoG));
+    vector<double> sigmas = mama->generateSigmaValues(sigma, num_intervals);
+    qDebug()<<"3";
+    tuple<vector<vector<Mat>>, vector<vector<Mat>>> Scale_DoG = mama->generateGaussianPyramid(base_img, num_intervals, sigmas);
+    qDebug()<<"4";
+    vector<KeyPoint> keypoints = mama->getKeyPoints(get<1>(Scale_DoG), get<0>(Scale_DoG), num_intervals, sigma);
+    qDebug()<<"5";
+    vector<Mat> key_descriptors = mama->getDescriptors(keypoints, get<0>(Scale_DoG));
+
 
     return 5;
 }

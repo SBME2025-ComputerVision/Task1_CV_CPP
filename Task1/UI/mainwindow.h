@@ -14,7 +14,7 @@
 #include "UI/thresholdwidget.h"
 #include "UI/houghtransormwidget.h"
 #include "UI/activecontourwidget.h"
-#include "UI/matchwidget.h"
+// #include "UI/matchwidget.h"
 #include "UI/harriswidget.h"
 
 
@@ -40,7 +40,7 @@ public:
     ThresholdWidget *thresholdWidget = new ThresholdWidget();
     HoughTransormWidget *houghTransformWidget = new HoughTransormWidget();
     ActiveContourWidget *activeContourWidget = new ActiveContourWidget();
-    MatchWidget *matchWidget = new MatchWidget();
+    // MatchWidget *matchWidget = new MatchWidget();
     HarrisWidget *harrisWidget = new HarrisWidget();
 
 

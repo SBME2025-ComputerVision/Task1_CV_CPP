@@ -342,15 +342,22 @@ vector<KeyPoint> SIFTX::getKeyPoints(vector<vector<Mat>> DoG, vector<vector<Mat>
     tuple<Point, int> candidate;
     double threshold = floor(0.5 * 0.04 / intervals * 255); // contrast_threshold=0.04
     vector<KeyPoint> keypoints;
+    // qDebug()<<"4.1";
     for (int oct = 0; oct < DoG.size(); oct++) {
+        // qDebug()<<"4.2";
         for (int scale = 1; scale < DoG[0].size() - 1; scale++) {
+            // qDebug()<<"4.3";
             for (int i = 5; i < DoG[oct][0].size().height - 5; i++) {
+                // qDebug()<<"4.4";
                 for (int j = 5; j < DoG[oct][0].size().width - 5; j++) {
+                    // qDebug()<<"4.5.1";
                     if (isKeyPoint(DoG[oct][scale](Rect(j - 1, i - 1, 3, 3)),
                                        DoG[oct][scale + 1](Rect(j - 1, i - 1, 3, 3)), 
                                        DoG[oct][scale - 1](Rect(j - 1, i - 1, 3, 3)), threshold)) {
+                        // qDebug()<<"4.5.2";
                         candidate = localizeExtremum(i, j, scale, DoG[oct], oct);
                         if (get<0>(candidate).x != -1 && get<0>(candidate).y != -1) {
+                            // qDebug()<<"4.5.3";
                             vector<float> Orientations = computeOrientation(get<0>(candidate), oct, scale, scaledImages[oct][get<1>(candidate)]);
                             for (int angle = 0; angle < Orientations.size(); angle++) {
                                 KeyPoint key;
@@ -366,6 +373,7 @@ vector<KeyPoint> SIFTX::getKeyPoints(vector<vector<Mat>> DoG, vector<vector<Mat>
             }
         }
     }
+qDebug()<<"4.6";
 
     vector<KeyPoint> unique_keys;
     unique_keys = SIFTX::removeDuplicates(keypoints);
