@@ -92,3 +92,16 @@ float Helpers::convertQstringToFloat(const QString input){
     }
     return floatValue;
 }
+
+
+Mat Helpers::vectorToMat(const vector<vector<float>>& input) {
+    Mat output(input.size(), input[0].size(), CV_32F);
+
+    for (size_t i = 0; i < input.size(); i++) {
+        for (size_t j = 0; j < input[i].size(); j++) {
+            output.at<float>(i, j) = input[i][j];
+        }
+    }
+
+    return output;
+}

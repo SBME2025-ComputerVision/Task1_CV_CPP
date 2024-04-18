@@ -14,9 +14,9 @@
 #include "UI/thresholdwidget.h"
 #include "UI/houghtransormwidget.h"
 #include "UI/activecontourwidget.h"
-// #include "UI/matchwidget.h"
+#include "UI/matchwidget.h"
 #include "UI/harriswidget.h"
-
+#include "UI/siftwidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -40,8 +40,9 @@ public:
     ThresholdWidget *thresholdWidget = new ThresholdWidget();
     HoughTransormWidget *houghTransformWidget = new HoughTransormWidget();
     ActiveContourWidget *activeContourWidget = new ActiveContourWidget();
-    // MatchWidget *matchWidget = new MatchWidget();
+    MatchWidget *matchWidget = new MatchWidget();
     HarrisWidget *harrisWidget = new HarrisWidget();
+    SiftWidget   *siftWidget   = new SiftWidget();
 
 
 private slots:
@@ -70,6 +71,9 @@ private slots:
     void on_matchingBtn_clicked();
 
     void on_harrisBtn_clicked();
+
+
+    void on_siftBtn_clicked();
 
 private:
     Ui::MainWindow *ui;

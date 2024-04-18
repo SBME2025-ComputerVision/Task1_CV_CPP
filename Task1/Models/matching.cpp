@@ -66,9 +66,46 @@ void Matching::CrossCorrelation(Mat img, Mat src, Rect & roi){
 }
 
 
-void Matching::applyMatching(Mat img1,Mat img2, vector<Vec3d>& matched){
+void Matching::applyMatching(Mat des1,Mat des2, vector<Vec3d>& matches){
+    cv::Mat corrMatrix(des1.rows, des2.rows, CV_32F);
+
+       for (int i = 0; i < des1.rows; i++) {
+           cv::Mat des1Row = des1.row(i);
+           cv::Scalar des1Mean, des1Std;
+           cv::meanStdDev(des1Row, des1Mean, des1Std);
+           for (int j = 0; j < des2.rows; j++) {
+               cv::Mat des2Row = des2.row(j);
+               cv::Scalar des2Mean = cv::mean(des2Row);
+               int counter = 0;
+               double des2Std = 0;
+               double des1des2Std = 0;
+               for (int k = 0; k < des2Row.cols; k++) {
+                   des2Std += (des2Row.at<float>(k) - des2Mean[0]) * (des2Row.at<float>(k) - des2Mean[0]);
+                   des1des2Std += (des2Row.at<float>(k) - des2Mean[0]) * (des1Row.at<float>(k) - des1Mean[0]);
+                   counter++;
+               }
+               des2Std /= counter;
+               des1des2Std /= counter;
+               corrMatrix.at<float>(i, j) = des1des2Std / (des2Std * des1Std[0]);
+           }
+       }
+
+       for (int i = 0; i < des1.rows; i++)
+       {
+           float maxCorr = -1.0f;
+           int maxIdx = -1;
+           for (int j = 0; j < des2.rows; j++)
+           {
+               if (corrMatrix.at<float>(i, j) > maxCorr)
+               {
+                   maxCorr = corrMatrix.at<float>(i, j);
+                   maxIdx = j;
+               }
+
+           }
+           matches.push_back(cv::Vec3d(i, maxIdx, maxCorr));
 
 
 
-
+}
 }
