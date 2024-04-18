@@ -1,4 +1,5 @@
 #include "snake.h"
+#include "Models/filter.h"
 
 Snake::Snake() {}
 
@@ -9,7 +10,7 @@ double ptDistance(const cv::Point& pt1, const cv::Point& pt2) {
     return std::sqrt(dx*dx + dy*dy);
 }
 
-vector<Point> Snake::snakeCurve(Point center, int radius){
+vector<Point> snakeCurve(Point center, int radius){
     vector<Point> curve;
 
     for (int i = 0; i <= 360; i += 1) {
@@ -23,8 +24,12 @@ vector<Point> Snake::snakeCurve(Point center, int radius){
 }
 
 static Mat preprocess(Mat img){
+    Mat greyImg = Filter::convertToGrayScale(img);
+    Mat imgBlurred;
+    blur(greyImg, imgBlurred, Size(5,5));
     Mat imgCanny;
-    Canny(img, imgCanny,10,350);
+    Canny(imgBlurred, imgCanny,10,350);
+    return imgCanny;
 }
 
 // internal energy that penalizes discontinuities or irregularities in the curve
@@ -78,3 +83,54 @@ static double pointEnergy(Mat img, Point Pt, Point prevPt, Point nextPt, double 
     tE = eE+ cE+ bE+ sE;
     return tE;
 }
+
+static vector<Point> updateCurve(Mat img, vector<Point>& curve, double alpha, double beta, double gamma, double delta) {
+    int numPoints = curve.size();
+    vector<Point> newCurve(numPoints);
+    for (int i = 0; i < numPoints; i++) {
+        Point Pt = curve[i];
+        Point prevPt = curve[(i-1+numPoints)%numPoints];
+        Point nextPt = curve[(i+1)%numPoints];
+        double minEnergy = DBL_MAX;
+        Point newPt = Pt;
+        // Try moving the point in different directions and choose the one with the minimum energy
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+                Point movePt(Pt.x + dx, Pt.y + dy);
+                double energy = pointEnergy(img, movePt, prevPt, nextPt, delta, gamma, beta, alpha);
+                if (energy < minEnergy) {
+                    minEnergy = energy;
+                    newPt = movePt;
+                }
+            }
+        }
+        newCurve[i] = newPt;
+    }
+    curve = newCurve;
+    return curve;
+}
+
+void applySnake(Mat img, vector<Point> curve, int iterations, double alpha, double beta, double gamma, double delta){
+    Mat processed = preprocess(img);
+    for (int i =0; i<iterations; i++){
+        updateCurve(processed, curve, alpha, beta, gamma, delta);
+    }
+}
+
+vector<Point> activeContour(Mat img, Point center, int radius, int iterations, double alpha, double beta, double gamma, double delta){
+    vector<Point> curve = snakeCurve(center, radius);
+    applySnake(img, curve, iterations,alpha, beta, gamma, delta);
+
+    Mat outputImg = img.clone();
+    for(int i =0; i<curve.size(); i++){
+        circle(outputImg, curve[i], 4, Scalar(64,224,208),1);
+        if(i>0){
+             line(outputImg, curve[i-1], curve[i], Scalar(64,64,64), 1);
+        }
+    }
+    line(outputImg, curve[0], curve[curve.size()-1], Scalar(64,224,208), 1);
+    return curve;
+}
+
+
+

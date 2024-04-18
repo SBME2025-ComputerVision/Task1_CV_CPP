@@ -3,6 +3,7 @@
 #include <opencv2/opencv.hpp>
 #include <QApplication>
 #include <QFile>
+#include "snake.h"
 
 
 
@@ -22,7 +23,19 @@ int main(int argc, char *argv[])
 
          //setup stylesheet
          a.setStyleSheet(styleSheet);
-     //
+         // Mat ssssnakeTry = imread("./Gallery/snakeTry.png");
+
+
+            Image* img = new Image("./Gallery/snakeTry.png");
+
+            Mat ssssnakeTry = img->getOriginalImg();
+
+         Point Ptry;
+         Ptry.x = 100;
+         Ptry.y = 100;
+         // Snake anaElTho3ban();
+         vector<Point> resultCurve = Snake::activeContour(ssssnakeTry, Ptry, 20, 100, 10.0,10.0,10.0,10.0);
+         imwrite("ana_el_tho3ban.jpg", ssssnakeTry);
 
 
      return a.exec();
@@ -33,5 +46,5 @@ int main(int argc, char *argv[])
 //    Mat v = HoughTransform::detectLines(ori,150);
 
 //    imwrite("emad.jpg",v);
-    return 5;
+    return 0;
 }
