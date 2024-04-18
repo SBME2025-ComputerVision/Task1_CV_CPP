@@ -1,8 +1,6 @@
 
 Windows
 ```
-
-
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -20,30 +18,41 @@ CONFIG += c++17
 
 
 SOURCES += \
+    Controllers/activecontourcontroller.cpp \
     Controllers/controller.cpp \
     Controllers/filtercontroller.cpp \
     Controllers/frequencycontroller.cpp \
+    Controllers/harriscontroller.cpp \
     Controllers/histogramcontroller.cpp \
     Controllers/houghcontroller.cpp \
     Controllers/imagecontroller.cpp \
     Controllers/edgecontroller.cpp  \
     Controllers/hybridcontroller.cpp \
-    Controllers/thresholdcontroller.cpp \ 
-    Controllers/houghcontroller.cpp \
+    Controllers/matchcontroller.cpp \
+    Controllers/thresholdcontroller.cpp \
     Helpers/helpers.cpp \
+    Helpers/scene.cpp \
+    Helpers/clickable.cpp\
     Models/edgedetection.cpp \
     Models/filter.cpp \
     Models/fourier.cpp \
+    Models/harris.cpp \
+    Models/matching.cpp \
     Models/noise.cpp \
     Models/image.cpp \
     Models/histogram.cpp \
     Models/hybrid.cpp   \
+    Models/sift.cpp \
+    Models/snake.cpp \
     Models/threshold.cpp \
     Models/houghtransform.cpp \
+    UI/activecontourwidget.cpp \
     UI/edgedetectionwidget.cpp \
     UI/filterswidget.cpp \
     UI/frequencywidget.cpp \
+    UI/harriswidget.cpp \
     UI/histogramwidget.cpp \
+    UI/matchwidget.cpp \
     UI/plotswidget.cpp \
     UI/hybridwidget.cpp \
     UI/mainwindow.cpp \
@@ -53,30 +62,41 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
+    Controllers/activecontourcontroller.h \
     Controllers/controller.h \
     Controllers/filtercontroller.h \
     Controllers/frequencycontroller.h \
+    Controllers/harriscontroller.h \
     Controllers/histogramcontroller.h \
     Controllers/edgecontroller.h  \
     Controllers/houghcontroller.h \
     Controllers/imagecontroller.h \
     Controllers/hybridcontroller.h \
+    Controllers/matchcontroller.h \
     Controllers/thresholdcontroller.h \
-    Controllers/houghcontroller.h \
     Helpers/helpers.h \
+    Helpers/scene.h \
+    Helpers/clickable.h\
     Models/edgedetection.h \
     Models/filter.h \
     Models/fourier.h \
+    Models/harris.h \
     Models/image.h \
+    Models/matching.h \
     Models/noise.h \
     Models/histogram.h \
     Models/hybrid.h   \
+    Models/sift.h \
+    Models/snake.h \
     Models/threshold.h \
     Models/houghtransform.h \
+    UI/activecontourwidget.h \
     UI/edgedetectionwidget.h \
     UI/filterswidget.h \
     UI/frequencywidget.h \
+    UI/harriswidget.h \
     UI/histogramwidget.h \
+    UI/matchwidget.h \
     UI/plotswidget.h \
     UI/hybridwidget.h \
     UI/mainwindow.h \
@@ -85,15 +105,20 @@ HEADERS += \
     config.h \
 
 FORMS += \
+    UI/activecontourwidget.ui \
     UI/edgedetectionwidget.ui \
     UI/filterswidget.ui \
     UI/frequencywidget.ui \
+    UI/harriswidget.ui \
     UI/histogramwidget.ui \
+    UI/matchwidget.ui \
     UI/plotswidget.ui \
     UI/hybridwidget.ui \
     UI/thresholdwidget.ui  \
     UI/houghtransormwidget.ui \
     UI/mainwindow.ui \
+
+
 
 
 DISTFILES += \
