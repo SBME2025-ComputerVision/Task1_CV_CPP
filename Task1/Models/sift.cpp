@@ -12,7 +12,7 @@ const float PI = acos(-1.0);
  * @param Image2 Output grayscale image of type CV_32FC1 (32-bit floating-point, single-channel float).
  */
 void SIFTX:: char_to_float( Mat& Image1,  Mat&Image2) {
-    Image2 =  Mat::zeros(Image1.rows, Image1.cols, CV_32FC1);cale_space[i][j];
+    Image2 =  Mat::zeros(Image1.rows, Image1.cols, CV_32FC1);
 
     for (int i = 0;i < Image1.rows;i++) {
         for (int j = 0;j < Image1.cols;j++) {
