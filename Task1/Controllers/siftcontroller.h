@@ -14,9 +14,6 @@ public:
     Mat getOriginalImgMat();
     Mat getOriginalImgMat2();
 
-    void extractPoints(Mat& keypoints_img,vector<vector<Mat>>&keypoints, vector<vector<Mat>>&scale_space,float sigma, float contrast_threshold, float edge_threshold, float k);
-    void match(vector<vector<float>>&descriptors, vector<vector<cv::Mat>> scale_space, vector<vector<cv::Mat>>& keypoints,float magnitude_threshold,float sigma,float k);
-    void appcon(Mat &output);
 };
 
 #endif // SIFTCONTROLLER_H
