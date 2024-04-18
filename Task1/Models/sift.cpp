@@ -92,14 +92,11 @@ void SIFTX:: get_scale_space( Mat& I, float sigma,vector<vector< Mat>>& scale_sp
  */
 
 void SIFTX:: get_DoG(vector<vector< Mat>>& scale_space, vector<vector< Mat>>& DoG) {
-
-
     for (int i = 0;i < 4;i++) {
         for (int j = 0;j < 4;j++) {
             DoG[i][j] = abs(scale_space[i][j + 1] - scale_space[i][j]);
         }
     }
-
 }
 
 /**
@@ -230,13 +227,6 @@ void SIFTX:: remove_low_contrast(vector<vector< Mat>>& keypoints, vector<vector<
     }
 }
 
-/**
- * @brief Removes keypoints likely to be located on edges in each level of the Difference of Gaussians (DoG) pyramid.
- * 
- * @param keypoints Vector containing detected keypoints. It is a 2D vector where the first dimension corresponds to the level of the pyramid, and the second dimension contains two matrices representing keypoints detected as maxima and minima.
- * @param DoG Difference of Gaussians (DoG) pyramid representing scale space.
- * @param edge_threshold Threshold value for edge detection. Keypoints with Hessian eigenvalues indicating edge-like structures above this threshold will be removed.
- */
 
 /**
  * @brief Removes keypoints likely to be located on edges in each level of the Difference of Gaussians (DoG) pyramid.
@@ -604,7 +594,7 @@ pair<int, int> SIFTX::get_initial_pos(int i, int j) {
 }
 
 
-int SIFTX  ::get_pos_histogram2(float ang) {
+int SIFTX ::get_pos_histogram2(float ang) {
     for (int i = 0;i < 8;i++) {
         if (ang >= 45 * i && ang < 45 * (i + 1)) return i;
     }
