@@ -24,6 +24,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->stackedWidget->addWidget(thresholdWidget);
     ui->stackedWidget->addWidget(houghTransformWidget);
     ui->stackedWidget->addWidget(activeContourWidget);
+     ui->stackedWidget->addWidget(matchWidget);
+    ui->stackedWidget->addWidget(harrisWidget);
+    ui->stackedWidget->addWidget(siftWidget);
     menuBtns.append(ui->filteringBtn);
     menuBtns.append(ui->frequencyBtn);
     menuBtns.append(ui->edgeDetectionBtn);
@@ -33,6 +36,9 @@ MainWindow::MainWindow(QWidget *parent)
     menuBtns.append(ui->hybridBtn);
     menuBtns.append(ui->houghTransformBtn);
     menuBtns.append(ui->ActiveContourBtn);
+    menuBtns.append(ui->matchingBtn);
+    menuBtns.append(ui->harrisBtn);
+    menuBtns.append(ui->siftBtn);
 
     style="\
         QPushButton {\
@@ -169,6 +175,33 @@ void MainWindow::on_ActiveContourBtn_clicked()
     changeButtonColors(menuBtns,style);
     ui->ActiveContourBtn->setStyleSheet("background-color: #76ABAE;");
     ui->stackedWidget->setCurrentWidget(activeContourWidget);
+     setWindowState(Qt::WindowMaximized);
+}
+
+
+void MainWindow::on_matchingBtn_clicked()
+{
+     changeButtonColors(menuBtns,style);
+     ui->matchingBtn->setStyleSheet("background-color: #76ABAE;");
+     ui->stackedWidget->setCurrentWidget(matchWidget);
+      setWindowState(Qt::WindowMaximized);
+}
+
+
+void MainWindow::on_harrisBtn_clicked()
+{
+    changeButtonColors(menuBtns,style);
+    ui->harrisBtn->setStyleSheet("background-color: #76ABAE;");
+    ui->stackedWidget->setCurrentWidget(harrisWidget);
+     setWindowState(Qt::WindowMaximized);
+}
+
+
+void MainWindow::on_siftBtn_clicked()
+{
+    changeButtonColors(menuBtns,style);
+    ui->siftBtn->setStyleSheet("background-color: #76ABAE;");
+    ui->stackedWidget->setCurrentWidget(siftWidget);
      setWindowState(Qt::WindowMaximized);
 }
 

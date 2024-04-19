@@ -6,7 +6,9 @@
 #include<QLabel>
 #include<qstring.h>
 #include<opencv2/opencv.hpp>
+#include <bits/stdc++.h>
 using namespace cv;
+using namespace std;
 class Helpers
 {
 public:
@@ -17,7 +19,7 @@ public:
     static QString openFile();
     static QPixmap convertMatToPixmap(Mat img);
     static float  convertQstringToFloat(const QString input);
-    
+    static Mat vectorToMat( const vector<vector<float>> & input);
 };
 
-#endif // HELPERS_H
+#endif // HELPERS_Hs

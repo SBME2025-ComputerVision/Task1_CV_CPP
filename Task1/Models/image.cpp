@@ -88,3 +88,30 @@ bool Image::isEmpty(){
 bool Image::isProcessed(){
     return processed;
 }
+
+/**
+ * @brief Draw a point on the image.
+ *
+ * @param x X-coordinate of the point.
+ * @param y Y-coordinate of the point.
+ * @param size Size of the point.
+*/
+void Image::drawPoint(int x, int y, int size){
+    if(!empty){
+        circle(originalImg,Point(x,y),size,Scalar(0,0,255),FILLED);
+    }
+}
+
+/**
+ * @brief Draw a line on the image.
+ *
+ * @param x1 X-coordinate of the starting point.
+ * @param y1 Y-coordinate of the starting point.
+ * @param x2 X-coordinate of the ending point.
+ * @param y2 Y-coordinate of the ending point.
+*/
+void Image::drawLine(int x1, int y1, int x2, int y2){
+    if(!empty){
+        line(originalImg,Point(x1,y1),Point(x2,y2),Scalar(0,0,255),2);
+    }
+}

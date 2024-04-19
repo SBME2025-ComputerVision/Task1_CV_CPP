@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1500</width>
-    <height>615</height>
+    <height>663</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -188,6 +188,27 @@ QFrame{
         <widget class="QPushButton" name="ActiveContourBtn">
          <property name="text">
           <string>Active Contour</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="matchingBtn">
+         <property name="text">
+          <string>Matching</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="harrisBtn">
+         <property name="text">
+          <string>Harris Operator</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="siftBtn">
+         <property name="text">
+          <string>SIFT</string>
          </property>
         </widget>
        </item>

@@ -4,8 +4,6 @@
 #include <QApplication>
 #include <QFile>
 
-
-
 int main(int argc, char *argv[])
 {
      QApplication  a(argc, argv);
@@ -27,11 +25,8 @@ int main(int argc, char *argv[])
 
      return a.exec();
 
-//    Image* img = new Image("./Gallery/f.jpg");
 
-//    Mat ori = img->getOriginalImg();
-//    Mat v = HoughTransform::detectLines(ori,150);
 
-//    imwrite("emad.jpg",v);
+
     return 5;
 }
