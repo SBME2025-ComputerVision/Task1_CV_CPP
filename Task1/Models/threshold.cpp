@@ -89,32 +89,30 @@ Mat Threshold::optimumThresholding(Mat img)
     vector<float>foreground,background;
     float currentThreshold,prevThreshold;
     currentThreshold = grey_img.at<uchar>(0,0)+grey_img.at<uchar>(0,img.cols-1)+grey_img.at<uchar>(img.rows-1,0)+grey_img.at<uchar>(img.rows-1,img.cols-1);
+
+
+    Mat pdf = Threshold::thresholdingHistogram(grey_img);
+
     // @TODO Epsilon by the user
     do{
-        for(int i=0;i<grey_img.rows;i++){
-            for(int j=0;j<grey_img.cols;j++){
-                if(grey_img.at<uchar>(i,j) > currentThreshold){
-                    foreground.push_back(grey_img.at<uchar>(i,j));
-                }
-                else{
-                    background.push_back(grey_img.at<uchar>(i,j));
-                }
+        int sum1=0,sum2=0;
+        int cdf1=0,cdf2=0;
+        for(int i=0;i<256;i++){
+            if(i>currentThreshold){
+                sum1 += i* pdf.at<float>(i);
+                cdf1 += pdf.at<float>(i);
+            }
+            else{
+                sum2 += i* pdf.at<float>(i);
+                cdf2 += pdf.at<float>(i);
             }
         }
-        float mean_background = 0;
-        float mean_foreground = 0;
-        for (int i = 0; i < background.size(); i++){
-            mean_background = mean_background + background[i];
-        }
-        mean_background = mean_background/background.size();
-        for (int i = 0; i < foreground.size(); i++){
-            mean_foreground = mean_foreground + foreground[i];
-        }
-        mean_foreground = mean_foreground/foreground.size();
+        // @TODO Float div
+        int muo1,muo2;
+        muo1 = sum1/cdf1;
+        muo2 = sum2/cdf2;
         prevThreshold = currentThreshold;
-        currentThreshold = (mean_background + mean_foreground)/2.0;
-        background.clear();
-        foreground.clear();
+        currentThreshold = (muo1 + muo2)/2.0;
     }
     while(abs(currentThreshold-prevThreshold) > 0.002);
     grey_img = Threshold::applyThresholding(grey_img,currentThreshold);
