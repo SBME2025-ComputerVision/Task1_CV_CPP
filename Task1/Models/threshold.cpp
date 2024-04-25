@@ -1,5 +1,5 @@
 #include "threshold.h"
-
+#include "config.h"
 Threshold::Threshold() {}
 
 Mat Threshold::globalThresholding(Mat img, int thresholdValue){
@@ -63,6 +63,104 @@ Mat Threshold::Padd_Mono(const Mat &src, int padding_margin , int data_type)
     }
     return padding_img;
 }
+
+Mat Threshold::optimumThresholding(Mat img)
+{
+    Mat grey_img = img.clone();
+    cvtColor(img, grey_img, COLOR_BGR2GRAY);
+    vector<float>foreground,background;
+    float currentThreshold,prevThreshold;
+    currentThreshold = grey_img.at<uchar>(0,0)+grey_img.at<uchar>(0,img.cols-1)+grey_img.at<uchar>(img.rows-1,0)+grey_img.at<uchar>(img.rows-1,img.cols-1);
+    // @TODO Epsilon by the user
+    do{
+        for(int i=0;i<grey_img.rows;i++){
+            for(int j=0;j<grey_img.cols;j++){
+                if(grey_img.at<uchar>(i,j) > currentThreshold){
+                    foreground.push_back(grey_img.at<uchar>(i,j));
+                }
+                else{
+                    background.push_back(grey_img.at<uchar>(i,j));
+                }
+            }
+        }
+        float mean_background = 0;
+        float mean_foreground = 0;
+        for (int i = 0; i < background.size(); i++){
+            mean_background = mean_background + background[i];
+        }
+        mean_background = mean_background/background.size();
+        for (int i = 0; i < foreground.size(); i++){
+            mean_foreground = mean_foreground + foreground[i];
+        }
+        mean_foreground = mean_foreground/foreground.size();
+        prevThreshold = currentThreshold;
+        currentThreshold = (mean_background + mean_foreground)/2.0;
+        background.clear();
+        foreground.clear();
+    }
+    while(abs(currentThreshold-prevThreshold) > 0.002);
+    grey_img = Threshold::applyThresholding(grey_img,currentThreshold);
+    return grey_img;
+
+}
+
+Mat Threshold::applyThresholding(Mat grey_img, float currentThreshold)
+{
+
+    for(int i=0;i<grey_img.rows;i++){
+        for(int j=0;j<grey_img.cols;j++){
+            if(grey_img.at<uchar>(i,j) > currentThreshold){
+                grey_img.at<uchar>(i,j) = 255;
+            }
+            else{
+                grey_img.at<uchar>(i,j) = 0;
+            }
+        }
+    }
+    return grey_img;
+}
+
+// Mat Threshold::otsuThresholding(Mat img)
+// {
+//     Mat grey_img = img.clone();
+//     cvtColor(img, grey_img, COLOR_BGR2GRAY);
+//     Mat pdf = Histogram::calculateHistogram(grey_img);
+//     Mat cdf = Mat::zeros(256,1,CV_32F);
+//     Mat weighted_cdf = Mat::zeros(256,1,CV_32F);
+//     cdf.at<float>(0) = pdf.at<float>(0);
+//     weighted_cdf.at<float>(0) = 0;
+
+//     for(int i=1;i<256;i++){
+//         cdf.at<float>(i) = cdf.at<float>(i-1) +  pdf.at<float>(i);
+//         weighted_cdf.at<float>(i) = weighted_cdf.at<float>(i-1) + i*pdf.at<float>(i);
+//     }
+//     float maxPixel = cdf.at<float>(255);
+//     cdf /= maxPixel;
+
+//     float best_k = 0, best_Variance = 0;
+
+//     for(int k=0;k<256;k++){
+//         float w0=0,w1=0,sum1=0,sum2=0,cdf1=0,cdf2=0;
+//         w0 = cdf.at<float>(k);
+//         w1 = 1-w0;
+//         sum1 = weighted_cdf.at<float>(k);
+//         sum2 = weighted_cdf.at<float>(255)-sum1;
+//         cdf1 = ( cdf.at<float>(k) )*maxPixel;
+//         cdf2 = (1-cdf.at<float>(k))*maxPixel;
+
+//         float muo=0,mu1=0;
+//         muo = sum1/cdf1;
+//         mu1 = sum2/cdf2;
+//         float interClassVar = w0*w1*(muo-mu1)*(muo-mu1);
+//         qDebug()<<"inter"<<interClassVar<<"best"<<best_Variance;
+//         if(interClassVar > best_Variance){
+//             best_k = k;
+//             best_Variance = interClassVar;
+//         }
+//     }
+//     grey_img = Threshold::applyThresholding(grey_img, best_k);
+//     return grey_img;
+// }
 
 
 Mat adaptive_padding_function(Mat src){
