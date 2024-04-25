@@ -47,6 +47,8 @@ const float LAMBDA_DESC = 6;
 const float THRESH_ABSOLUTE = 350;
 const float THRESH_RELATIVE = 0.7;
 
+const int KMEANS_THRESHOLD = 10;
+
 
 extern string birdPth;
 extern string catPth;

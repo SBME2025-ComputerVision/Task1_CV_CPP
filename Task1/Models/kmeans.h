@@ -2,7 +2,6 @@
 #define KMEANS_H
 /*
 * K-Means algorithm
-* this implementation is based on K-Means++ algorithm
 * Steps:
 * 1. Initialize the clusters:
 *    select k points from the dataset as the initial centroids
@@ -19,11 +18,19 @@
 using namespace std;
 using namespace cv;
 
+struct KMeansResult
+{
+    Mat clusters;
+    vector<KMeanPoint> centroids;
+};
+
+
+
 class Kmeans
 {
 public:
     Kmeans();
-    static Mat KmeansClustering(Mat &image, int k, int maxIter = 100);
+    static KMeansResult KmeansClustering(Mat &image, int k, int maxIter = 100);
     static vector<KMeanPoint> getCentroids(int k);
     static Mat assignClusters(Mat &image, vector<KMeanPoint> &centroids);
     static vector<KMeanPoint> computeCentroids(Mat &image, Mat &clusters, int k, vector<KMeanPoint> &centroids);

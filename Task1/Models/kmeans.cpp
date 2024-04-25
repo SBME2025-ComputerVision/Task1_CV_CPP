@@ -2,9 +2,48 @@
 
 Kmeans::Kmeans() {}
 
-Mat Kmeans::KmeansClustering(Mat &image, int k, int maxIter)
-{
+/*
+* @brief K-Means algorithm
+* 
+* @param Mat image the image to be clustered
+* @param int k the number of clusters
+* @param int maxIter the maximum number of iterations
+*
+* @return KMeansResult the clusters and the centroids
 
+*/
+
+KMeansResult Kmeans::KmeansClustering(Mat &image, int k, int maxIter)
+{
+    vector<KMeanPoint> centroids = getCentroids(k);
+    bool stop = true;
+    Mat clusters = Mat::zeros(image.size(), CV_8UC1);
+    for (int i = 0; i < maxIter; i++)
+    {
+        Mat newClusters = assignClusters(image, centroids);
+        vector<KMeanPoint> newCentroids = computeCentroids(image, newClusters, k, centroids);
+
+        for(int i = 0; i < k; i++)
+        {
+            if (abs(newCentroids[i].r - centroids[i].r) < KMEANS_THRESHOLD && abs(newCentroids[i].g - centroids[i].g) < KMEANS_THRESHOLD && abs(newCentroids[i].b - centroids[i].b) < KMEANS_THRESHOLD)
+            {
+                continue;
+            }
+            stop = false;
+
+        }
+        
+        centroids = newCentroids;
+        clusters = newClusters;
+        if (stop)
+        {
+            break;
+        }
+    }
+    KMeansResult result;
+    result.centroids = centroids;
+    result.clusters = clusters;
+    return result;
 }
 
 /*
