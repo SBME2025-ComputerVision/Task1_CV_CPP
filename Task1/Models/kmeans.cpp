@@ -9,11 +9,11 @@ Kmeans::Kmeans() {}
 * @param int k the number of clusters
 * @param int maxIter the maximum number of iterations
 *
-* @return KMeansResult the clusters and the centroids
+* @return Mat the clustered image
 
 */
 
-KMeansResult Kmeans::KmeansClustering(Mat &image, int k, int maxIter)
+Mat Kmeans::KmeansClustering(Mat &image, int k, int maxIter)
 {
     vector<KMeanPoint> centroids = getCentroids(k);
     bool stop = true;
@@ -40,9 +40,7 @@ KMeansResult Kmeans::KmeansClustering(Mat &image, int k, int maxIter)
             break;
         }
     }
-    KMeansResult result;
-    result.centroids = centroids;
-    result.clusters = clusters;
+    Mat result = mapPointsToCentroids(image, centroids, clusters);
     return result;
 }
 
@@ -136,3 +134,22 @@ vector<KMeanPoint> Kmeans::computeCentroids(Mat &image, Mat &clusters, int k, ve
     }
     return newCentroids;
 }
+
+Mat Kmeans::mapPointsToCentroids(Mat &image, vector<KMeanPoint> &centroids, Mat &clusters)
+{
+    Mat result = image.clone();
+    for (int i = 0; i < image.rows; i++)
+    {
+        for (int j = 0; j < image.cols; j++)
+        {
+            int cluster = clusters.at<uchar>(i, j);
+            Vec3b pixel = result.at<Vec3b>(i, j);
+            pixel[2] = centroids[cluster].r;
+            pixel[1] = centroids[cluster].g;
+            pixel[0] = centroids[cluster].b;
+            result.at<Vec3b>(i, j) = pixel;
+        }
+    }
+    return result;
+}
+

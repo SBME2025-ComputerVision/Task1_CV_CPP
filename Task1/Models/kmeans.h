@@ -18,11 +18,6 @@
 using namespace std;
 using namespace cv;
 
-struct KMeansResult
-{
-    Mat clusters;
-    vector<KMeanPoint> centroids;
-};
 
 
 
@@ -30,10 +25,11 @@ class Kmeans
 {
 public:
     Kmeans();
-    static KMeansResult KmeansClustering(Mat &image, int k, int maxIter = 100);
+    static Mat KmeansClustering(Mat &image, int k, int maxIter = 100);
     static vector<KMeanPoint> getCentroids(int k);
     static Mat assignClusters(Mat &image, vector<KMeanPoint> &centroids);
     static vector<KMeanPoint> computeCentroids(Mat &image, Mat &clusters, int k, vector<KMeanPoint> &centroids);
+    static Mat mapPointsToCentroids(Mat &image, vector<KMeanPoint> &centroids, Mat &clusters);
      
 };
 
