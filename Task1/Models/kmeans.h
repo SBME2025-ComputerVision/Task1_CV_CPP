@@ -12,7 +12,7 @@
 
 * As we are working with images we will use the RGB values of the pixels as the features
 */
-#include <ctime>     // for a random seed
+#include <ctime>     
 #include <vector>
 #include "config.h"
 
