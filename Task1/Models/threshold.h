@@ -20,9 +20,10 @@ public:
     static Mat localThresholding(Mat img, int kernelSize, int C);
     static Mat local_threshold_mean_calculation(const Mat &src, int target_app, int C);
     static Mat Padd_Mono(const Mat &src ,int padding_margin , int data_type = UCHAR_FLAG);
+    static Mat thresholdingHistogram(Mat img);
     static Mat optimumThresholding(Mat img);
     static Mat applyThresholding(Mat grey_img, float currentThreshold);
-    // static Mat otsuThresholding(Mat img);
+    static Mat otsuThresholding(Mat img);
 };
 
 #endif // THRESHOLD_H

@@ -64,6 +64,24 @@ Mat Threshold::Padd_Mono(const Mat &src, int padding_margin , int data_type)
     return padding_img;
 }
 
+Mat Threshold::thresholdingHistogram(Mat image)
+{
+        Mat hist;
+        hist = Mat::zeros(256, 1, CV_32F);
+        // convert each pixel to be stored in float
+        image.convertTo(image, CV_32F);
+        double value = 0;
+        for (int i = 0; i < image.rows; i++)
+        {
+            for (int j = 0; j < image.cols; j++)
+            {
+                value = image.at<float>(i, j);
+                hist.at<float>(value) = hist.at<float>(value) + 1;
+            }
+        }
+        return hist;
+}
+
 Mat Threshold::optimumThresholding(Mat img)
 {
     Mat grey_img = img.clone();
@@ -120,47 +138,47 @@ Mat Threshold::applyThresholding(Mat grey_img, float currentThreshold)
     return grey_img;
 }
 
-// Mat Threshold::otsuThresholding(Mat img)
-// {
-//     Mat grey_img = img.clone();
-//     cvtColor(img, grey_img, COLOR_BGR2GRAY);
-//     Mat pdf = Histogram::calculateHistogram(grey_img);
-//     Mat cdf = Mat::zeros(256,1,CV_32F);
-//     Mat weighted_cdf = Mat::zeros(256,1,CV_32F);
-//     cdf.at<float>(0) = pdf.at<float>(0);
-//     weighted_cdf.at<float>(0) = 0;
+Mat Threshold::otsuThresholding(Mat img)
+{
+    Mat grey_img = img.clone();
+    cvtColor(img, grey_img, COLOR_BGR2GRAY);
+    Mat pdf = Threshold::thresholdingHistogram(grey_img);
+    Mat cdf = Mat::zeros(256,1,CV_32F);
+    Mat weighted_cdf = Mat::zeros(256,1,CV_32F);
+    cdf.at<float>(0) = pdf.at<float>(0);
+    weighted_cdf.at<float>(0) = 0;
 
-//     for(int i=1;i<256;i++){
-//         cdf.at<float>(i) = cdf.at<float>(i-1) +  pdf.at<float>(i);
-//         weighted_cdf.at<float>(i) = weighted_cdf.at<float>(i-1) + i*pdf.at<float>(i);
-//     }
-//     float maxPixel = cdf.at<float>(255);
-//     cdf /= maxPixel;
+    for(int i=1;i<256;i++){
+        cdf.at<float>(i) = cdf.at<float>(i-1) +  pdf.at<float>(i);
+        weighted_cdf.at<float>(i) = weighted_cdf.at<float>(i-1) + i*pdf.at<float>(i);
+    }
+    float maxPixel = cdf.at<float>(255);
+    cdf /= maxPixel;
 
-//     float best_k = 0, best_Variance = 0;
+    float best_k = 0, best_Variance = 0;
 
-//     for(int k=0;k<256;k++){
-//         float w0=0,w1=0,sum1=0,sum2=0,cdf1=0,cdf2=0;
-//         w0 = cdf.at<float>(k);
-//         w1 = 1-w0;
-//         sum1 = weighted_cdf.at<float>(k);
-//         sum2 = weighted_cdf.at<float>(255)-sum1;
-//         cdf1 = ( cdf.at<float>(k) )*maxPixel;
-//         cdf2 = (1-cdf.at<float>(k))*maxPixel;
+    for(int k=0;k<256;k++){
+        float w0=0,w1=0,sum1=0,sum2=0,cdf1=0,cdf2=0;
+        w0 = cdf.at<float>(k);
+        w1 = 1-w0;
+        sum1 = weighted_cdf.at<float>(k);
+        sum2 = weighted_cdf.at<float>(255)-sum1;
+        cdf1 = ( cdf.at<float>(k) )*maxPixel;
+        cdf2 = (1-cdf.at<float>(k))*maxPixel;
 
-//         float muo=0,mu1=0;
-//         muo = sum1/cdf1;
-//         mu1 = sum2/cdf2;
-//         float interClassVar = w0*w1*(muo-mu1)*(muo-mu1);
-//         qDebug()<<"inter"<<interClassVar<<"best"<<best_Variance;
-//         if(interClassVar > best_Variance){
-//             best_k = k;
-//             best_Variance = interClassVar;
-//         }
-//     }
-//     grey_img = Threshold::applyThresholding(grey_img, best_k);
-//     return grey_img;
-// }
+        float muo=0,mu1=0;
+        muo = sum1/cdf1;
+        mu1 = sum2/cdf2;
+        float interClassVar = w0*w1*(muo-mu1)*(muo-mu1);
+        qDebug()<<"inter"<<interClassVar<<"best"<<best_Variance;
+        if(interClassVar > best_Variance){
+            best_k = k;
+            best_Variance = interClassVar;
+        }
+    }
+    grey_img = Threshold::applyThresholding(grey_img, best_k);
+    return grey_img;
+}
 
 
 Mat adaptive_padding_function(Mat src){
