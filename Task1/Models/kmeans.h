@@ -26,7 +26,7 @@ public:
     static Mat KmeansClustering(Mat &image, int k, int maxIter = 100);
     static vector<KMeanPoint> getCentroids(int k);
     static Mat assignClusters(Mat &image, vector<KMeanPoint> &centroids);
-    static vector<KMeanPoint> computeCentroids(Mat &image, Mat &clusters, int k);
+    static vector<KMeanPoint> computeCentroids(Mat &image, Mat &clusters, int k, vector<KMeanPoint> &centroids);
      
 };
 
