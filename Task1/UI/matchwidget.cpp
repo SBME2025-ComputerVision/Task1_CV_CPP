@@ -1,5 +1,5 @@
 #include "matchwidget.h"
-#include "ui_matchwidget.h"
+#include "ui_MatchWidget.h"
 #include "Models/matching.h"
 #include "Helpers/helpers.h"
 
