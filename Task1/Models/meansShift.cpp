@@ -15,3 +15,13 @@ void MeansShift::meanShiftPointAccumelate(Pixel* original, Pixel point)
 
 }
 
+void MeansShift::meanShiftSetPoint(Pixel *point, float x, float y, float l, float a, float b)
+{
+    point->x=x;
+    point->y=y;
+    point->l=l;
+    point->a=a;
+    point->b=b;
+
+}
+
