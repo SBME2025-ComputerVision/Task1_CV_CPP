@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
          double bandwidth=45;
          Image *hello=new Image("./Gallery/kmeans.jpg");
 
-         Mat image=meanShift_Segmentation(hello->getOriginalImg(),10,20);
+         Mat image=MeansShift::meanShiftSegmentation(hello->getOriginalImg(),10,20);
          imwrite("meanShift.jpg",image);
 
 

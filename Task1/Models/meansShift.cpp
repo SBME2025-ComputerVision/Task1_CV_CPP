@@ -186,8 +186,8 @@ cv::Mat MeansShift::meanShiftSegmentation(Mat Img, float distanceBandwidth, floa
                 }
                 memberModeCount[label]++;  // count the point itself
                 mode[label*3+0]/=memberModeCount[label]; // get averge color
-                mode[label*3+0]/=memberModeCount[label]; // get averge color
-                mode[label*3+0]/=memberModeCount[label]; // get averge color
+                mode[label*3+1]/=memberModeCount[label]; // get averge color
+                mode[label*3+2]/=memberModeCount[label]; // get averge color
             }
         }
     }
