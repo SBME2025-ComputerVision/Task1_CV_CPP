@@ -25,12 +25,12 @@ int main(int argc, char *argv[])
      //
 
 
-//     return a.exec();
-         double bandwidth=45;
-         Image *hello=new Image("./Gallery/kmeans.jpg");
+     return a.exec();
+//         double bandwidth=45;
+//         Image *hello=new Image("./Gallery/kmeans.jpg");
 
-         Mat image=MeansShift::meanShiftSegmentation(hello->getOriginalImg(),10,20);
-         imwrite("meanShift.jpg",image);
+//         Mat image=MeansShift::meanShiftSegmentation(hello->getOriginalImg(),20,40);
+//         imwrite("meanShift.jpg",image);
 
 
 
