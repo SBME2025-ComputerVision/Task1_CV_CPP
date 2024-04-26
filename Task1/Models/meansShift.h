@@ -8,25 +8,26 @@
 using namespace cv;
 using namespace std;
 
-#define MS_MAX_NUM_CONVERGENCE_STEPS	10										// up to 10 steps are for convergence
-#define MS_MEAN_SHIFT_TOL_COLOR			0.3										// minimum mean color shift change
-#define MS_MEAN_SHIFT_TOL_SPATIAL		0.3										// minimum mean spatial shift change
+#define MEANSHIFT_MAX_NUMBER_OF_ITERATION_STEPS
 
-struct Pixel
-{
-        float x;			// Spatial value
-        float y;			// Spatial value
-        float l;			// Lab value
-        float a;			// Lab value
-        float b;			// Lab value
+struct Pixel{
+    float x; // x coordinate of the point - spatial value
+    float y; // y coordinate of the point - spatial value
+    float l; // Lab
+    float a; // Lab
+    float b; // Lab
 };
 
-void meanShift_setPoint(Pixel* p, float px, float py, float pl, float pa, float pb);
-void meanShift_PointLab(Pixel* pt);
-void meanShift_copyPoint_F2S(Pixel* p1, Pixel* p2);
-float meanShift_ColorDistance(Pixel Pt1, Pixel Pt2);
-float meanShift_SpatialDistance(Pixel Pt1, Pixel Pt2);
-void meanShift_PointScale(Pixel* p, float scale);
-void meanShift_PointAccum(Pixel* mainPt, Pixel Pt);
-void meanShift_PointRGB(Pixel* p);
-Mat meanShift_Segmentation(Mat Img, float distanceBandwidth, float colorBandwidth);
+class MeansShift{
+    MeansShift();
+    static void meanShiftPointAccumelate(Pixel*,Pixel);
+    static void meanShiftSetPoint(Pixel*,float,float,float,float,float);
+    static void meanShiftCopyPoint(Pixel*,Pixel*);
+    static float meanShiftColorDistance(Pixel,Pixel);
+    static float meanShiftSpatialDistance(Pixel,Pixel);
+    static Mat meanShiftSegmentation(Mat,float,float);
+    static void meanShiftPointRGB(Pixel*);
+    static void meanShiftPointToLab(Pixel*);
+    static void meanShiftPointScale(Pixel*,float);
+
+};
