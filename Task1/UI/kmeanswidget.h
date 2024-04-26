@@ -20,6 +20,8 @@ private slots:
 
     void on_kCluserSlider_sliderReleased();
 
+    void on_segmentBtn_clicked();
+
 private:
     Ui::KmeansWidget *ui;
     KmeansController* kmeansController;

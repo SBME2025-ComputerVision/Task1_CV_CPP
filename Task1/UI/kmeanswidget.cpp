@@ -48,10 +48,16 @@ void KmeansWidget::on_kCluserSlider_sliderReleased()
     ui->clustersNum->setText("Number of Clusters: " + qNumClustersStr);
 
 
+
+}
+
+
+void KmeansWidget::on_segmentBtn_clicked()
+{
+
     int k = ui->kCluserSlider->value();
     processedImg = kmeansController->kmeanClustering(k);
     processedImg = processedImg.scaled(ui->processedImage->size(),Qt::IgnoreAspectRatio);
     ui->processedImage->setPixmap(processedImg);
-
 }
 
