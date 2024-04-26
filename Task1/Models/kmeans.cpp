@@ -95,9 +95,10 @@ Mat Kmeans::assignClusters(Mat &image, vector<KMeanPoint> &centroids)
                 }
             }
             clusters.at<uchar>(i, j) = p.cluster;
+
         }
     }
-
+    return clusters;
 }
 
 /*
@@ -128,6 +129,9 @@ vector<KMeanPoint> Kmeans::computeCentroids(Mat &image, Mat &clusters, int k, ve
     }
     for (int i = 0; i < k; i++)
     {
+        if (count[i] == 0){
+            continue;
+        }
         newCentroids[i].r /= count[i];
         newCentroids[i].g /= count[i];
         newCentroids[i].b /= count[i];
