@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "UI/regiongrowingwidget.h"
+#include "UI/kmeanswidget.h"
 
 namespace Ui {
 class SegmentationWidget;
@@ -15,6 +16,7 @@ class SegmentationWidget : public QWidget
 public:
     explicit SegmentationWidget(QWidget *parent = nullptr);
     QWidget *regionWidget = new RegionGrowingWidget();
+    QWidget *kmeansWidget = new KmeansWidget();
     ~SegmentationWidget();
 
 private:
