@@ -8,7 +8,9 @@
 using namespace cv;
 using namespace std;
 
-#define MEANSHIFT_MAX_NUMBER_OF_ITERATION_STEPS
+#define MEANSHIFT_MAX_NUMBER_OF_ITERATION_STEPS 5 // allowed up to 10
+#define MEANSHIFT_COLOR_THRESHOLD_TO_TERMINATE 0.3
+#define MEANSHIFT_SPATIAL_THRESHOLD_TO_TERMINATE 0.3
 
 struct Pixel{
     float x; // x coordinate of the point - spatial value

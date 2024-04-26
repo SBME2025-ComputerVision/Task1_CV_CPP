@@ -87,16 +87,46 @@ cv::Mat MeansShift::meanShiftSegmentation(Mat Img, float distanceBandwidth, floa
     int pointsNumber; // number of points in a hypersphere
     int step;
 
+    // FILTERING
+
     for(int i=0;i<ROWS;i++){
-        for(int j=0;i<COLS;j++){
+        for(int j=0;j<COLS;j++){
             left=(j-distanceBandwidth)>0?(j-distanceBandwidth):0;
             right=(j+distanceBandwidth)<COLS?(j+distanceBandwidth):COLS;
             top=(i-distanceBandwidth)>0?(i-distanceBandwidth):0;
             bottom=(i+distanceBandwidth)<ROWS?(i+distanceBandwidth):ROWS;
             meanShiftSetPoint(&currentPoint,i,j,(float)ImgChannels[0].at<uchar>(i,j),(float)ImgChannels[1].at<uchar>(i,j),(float)ImgChannels[2].at<uchar>(i,j));
+            meanShiftPointToLab(&currentPoint);
+            step=0;
+            do{
+                meanShiftCopyPoint(&prevPoint,&currentPoint);
+                meanShiftSetPoint(&pointSum,0,0,0,0,0);
+                pointsNumber=0;
+                for(int hx=top;hx<bottom;hx++){
+                    for(int hy=left;hy<right;hy++){
+                        meanShiftSetPoint(&point,hx,hy,(float)ImgChannels[0].at<uchar>(hx, hy), (float)ImgChannels[1].at<uchar>(hx, hy), (float)ImgChannels[2].at<uchar>(hx, hy));
+                        meanShiftPointToLab(&point);
+                        if(meanShiftColorDistance(point,currentPoint)<colorBandwidth){
+                            meanShiftPointAccumelate(&pointSum,point);
+                            pointsNumber++;
+                        }
+
+                    }
+
+                }
+                meanShiftPointScale(&pointSum,1.0/pointsNumber);
+                meanShiftCopyPoint(&currentPoint,&pointSum);
+                step++;
+
+            }while((meanShiftColorDistance(currentPoint,prevPoint)>MEANSHIFT_COLOR_THRESHOLD_TO_TERMINATE)&&(meanShiftSpatialDistance(currentPoint,prevPoint)>MEANSHIFT_SPATIAL_THRESHOLD_TO_TERMINATE)&&(step<MEANSHIFT_MAX_NUMBER_OF_ITERATION_STEPS));
+            meanShiftPointRGB(&currentPoint);
+            ImgOut.at<Vec3b>(i,j)=Vec3b(currentPoint.l,currentPoint.a,currentPoint.b);
 
         }
     }
+
+    /*--------------------------------*/
+    /* SEGMENTATION */
 
 }
 
