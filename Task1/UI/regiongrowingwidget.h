@@ -1,10 +1,22 @@
 #ifndef REGIONGROWINGWIDGET_H
 #define REGIONGROWINGWIDGET_H
 
-class RegionGrowingWidget
+#include <QWidget>
+
+namespace Ui {
+class RegionGrowingWidget;
+}
+
+class RegionGrowingWidget : public QWidget
 {
+    Q_OBJECT
+
 public:
-    RegionGrowingWidget();
+    explicit RegionGrowingWidget(QWidget *parent = nullptr);
+    ~RegionGrowingWidget();
+
+private:
+    Ui::RegionGrowingWidget *ui;
 };
 
 #endif // REGIONGROWINGWIDGET_H

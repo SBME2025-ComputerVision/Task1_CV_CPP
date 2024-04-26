@@ -24,9 +24,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->stackedWidget->addWidget(thresholdWidget);
     ui->stackedWidget->addWidget(houghTransformWidget);
     ui->stackedWidget->addWidget(activeContourWidget);
-     ui->stackedWidget->addWidget(matchWidget);
+    ui->stackedWidget->addWidget(matchWidget);
     ui->stackedWidget->addWidget(harrisWidget);
     ui->stackedWidget->addWidget(siftWidget);
+    ui->stackedWidget->addWidget(segmentationWidget);
     menuBtns.append(ui->filteringBtn);
     menuBtns.append(ui->frequencyBtn);
     menuBtns.append(ui->edgeDetectionBtn);
@@ -39,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
     menuBtns.append(ui->matchingBtn);
     menuBtns.append(ui->harrisBtn);
     menuBtns.append(ui->siftBtn);
+    menuBtns.append(ui->segmentationBtn);
 
     style="\
         QPushButton {\
@@ -203,5 +205,14 @@ void MainWindow::on_siftBtn_clicked()
     ui->siftBtn->setStyleSheet("background-color: #76ABAE;");
     ui->stackedWidget->setCurrentWidget(siftWidget);
      setWindowState(Qt::WindowMaximized);
+}
+
+
+void MainWindow::on_segmentationBtn_clicked()
+{
+    changeButtonColors(menuBtns,style);
+    ui->segmentationBtn->setStyleSheet("background-color: #76ABAE;");
+    ui->stackedWidget->setCurrentWidget(segmentationWidget);
+    setWindowState(Qt::WindowMaximized);
 }
 
