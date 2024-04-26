@@ -5,6 +5,8 @@ MeansShift::MeansShift()
 {
 }
 
+const int dxdy[][2] = {{-1,-1},{-1,0},{-1,1},{0,-1},{0,1},{1,-1},{1,0},{1,1}};	// Region Growing
+
 void MeansShift::meanShiftPointAccumelate(Pixel* original, Pixel point)
 {
     original->x+=point.x;
@@ -127,6 +129,85 @@ cv::Mat MeansShift::meanShiftSegmentation(Mat Img, float distanceBandwidth, floa
 
     /*--------------------------------*/
     /* SEGMENTATION */
+    int label=-1; // label number
+    vector<float>mode(ROWS*COLS*3); // store the LAB color of each region
+    vector<int>memberModeCount(ROWS*COLS,0); // store the number of each region
+    split(ImgOut,ImgChannels);
+    vector<vector<int>>labels(ROWS);  // optimize
+    // Initialization
+    for(int i=0;i<ROWS;i++){
+        for(int j=0;j<COLS;j++){
+            labels[i].push_back(-1);
+        }
+    }
+
+    for(int i=0;i<ROWS;i++){
+        for(int j=0;j<COLS;j++){
+            if(labels[i][j]<0){  // if the point is not labeled
+                labels[i][j]=++label;  // give it a new label number
+                meanShiftSetPoint(&currentPoint,i,j, (float)ImgChannels[0].at<uchar>(i, j), (float)ImgChannels[1].at<uchar>(i, j), (float)ImgChannels[2].at<uchar>(i, j));
+                meanShiftPointToLab(&currentPoint);
+
+                // store each value of the LAB
+                mode[label*3+0]=currentPoint.l;
+                mode[label*3+1]=currentPoint.a;
+                mode[label*3+2]=currentPoint.b;
+
+                // region growing 8 neighbors
+                vector<Pixel>neighborPoints;
+                neighborPoints.push_back(currentPoint);
+                while(!neighborPoints.empty()){
+                    point=neighborPoints.back();
+                    neighborPoints.pop_back();
+
+                    // get 8 neighbours
+                    for(int k=0;k<8;k++){
+                        int hx=point.x+dxdy[k][0];
+                        int hy=point.y+dxdy[k][1];
+                        if((hx>=0)&&(hy>=0)&&(hx<ROWS)&&(hy<COLS)&&(labels[hx][hy]<0)){
+                            Pixel p;
+                            meanShiftSetPoint(&p,hx, hy, (float)ImgChannels[0].at<uchar>(hx, hy), (float)ImgChannels[1].at<uchar>(hx, hy), (float)ImgChannels[2].at<uchar>(hx, hy));
+                            meanShiftPointToLab(&p);
+
+                            // check if color is smaller than threshold
+                            if(meanShiftColorDistance(currentPoint,p)<colorBandwidth){
+                                labels[hx][hy]=label; // give the pixel the same label
+                                neighborPoints.push_back(p);
+                                memberModeCount[label]++; // this region number + 1
+                                mode[label*3+0]+=p.l;
+                                mode[label*3+1]+=p.a;
+                                mode[label*3+2]+=p.b;
+
+
+
+                            }
+                        }
+                    }
+                }
+                memberModeCount[label]++;  // count the point itself
+                mode[label*3+0]/=memberModeCount[label]; // get averge color
+                mode[label*3+0]/=memberModeCount[label]; // get averge color
+                mode[label*3+0]/=memberModeCount[label]; // get averge color
+            }
+        }
+    }
+
+    // get result image from the mode array
+    for(int i=0;i<ROWS;i++){
+        for(int j=0;j<COLS;j++){
+            label=labels[i][j];
+            float l=mode[label*3+0];
+            float a=mode[label*3+1];
+            float b=mode[label*3+2];
+            Pixel pixel;
+            meanShiftSetPoint(&pixel,i,j,l,a,b);
+            meanShiftPointRGB(&pixel);
+            ImgOut.at<Vec3b>(i,j)=Vec3b(pixel.l,pixel.a,pixel.b);
+        }
+    }
+    cvtColor(ImgOut,ImgOut,COLOR_Lab2BGR);
+    return ImgOut;
+
 
 }
 
