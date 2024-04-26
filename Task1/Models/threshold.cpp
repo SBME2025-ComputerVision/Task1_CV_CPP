@@ -82,10 +82,10 @@ Mat Threshold::thresholdingHistogram(Mat image)
         return hist;
 }
 
-Mat Threshold::optimumThresholding(Mat img)
+Mat Threshold::optimumThresholding(Mat img, bool isGlobal = true)
 {
     Mat grey_img = img.clone();
-    cvtColor(img, grey_img, COLOR_BGR2GRAY);
+    if (isGlobal) cvtColor(img, grey_img, COLOR_BGR2GRAY);
     vector<float>foreground,background;
     float currentThreshold,prevThreshold;
     currentThreshold = grey_img.at<uchar>(0,0)+grey_img.at<uchar>(0,img.cols-1)+grey_img.at<uchar>(img.rows-1,0)+grey_img.at<uchar>(img.rows-1,img.cols-1);
@@ -136,10 +136,10 @@ Mat Threshold::applyThresholding(Mat grey_img, float currentThreshold)
     return grey_img;
 }
 
-Mat Threshold::otsuThresholding(Mat img)
+Mat Threshold::otsuThresholding(Mat img, bool isGlobal = true)
 {
     Mat grey_img = img.clone();
-    // cvtColor(img, grey_img, COLOR_BGR2GRAY);
+     if (isGlobal) cvtColor(img, grey_img, COLOR_BGR2GRAY);
     Mat pdf = Threshold::thresholdingHistogram(grey_img);
     Mat cdf = Mat::zeros(256,1,CV_32F);
     Mat weighted_cdf = Mat::zeros(256,1,CV_32F);
@@ -178,10 +178,10 @@ Mat Threshold::otsuThresholding(Mat img)
     return grey_img;
 }
 
-Mat Threshold::spectralThresholding(Mat img)
+Mat Threshold::spectralThresholding(Mat img,bool isGlobal = true)
 {
     Mat gray_image = img.clone();
-    // cvtColor(img, gray_image, COLOR_BGR2GRAY);
+     if (isGlobal) cvtColor(img, gray_image, COLOR_BGR2GRAY);
     Mat pdf = Threshold::thresholdingHistogram(gray_image);
 
     Mat cdf = Mat::zeros(256,1,CV_32F);
@@ -268,13 +268,13 @@ Mat Threshold::localspectral(Mat img)
     Rect roi4(cols/2,rows/2,cols/2,rows/2);
 
     Mat part1 = img(roi1);
-    part1 = Threshold::spectralThresholding(part1);
+    part1 = Threshold::spectralThresholding(part1, false);
     Mat part2 = img(roi2);
-    part2 = Threshold::spectralThresholding(part2);
+    part2 = Threshold::spectralThresholding(part2, false);
     Mat part3 = img(roi3);
-    part3 = Threshold::spectralThresholding(part3);
+    part3 = Threshold::spectralThresholding(part3, false);
     Mat part4 = img(roi4);
-    part4 = Threshold::spectralThresholding(part4);
+    part4 = Threshold::spectralThresholding(part4, false);
 
     Mat gray_image = img.clone();
 
@@ -297,13 +297,13 @@ Mat Threshold::localOptimum(Mat img)
     Rect roi4(cols/2,rows/2,cols/2,rows/2);
 
     Mat part1 = img(roi1);
-    part1 = Threshold::optimumThresholding(part1);
+    part1 = Threshold::optimumThresholding(part1, false);
     Mat part2 = img(roi2);
-    part2 = Threshold::optimumThresholding(part2);
+    part2 = Threshold::optimumThresholding(part2, false);
     Mat part3 = img(roi3);
-    part3 = Threshold::optimumThresholding(part3);
+    part3 = Threshold::optimumThresholding(part3, false);
     Mat part4 = img(roi4);
-    part4 = Threshold::optimumThresholding(part4);
+    part4 = Threshold::optimumThresholding(part4, false);
 
     Mat gray_image = img.clone();
 
@@ -326,13 +326,13 @@ Mat Threshold::localOtsu(Mat img)
     Rect roi4(cols/2,rows/2,cols/2,rows/2);
 
     Mat part1 = img(roi1);
-    part1 = Threshold::otsuThresholding(part1);
+    part1 = Threshold::otsuThresholding(part1, false);
     Mat part2 = img(roi2);
-    part2 = Threshold::otsuThresholding(part2);
+    part2 = Threshold::otsuThresholding(part2, false);
     Mat part3 = img(roi3);
-    part3 = Threshold::otsuThresholding(part3);
+    part3 = Threshold::otsuThresholding(part3, false);
     Mat part4 = img(roi4);
-    part4 = Threshold::otsuThresholding(part4);
+    part4 = Threshold::otsuThresholding(part4, false);
 
     Mat gray_image = img.clone();
 
