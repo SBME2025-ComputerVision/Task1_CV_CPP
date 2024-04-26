@@ -71,6 +71,12 @@ extern string whalePth;
  enum ThresholdingType{
      LocalThresholding = 1,
      GlobalThresholding,
+     OptimumThresholding,
+     OtsuThresholding,
+     SpectralThresholding,
+     LocalOptimum,
+     LocalOtsu,
+     LocalSpectral,
  };
 
  enum cornerDetectionType{

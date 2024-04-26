@@ -56,3 +56,17 @@ void ThresholdWidget::on_radiusSLider_sliderReleased()
      on_globalThresholdBtn_clicked();
 }
 
+
+void ThresholdWidget::on_spectralBtn_clicked()
+{
+    if(ui->globalVsLocalCombo->currentIndex()==0){
+    thresholdedImg = thresholdController->ThresholdingFilter(SpectralThresholding,ui->radiusSLider->value(), thresholdParams.ThresholdKernelSize, thresholdParams.CParam);
+    }
+    else{
+          thresholdedImg = thresholdController->ThresholdingFilter(LocalSpectral,ui->radiusSLider->value(), thresholdParams.ThresholdKernelSize, thresholdParams.CParam);
+    }
+    thresholdedImg = thresholdedImg.scaled(ui->processedImage->size(),Qt::IgnoreAspectRatio);
+    ui->processedImage->setPixmap(thresholdedImg);
+    ui->processedImage->setAlignment(Qt::AlignCenter);
+}
+
