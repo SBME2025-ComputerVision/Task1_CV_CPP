@@ -24,6 +24,11 @@ public:
     static Mat optimumThresholding(Mat img);
     static Mat applyThresholding(Mat grey_img, float currentThreshold);
     static Mat otsuThresholding(Mat img);
+    static Mat spectralThresholding(Mat img);
+    static Mat applyDoubleThresholding(Mat gray_image, float optimal_high, float optimal_low);
+    static Mat localspectral(Mat img);
+    static Mat localOptimum(Mat img);
+    static Mat localOtsu(Mat img);
 };
 
 #endif // THRESHOLD_H
