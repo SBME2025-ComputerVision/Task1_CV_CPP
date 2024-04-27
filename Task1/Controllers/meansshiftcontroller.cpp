@@ -7,9 +7,8 @@ QPixmap MeansShiftController::getMeansShiftSegmentedImg(float distanceBandwidth,
 {
     if(img->isEmpty())return  Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
 
-     Mat res=MeansShift::meanShiftSegmentation(img->getOriginalImg(),distanceBandwidth,colorBandwidth);
-     processedImg=res;
-     return Helpers::convertMatToPixmap(processedImg);
+    Mat res=MeansShift::meanShiftSegmentation(img->getOriginalImg(),distanceBandwidth,colorBandwidth);
+    return Helpers::convertMatToPixmap(res);
 
 }
 

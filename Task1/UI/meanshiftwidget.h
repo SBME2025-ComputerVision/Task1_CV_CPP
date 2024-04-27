@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include"config.h"
-#include"Controllers/meansShiftcontroller.h"
+#include"Controllers/meansshiftcontroller.h"
 
 
 namespace Ui {

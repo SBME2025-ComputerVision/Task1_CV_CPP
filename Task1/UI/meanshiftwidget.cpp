@@ -30,5 +30,8 @@ void MeanShiftWidget::on_applyMeansShiftBtn_clicked()
 //    colorBandwidth= ui->colorBandwidthSpinBox->value();
 //    distanceBandwidth=ui->distanceBandwidthSpinBox->value();
     processedImg=meansShiftController->getMeansShiftSegmentedImg(10,20);
+    processedImg=processedImg.scaled(ui->processedImgWidget->size(),Qt::IgnoreAspectRatio);
+    ui->processedImgWidget->setPixmap(processedImg);
 }
+
 
