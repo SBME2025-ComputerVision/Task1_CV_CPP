@@ -47,6 +47,8 @@ const float LAMBDA_DESC = 6;
 const float THRESH_ABSOLUTE = 350;
 const float THRESH_RELATIVE = 0.7;
 
+const int KMEANS_THRESHOLD = 10;
+
 
 extern string birdPth;
 extern string catPth;
@@ -71,6 +73,12 @@ extern string whalePth;
  enum ThresholdingType{
      LocalThresholding = 1,
      GlobalThresholding,
+     OptimumThresholding,
+     OtsuThresholding,
+     SpectralThresholding,
+     LocalOptimum,
+     LocalOtsu,
+     LocalSpectral,
  };
 
  enum cornerDetectionType{
@@ -126,4 +134,32 @@ extern string whalePth;
     HybridPage = 4,
     FrequencyPage = 5
 };
+
+struct KMeanPoint{
+    int r, g, b;
+    int cluster;
+    double minDistance;
+
+    KMeanPoint(){
+        this->r = 0;
+        this->g = 0;
+        this->b = 0;
+        this->cluster = -1;
+        this->minDistance = INT_MAX;
+    }
+
+    KMeanPoint(int r, int g, int b){
+        this->r = r;
+        this->g = g;
+        this->b = b;
+        this->cluster = -1;
+        this->minDistance = INT_MAX;
+    }
+
+    double distance(KMeanPoint p){
+        return (p.r - r) * (p.r - r) + (p.g - g) * (p.g - g) + (p.b - b) * (p.b - b);
+    }
+
+};
+
 #endif // CONFIG_H

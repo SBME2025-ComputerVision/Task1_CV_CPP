@@ -17,6 +17,7 @@
 #include "UI/matchwidget.h"
 #include "UI/harriswidget.h"
 #include "UI/siftwidget.h"
+#include "UI/segmentationwidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -43,6 +44,7 @@ public:
     MatchWidget *matchWidget = new MatchWidget();
     HarrisWidget *harrisWidget = new HarrisWidget();
     SiftWidget   *siftWidget   = new SiftWidget();
+    SegmentationWidget *segmentationWidget = new SegmentationWidget();
 
 
 private slots:
@@ -74,6 +76,8 @@ private slots:
 
 
     void on_siftBtn_clicked();
+
+    void on_segmentationBtn_clicked();
 
 private:
     Ui::MainWindow *ui;

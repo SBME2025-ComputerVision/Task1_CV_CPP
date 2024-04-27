@@ -1,6 +1,8 @@
 #include "UI/mainwindow.h"
 #include "Models/houghtransform.h"
 #include <opencv2/opencv.hpp>
+#include"Models/meansShift.h"
+#include"config.h"
 #include <QApplication>
 #include <QFile>
 
@@ -24,6 +26,7 @@ int main(int argc, char *argv[])
 
 
      return a.exec();
+
 
 
 

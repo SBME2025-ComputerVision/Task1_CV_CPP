@@ -23,7 +23,7 @@ QPixmap Controller::uploadImg() {
 
     QString path = Helpers::openFile(); // Opens a file dialog to select an image file
     if(!path.isEmpty()){
-        delete img; // Deletes any previous image
+//        delete img; // Deletes any previous image
         img = new Image(path.toStdString()); // Loads the image from the selected path
         if(!img->isEmpty()){ // Checks if the image is successfully loaded
             return Helpers::convertMatToPixmap(img->getOriginalImg()); // Converts the image to QPixmap
