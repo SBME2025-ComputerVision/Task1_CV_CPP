@@ -1,3 +1,5 @@
+#ifndef MEANSSHIFT_H
+#define MEANSSHIFT_H
 #include <math.h>
 #include <vector>
 #include <iostream>
@@ -33,3 +35,7 @@ public:
     static void meanShiftPointScale(Pixel*,float);
 
 };
+
+
+#endif // MEANSSHIFT_H
+

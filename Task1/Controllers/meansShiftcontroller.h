@@ -9,4 +9,3 @@ public:
 };
 
 #endif // MEANSSHIFTCONTROLLER_H
-

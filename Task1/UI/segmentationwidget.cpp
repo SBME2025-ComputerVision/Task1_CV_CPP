@@ -13,7 +13,8 @@ SegmentationWidget::SegmentationWidget(QWidget *parent)
     ui->workFrame->setLayout(layout);
 
     // Add the regionWidget to the layout
-    layout->addWidget(regionWidget);
+    layout->addWidget(meansShiftWidget);
+
 
 }
 

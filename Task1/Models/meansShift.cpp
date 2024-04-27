@@ -1,4 +1,4 @@
-#include"meansShift.h"
+#include"meansshift.h"
 #include<math.h>
 
 MeansShift::MeansShift()
@@ -210,4 +210,5 @@ cv::Mat MeansShift::meanShiftSegmentation(Mat Img, float distanceBandwidth, floa
 
 
 }
+
 

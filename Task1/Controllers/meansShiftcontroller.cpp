@@ -1,7 +1,7 @@
-#include"meansShiftcontroller.h"
+#include"meansshiftcontroller.h"
 #include"Helpers/helpers.h"
 #include"config.h"
-#include"Models/meansShift.h"
+#include"Models/meansshift.h"
 
 QPixmap MeansShiftController::getMeansShiftSegmentedImg(float distanceBandwidth,float colorBandwidth)
 {
@@ -12,4 +12,5 @@ QPixmap MeansShiftController::getMeansShiftSegmentedImg(float distanceBandwidth,
      return Helpers::convertMatToPixmap(processedImg);
 
 }
+
 
