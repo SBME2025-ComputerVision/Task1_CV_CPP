@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "UI/regiongrowingwidget.h"
 #include"UI/meanshiftwidget.h"
+#include "UI/agglomerativewidget.h"
 
 namespace Ui {
 class SegmentationWidget;
@@ -17,6 +18,7 @@ public:
     explicit SegmentationWidget(QWidget *parent = nullptr);
     QWidget *regionWidget = new RegionGrowingWidget();
     QWidget *meansShiftWidget=new MeanShiftWidget();
+    QWidget *agglomerativeWidget = new AgglomerativeWidget();
     ~SegmentationWidget();
 
 private:
