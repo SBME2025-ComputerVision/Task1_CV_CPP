@@ -26,6 +26,8 @@ private slots:
 
 
 
+    void on_applyBtn_clicked();
+
 private:
     Ui::RegionGrowingWidget *ui;
     RegionGrowingController *regionGrowingController;
@@ -33,6 +35,7 @@ private:
     QPixmap originalImg;
     QPixmap processedImg;
     QGraphicsPixmapItem *pixmapItem;
+    vector<pair<int,int>> seedPoints;
 private:
     bool eventFilter(QObject *obj, QEvent *event); // Declare the event filter method
 

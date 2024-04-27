@@ -1,5 +1,6 @@
 #include "regiongrowingwidget.h"
 #include "qevent.h"
+#include <qdebug.h>
 #include "ui_regiongrowingwidget.h"
 
 RegionGrowingWidget::RegionGrowingWidget(QWidget *parent)
@@ -70,10 +71,26 @@ void RegionGrowingWidget::on_graphicsView_pressed(QMouseEvent *event)
         // Convert back to QPixmap
         originalImg = QPixmap::fromImage(tempImage);
 
+        // Save the location of the press as col and row in the cv::Mat
+        int row = imagePos.y();
+        int col = imagePos.x();
+
+        qDebug() << "Row: " << row << "Col: " << col;
+        
+        seedPoints.push_back({row, col});
+
         // Update the pixmap item
         pixmapItem->setPixmap(originalImg);
     }
 }
 
 
+
+
+void RegionGrowingWidget::on_applyBtn_clicked()
+{
+    processedImg = regionGrowingController->growSeedPoints(seedPoints,5);
+    processedImg = processedImg.scaled(ui->processedImgLabel->size(),Qt::IgnoreAspectRatio);
+    ui->processedImgLabel->setPixmap(processedImg);
+}
 
