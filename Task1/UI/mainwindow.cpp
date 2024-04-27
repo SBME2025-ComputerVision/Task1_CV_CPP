@@ -108,7 +108,7 @@ void MainWindow::on_thresholdingBtn_clicked()
     changeButtonColors(menuBtns,style);
     ui->thresholdingBtn->setStyleSheet("background-color: #76ABAE;");
     ui->stackedWidget->setCurrentWidget(thresholdWidget);
-     setWindowState(Qt::WindowMaximized);
+    setWindowState(Qt::WindowMaximized);
 }
 
 
@@ -117,7 +117,7 @@ void MainWindow::on_hybridBtn_clicked()
     changeButtonColors(menuBtns,style);
     ui->hybridBtn->setStyleSheet("background-color: #76ABAE;");
     ui->stackedWidget->setCurrentWidget(hybridWidget);
-  setWindowState(Qt::WindowMaximized);
+    setWindowState(Qt::WindowMaximized);
 }
 
 void MainWindow::on_frequencyBtn_clicked()

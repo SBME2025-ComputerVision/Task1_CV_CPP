@@ -39,6 +39,7 @@ bool RegionGrowingWidget::eventFilter(QObject *obj, QEvent *event)
 void RegionGrowingWidget::on_uploadBtn_clicked()
 {
     originalImg = regionGrowingController->uploadImg();
+    temp = originalImg;
     if(!originalImg.isNull())
     {
         scene->clear();
@@ -92,5 +93,21 @@ void RegionGrowingWidget::on_applyBtn_clicked()
     processedImg = regionGrowingController->growSeedPoints(seedPoints,5);
     processedImg = processedImg.scaled(ui->processedImgLabel->size(),Qt::IgnoreAspectRatio);
     ui->processedImgLabel->setPixmap(processedImg);
+}
+
+
+void RegionGrowingWidget::on_resetBtn_clicked()
+{
+    scene->clear();
+    seedPoints.clear();
+    ui->processedImgLabel->clear();
+    originalImg = temp;
+    if(!originalImg.isNull())
+    {
+        scene->clear();
+        pixmapItem = scene->addPixmap(originalImg);
+        ui->graphicsView->setScene(scene);
+        ui->graphicsView->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
+    }
 }
 
