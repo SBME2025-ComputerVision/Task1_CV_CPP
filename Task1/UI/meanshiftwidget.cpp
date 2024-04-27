@@ -6,6 +6,7 @@ MeanShiftWidget::MeanShiftWidget(QWidget *parent) :
     ui(new Ui::MeanShiftWidget)
 {
     ui->setupUi(this);
+    meansShiftController = new MeansShiftController();
 }
 
 MeanShiftWidget::~MeanShiftWidget()
