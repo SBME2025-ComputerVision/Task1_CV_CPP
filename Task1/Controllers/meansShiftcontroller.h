@@ -5,7 +5,7 @@
 class MeansShiftController:public Controller{
 public:
     MeansShiftController();
-    QPixmap getMeansShiftSegmentedImg(Mat Img,float distanceBandwidth,float colorBandwidth);
+    QPixmap getMeansShiftSegmentedImg(float distanceBandwidth,float colorBandwidth);
 };
 
 #endif // MEANSSHIFTCONTROLLER_H

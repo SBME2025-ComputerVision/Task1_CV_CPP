@@ -3,7 +3,7 @@
 #include"config.h"
 #include"Models/meansShift.h"
 
-QPixmap MeansShiftController::getMeansShiftSegmentedImg(Mat Img,float distanceBandwidth,float colorBandwidth)
+QPixmap MeansShiftController::getMeansShiftSegmentedImg(float distanceBandwidth,float colorBandwidth)
 {
     if(img->isEmpty())return  Helpers::convertMatToPixmap(Mat::zeros(1,1,CV_8UC1));
 
