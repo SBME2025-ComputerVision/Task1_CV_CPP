@@ -35,6 +35,7 @@ private slots:
     void on_spectralBtn_clicked();
     void on_otsuBtn_clicked();
     void on_optimumBtn_clicked();
+    void on_resetBtn_clicked();
 };
 
 #endif // THRESHOLDWIDGET_H
