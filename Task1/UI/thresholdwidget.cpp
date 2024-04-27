@@ -104,5 +104,6 @@ void ThresholdWidget::on_resetBtn_clicked()
     processedImg = originalImg;
     processedImg = processedImg.scaled(ui->processedImage->size(),Qt::IgnoreAspectRatio);
     ui->processedImage->setPixmap(processedImg);
+
 }
 
