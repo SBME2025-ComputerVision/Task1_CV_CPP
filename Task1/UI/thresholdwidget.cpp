@@ -70,3 +70,31 @@ void ThresholdWidget::on_spectralBtn_clicked()
     ui->processedImage->setAlignment(Qt::AlignCenter);
 }
 
+
+void ThresholdWidget::on_otsuBtn_clicked()
+{
+    if(ui->globalVsLocalCombo->currentIndex()==0){
+        thresholdedImg = thresholdController->ThresholdingFilter(OtsuThresholding,ui->radiusSLider->value(), thresholdParams.ThresholdKernelSize, thresholdParams.CParam);
+    }
+    else{
+        thresholdedImg = thresholdController->ThresholdingFilter(LocalOtsu,ui->radiusSLider->value(), thresholdParams.ThresholdKernelSize, thresholdParams.CParam);
+    }
+    thresholdedImg = thresholdedImg.scaled(ui->processedImage->size(),Qt::IgnoreAspectRatio);
+    ui->processedImage->setPixmap(thresholdedImg);
+    ui->processedImage->setAlignment(Qt::AlignCenter);
+}
+
+
+void ThresholdWidget::on_optimumBtn_clicked()
+{
+    if(ui->globalVsLocalCombo->currentIndex()==0){
+        thresholdedImg = thresholdController->ThresholdingFilter(OptimumThresholding,ui->radiusSLider->value(), thresholdParams.ThresholdKernelSize, thresholdParams.CParam);
+    }
+    else{
+        thresholdedImg = thresholdController->ThresholdingFilter(LocalOptimum,ui->radiusSLider->value(), thresholdParams.ThresholdKernelSize, thresholdParams.CParam);
+    }
+    thresholdedImg = thresholdedImg.scaled(ui->processedImage->size(),Qt::IgnoreAspectRatio);
+    ui->processedImage->setPixmap(thresholdedImg);
+    ui->processedImage->setAlignment(Qt::AlignCenter);
+}
+
