@@ -8,6 +8,7 @@ SegmentationWidget::SegmentationWidget(QWidget *parent)
     ui->setupUi(this);
     ui->stackedWidget->addWidget(regionWidget);
     ui->stackedWidget->addWidget(meansShiftWidget);
+    ui->stackedWidget->addWidget(agglomerativeWidget);  
     menuBtns.append(ui->meanShiftBtn);
     menuBtns.append(ui->kmeansBtn);
     menuBtns.append(ui->aggBtn);
