@@ -84,5 +84,7 @@ void SegmentationWidget::on_aggBtn_clicked()
 {
     changeButtonColors(menuBtns,style);
     ui->aggBtn->setStyleSheet("background-color: #76ABAE;");
+    ui->stackedWidget->setCurrentWidget(agglomerativeWidget);
+    setWindowState(Qt::WindowMaximized);
 }
 
