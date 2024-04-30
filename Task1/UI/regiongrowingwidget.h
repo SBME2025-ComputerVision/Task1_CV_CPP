@@ -28,12 +28,15 @@ private slots:
 
     void on_applyBtn_clicked();
 
+    void on_resetBtn_clicked();
+
 private:
     Ui::RegionGrowingWidget *ui;
     RegionGrowingController *regionGrowingController;
     QGraphicsScene *scene;
     QPixmap originalImg;
     QPixmap processedImg;
+    QPixmap temp;
     QGraphicsPixmapItem *pixmapItem;
     vector<pair<int,int>> seedPoints;
 private:

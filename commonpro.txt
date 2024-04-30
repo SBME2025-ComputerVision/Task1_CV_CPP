@@ -29,6 +29,9 @@ SOURCES += \
     Controllers/edgecontroller.cpp  \
     Controllers/hybridcontroller.cpp \
     Controllers/matchcontroller.cpp \
+    Controllers/meansshiftcontroller.cpp \
+    Controllers/regiongrowingcontroller.cpp \
+    Controllers/siftcontroller.cpp \
     Controllers/thresholdcontroller.cpp \
     Helpers/helpers.cpp \
     Helpers/scene.cpp \
@@ -37,11 +40,14 @@ SOURCES += \
     Models/filter.cpp \
     Models/fourier.cpp \
     Models/harris.cpp \
+    Models/kmeans.cpp \
     Models/matching.cpp \
+    Models/meansshift.cpp \
     Models/noise.cpp \
     Models/image.cpp \
     Models/histogram.cpp \
     Models/hybrid.cpp   \
+    Models/regiongrowing.cpp \
     Models/sift.cpp \
     Models/snake.cpp \
     Models/threshold.cpp \
@@ -53,9 +59,13 @@ SOURCES += \
     UI/harriswidget.cpp \
     UI/histogramwidget.cpp \
     UI/matchwidget.cpp \
+    UI/meanshiftwidget.cpp \
     UI/plotswidget.cpp \
     UI/hybridwidget.cpp \
     UI/mainwindow.cpp \
+    UI/regiongrowingwidget.cpp \
+    UI/segmentationwidget.cpp \
+    UI/siftwidget.cpp \
     UI/thresholdwidget.cpp \
     UI/houghtransormwidget.cpp \
     config.cpp \
@@ -73,6 +83,9 @@ HEADERS += \
     Controllers/imagecontroller.h \
     Controllers/hybridcontroller.h \
     Controllers/matchcontroller.h \
+    Controllers/meansshiftcontroller.h \
+    Controllers/regiongrowingcontroller.h \
+    Controllers/siftcontroller.h \
     Controllers/thresholdcontroller.h \
     Helpers/helpers.h \
     Helpers/scene.h \
@@ -82,10 +95,13 @@ HEADERS += \
     Models/fourier.h \
     Models/harris.h \
     Models/image.h \
+    Models/kmeans.h \
     Models/matching.h \
+    Models/meansshift.h \
     Models/noise.h \
     Models/histogram.h \
     Models/hybrid.h   \
+    Models/regiongrowing.h \
     Models/sift.h \
     Models/snake.h \
     Models/threshold.h \
@@ -97,12 +113,17 @@ HEADERS += \
     UI/harriswidget.h \
     UI/histogramwidget.h \
     UI/matchwidget.h \
+    UI/meanshiftwidget.h \
     UI/plotswidget.h \
     UI/hybridwidget.h \
     UI/mainwindow.h \
+    UI/regiongrowingwidget.h \
+    UI/segmentationwidget.h \
+    UI/siftwidget.h \
     UI/thresholdwidget.h \
     UI/houghtransormwidget.h \
     config.h \
+
 
 FORMS += \
     UI/activecontourwidget.ui \
@@ -111,13 +132,16 @@ FORMS += \
     UI/frequencywidget.ui \
     UI/harriswidget.ui \
     UI/histogramwidget.ui \
-    UI/matchwidget.ui \
+    UI/MatchWidget.ui \
+    UI/meanshiftwidget.ui \
     UI/plotswidget.ui \
     UI/hybridwidget.ui \
+    UI/regiongrowingwidget.ui \
+    UI/segmentationwidget.ui \
+    UI/siftwidget.ui \
     UI/thresholdwidget.ui  \
     UI/houghtransormwidget.ui \
     UI/mainwindow.ui \
-
 
 
 

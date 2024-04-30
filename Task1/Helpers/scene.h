@@ -6,7 +6,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <qpainter.h>
 #include <vector>
-#include <opencv2/core.hpp>>
+#include <opencv2/core.hpp>
 
 
 

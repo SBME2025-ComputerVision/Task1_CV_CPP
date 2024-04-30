@@ -21,9 +21,21 @@ public:
     QWidget *agglomerativeWidget = new AgglomerativeWidget();
     ~SegmentationWidget();
 
+private slots:
+    void on_kmeansBtn_clicked();
+
+    void on_regionGrowingBtn_clicked();
+
+    void on_meanShiftBtn_clicked();
+
+    void on_aggBtn_clicked();
+
 private:
     Ui::SegmentationWidget *ui;
+    QList<QPushButton*> menuBtns;
+    QString style;
 
+    void changeButtonColors(QList<QPushButton *> list, QString style);
 };
 
 #endif // SEGMENTATIONWIDGET_H
