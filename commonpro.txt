@@ -33,6 +33,8 @@ SOURCES += \
     Controllers/regiongrowingcontroller.cpp \
     Controllers/siftcontroller.cpp \
     Controllers/thresholdcontroller.cpp \
+    Controllers/agglomerativecontroller.cpp \
+    Controllers/kmeanscontroller.cpp  \
     Helpers/helpers.cpp \
     Helpers/scene.cpp \
     Helpers/clickable.cpp\
@@ -52,6 +54,7 @@ SOURCES += \
     Models/snake.cpp \
     Models/threshold.cpp \
     Models/houghtransform.cpp \
+    Models/agglomerative.cpp  \
     UI/activecontourwidget.cpp \
     UI/edgedetectionwidget.cpp \
     UI/filterswidget.cpp \
@@ -68,6 +71,8 @@ SOURCES += \
     UI/siftwidget.cpp \
     UI/thresholdwidget.cpp \
     UI/houghtransormwidget.cpp \
+    UI/agglomerativewidget.cpp \
+    UI/kmeanswidget.cpp    \
     config.cpp \
     main.cpp
 
@@ -87,6 +92,8 @@ HEADERS += \
     Controllers/regiongrowingcontroller.h \
     Controllers/siftcontroller.h \
     Controllers/thresholdcontroller.h \
+    Controllers/agglomerativecontroller.h \
+    Controllers/kmeanscontroller.h    \
     Helpers/helpers.h \
     Helpers/scene.h \
     Helpers/clickable.h\
@@ -106,6 +113,7 @@ HEADERS += \
     Models/snake.h \
     Models/threshold.h \
     Models/houghtransform.h \
+    Models/agglomerative.h   \
     UI/activecontourwidget.h \
     UI/edgedetectionwidget.h \
     UI/filterswidget.h \
@@ -122,6 +130,8 @@ HEADERS += \
     UI/siftwidget.h \
     UI/thresholdwidget.h \
     UI/houghtransormwidget.h \
+    UI/agglomerativewidget.h \
+    UI/kmeanswidget.h    \
     config.h \
 
 
@@ -141,6 +151,8 @@ FORMS += \
     UI/siftwidget.ui \
     UI/thresholdwidget.ui  \
     UI/houghtransormwidget.ui \
+    UI/agglomerativewidget.ui \
+    UI/kmeanswidget.ui     \
     UI/mainwindow.ui \
 
 
