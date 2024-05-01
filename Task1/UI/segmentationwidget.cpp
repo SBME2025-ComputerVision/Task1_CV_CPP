@@ -36,7 +36,7 @@ SegmentationWidget::SegmentationWidget(QWidget *parent)
             outline: 1px transparent;\
     }";
 
-    ui->kmeansBtn->setStyleSheet("background-color: #76ABAE;");
+    ui->regionGrowingBtn->setStyleSheet("background-color: #76ABAE;");
 }
 
 

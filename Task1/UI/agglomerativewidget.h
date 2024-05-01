@@ -20,7 +20,8 @@ private slots:
 
     void on_segmentBtn_clicked();
 
-    void on_kCluserSlider_sliderPressed();
+
+    void on_kCluserSlider_sliderReleased();
 
 private:
     Ui::AgglomerativeWidget *ui;

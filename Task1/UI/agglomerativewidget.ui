@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1003</width>
+    <width>1091</width>
     <height>863</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_7">
-   <item>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
     <widget class="QFrame" name="frame_11">
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -116,7 +116,7 @@
      </layout>
     </widget>
    </item>
-   <item>
+   <item row="1" column="0">
     <widget class="QFrame" name="frame_6">
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -133,57 +133,57 @@
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <widget class="QSlider" name="kCluserSlider">
+        <widget class="QWidget" name="">
          <property name="geometry">
           <rect>
-           <x>19</x>
-           <y>70</y>
-           <width>251</width>
-           <height>20</height>
+           <x>200</x>
+           <y>140</y>
+           <width>361</width>
+           <height>22</height>
           </rect>
          </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Clusters: 0</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSlider" name="kCluserSlider">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
-        <widget class="QLabel" name="label_4">
+        <widget class="QWidget" name="">
          <property name="geometry">
           <rect>
-           <x>20</x>
-           <y>40</y>
-           <width>61</width>
+           <x>50</x>
+           <y>20</y>
+           <width>169</width>
            <height>31</height>
           </rect>
          </property>
-         <property name="text">
-          <string>Clusters</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="browseBtn_2">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>10</y>
-           <width>89</width>
-           <height>25</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Browse</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="segmentBtn">
-         <property name="geometry">
-          <rect>
-           <x>120</x>
-           <y>10</y>
-           <width>89</width>
-           <height>25</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Segment</string>
-         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QPushButton" name="browseBtn_2">
+            <property name="text">
+             <string>Browse</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="segmentBtn">
+            <property name="text">
+             <string>Segment</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </widget>
       </item>

@@ -47,12 +47,14 @@ void AgglomerativeWidget::on_segmentBtn_clicked()
 }
 
 
-void AgglomerativeWidget::on_kCluserSlider_sliderPressed()
+
+
+
+void AgglomerativeWidget::on_kCluserSlider_sliderReleased()
 {
     int numClusters = ui->kCluserSlider->value();
     std::string numClustersStr = std::to_string(numClusters);
     QString qNumClustersStr = QString::fromStdString(numClustersStr);
     ui->label_4->setText("Number of Clusters: " + qNumClustersStr);
-
 }
 
