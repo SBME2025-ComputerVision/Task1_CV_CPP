@@ -5,6 +5,7 @@
 #include "UI/regiongrowingwidget.h"
 #include"UI/meanshiftwidget.h"
 #include "UI/agglomerativewidget.h"
+#include "UI/kmeanswidget.h"
 
 namespace Ui {
 class SegmentationWidget;
@@ -19,6 +20,7 @@ public:
     QWidget *regionWidget = new RegionGrowingWidget();
     QWidget *meansShiftWidget=new MeanShiftWidget();
     QWidget *agglomerativeWidget = new AgglomerativeWidget();
+    QWidget *kmeansWidget = new KmeansWidget();
     ~SegmentationWidget();
 
 private slots:

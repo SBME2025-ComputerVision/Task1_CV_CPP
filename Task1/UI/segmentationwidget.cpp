@@ -8,7 +8,8 @@ SegmentationWidget::SegmentationWidget(QWidget *parent)
     ui->setupUi(this);
     ui->stackedWidget->addWidget(regionWidget);
     ui->stackedWidget->addWidget(meansShiftWidget);
-    ui->stackedWidget->addWidget(agglomerativeWidget);  
+    ui->stackedWidget->addWidget(agglomerativeWidget);
+    ui->stackedWidget->addWidget(kmeansWidget);
     menuBtns.append(ui->meanShiftBtn);
     menuBtns.append(ui->kmeansBtn);
     menuBtns.append(ui->aggBtn);
@@ -55,6 +56,8 @@ void SegmentationWidget::on_kmeansBtn_clicked()
 
     changeButtonColors(menuBtns,style);
     ui->kmeansBtn->setStyleSheet("background-color: #76ABAE;");
+    ui->stackedWidget->setCurrentWidget(kmeansWidget);
+    setWindowState(Qt::WindowMaximized);
     // TODO: merege with k means
 
 
