@@ -1,6 +1,8 @@
 #include "agglomerative.h"
 
-double euclidean_distance(const std::vector<double> &point1, const std::vector<double> &point2)
+
+Agglomerative::Agglomerative() {}
+double Agglomerative::euclidean_distance(const std::vector<double> &point1, const std::vector<double> &point2)
 {
     if (point1.size() != point2.size())
     {
@@ -23,7 +25,7 @@ double euclidean_distance(const std::vector<double> &point1, const std::vector<d
   * keeps track of the maximum distance that it finds between any two points.
   * compared all pairs of points, the function returns the maximum distance it found.
 */
-double clusters_distance(const vector<vector<double>> &cluster1,
+double Agglomerative::clusters_distance(const vector<vector<double>> &cluster1,
                          const vector<vector<double>> &cluster2)
 {
     double max_dist = 0.0;
@@ -54,7 +56,7 @@ function:
  * Finally, the function returns the vector of clusters with the pixel values.
 */
 
-vector<vector<vector<double>>> initial_clusters(Mat PixelsMatrix)
+vector<vector<vector<double>>> Agglomerative::initial_clusters(Mat PixelsMatrix)
 {
     vector<vector<vector<double>>> clusters;
     vector<double> allComparingResult;
@@ -111,7 +113,7 @@ vector<vector<vector<double>>> initial_clusters(Mat PixelsMatrix)
    * The predict_center function returns the center of the cluster that the given pixel belongs to.
 */
 
-void fit(int k, Mat &pixels, vector<int> &labels, map<int, vector<double>> &centers, map<vector<double>, int> &cluster_map)
+void Agglomerative::fit(int k, Mat &pixels, vector<int> &labels, map<int, vector<double>> &centers, map<vector<double>, int> &cluster_map)
 {
     // Initially, assign each point to a distinct cluster
     vector<vector<vector<double>>> clusters_list = initial_clusters(pixels);
@@ -198,14 +200,14 @@ void fit(int k, Mat &pixels, vector<int> &labels, map<int, vector<double>> &cent
 }
 
 // Function to predict the cluster number of a given point
-int predict_cluster(map<vector<double>, int> &cluster_map, vector<double> &point)
+int Agglomerative::predict_cluster(map<vector<double>, int> &cluster_map, vector<double> &point)
 {
     // Find cluster number of point
     return cluster_map[point];
 }
 
 // Function to predict the center of the cluster that a given point belongs to
-vector<double> predict_center(map<int, vector<double>> &centers, map<vector<double>, int> &cluster_map, vector<double> &point)
+vector<double> Agglomerative::predict_center(map<int, vector<double>> &centers, map<vector<double>, int> &cluster_map, vector<double> &point)
 {
     // Find center of the cluster that point belongs to
     int point_cluster_num = predict_cluster(cluster_map, point);
@@ -213,7 +215,7 @@ vector<double> predict_center(map<int, vector<double>> &centers, map<vector<doub
     return center;
 }
 
-std::pair<Mat, Mat> image_preperation(Mat &image)
+std::pair<Mat, Mat> Agglomerative::image_preperation(Mat &image)
 {
     Mat resized_image;
     Mat pixels;
@@ -224,7 +226,7 @@ std::pair<Mat, Mat> image_preperation(Mat &image)
     return {pixels, resized_image};
 }
 
-Mat image_color_segmentation(int k, Mat &pixels, Mat &resized_image)
+Mat Agglomerative::image_color_segmentation(int k, Mat &pixels, Mat &resized_image)
 {
 
     // Perform agglomerative clustering to segment the image into k clusters
