@@ -89,7 +89,7 @@ Mat Threshold::optimumThresholding(Mat img, bool isGlobal = true)
     vector<float>foreground,background;
     float currentThreshold,prevThreshold;
     currentThreshold = grey_img.at<uchar>(0,0)+grey_img.at<uchar>(0,img.cols-1)+grey_img.at<uchar>(img.rows-1,0)+grey_img.at<uchar>(img.rows-1,img.cols-1);
-
+    currentThreshold/=4;
 
     Mat pdf = Threshold::thresholdingHistogram(grey_img);
 
