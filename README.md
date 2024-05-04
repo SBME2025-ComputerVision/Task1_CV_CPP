@@ -104,15 +104,19 @@ VisionX is a niche desktop application crafted in C++ utilizing the Qt framework
    | :----------------------------: | :-----------------------------: |
    | ![](Results/local-thresh-2.png) | ![](Results/multi-thresh.png) |
 
-   for more details about this tab and results check [Report 4](docs/Report%204.pdf)
+   for more details about this tab and results check [Report 4](docs/Computer%20Vision%20Task%204%20Report%20%20.pdf)
 
 10. Segmentation Methods tab:
     User can segment RGB images with 4 types of segmentation:
-    | K-Means Segmentation | Mean Shift Segmentation | Agglomerative Segmentation | Region Growing |
-    | :----------------------------: | :-----------------------------: | :--------------------------------: | :--------------------------------: |
-    | ![](samples/k-means.png) | ![](samples/mean-shift-seg.png) | ![](samples/agg-seg.png) | ![](samples/region-growing.png) |
+    | K-Means Segmentation | Mean Shift Segmentation |
+    | :----------------------------: | :-----------------------------: |
+    | ![](Results/k-means.png) | ![](Results/mean-shift.png) |
 
-for more details about this tab and results check [Report 4](docs/Report%204.pdf)
+    | Agglomerative Segmentation |         Region Growing          |
+    | :------------------------: | :-----------------------------: |
+    |  ![](Results/agg-seg.png)  | ![](Results/region-growing.png) |
+
+for more details about this tab and results check [Report 4](docs/Computer%20Vision%20Task%204%20Report%20%20.pdf)
 
 ### Project Structure Overview:
 
