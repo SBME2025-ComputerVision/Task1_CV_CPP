@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setWindowTitle("VisionX");
+    this->setWindowIcon(QPixmap("../Task1/Icons/vision.png"));
     index = FilterPage;
     ui->stackedWidget->addWidget(filterWidget);
     ui->stackedWidget->addWidget(edgeDetectionWidget);
@@ -63,9 +65,8 @@ MainWindow::MainWindow(QWidget *parent)
             outline: 1px transparent;\
     }";
     ui->filteringBtn->setStyleSheet("background-color: #76ABAE;");
-
-
-
+    QPixmap pix("../Task1/Icons/vision.png");
+    ui->logo->setPixmap(pix);
 }
 
 MainWindow::~MainWindow()
